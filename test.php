@@ -1,4 +1,6 @@
 <?php
+// http://abcnotation.com/wiki/abc:standard:v2.1
+
 namespace nan\mm;
 
 use nan\mm;

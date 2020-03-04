@@ -6,12 +6,12 @@ use nan\mm\reduce;
 class multiplex extends mm\MusicNode {
 	var $channels;
 	function __construct($channels,$nodes=[]) {
-		parent::__construct($nodes);
+		parent::__construct("multiplex",$nodes);
 		$this->channels=$channels;
 	}
 
 	function channels() {
-		$this->channels;
+		return $this->channels;
 	}
 }
 
@@ -26,7 +26,8 @@ class MultiplexReducer extends reduce\NodeReducer {
 			$miReduced=new mm\merge($merged);
 			$reducedNodes[]=$miReduced;
 		}
-		return count($reduceNodes)==1 ? $reducedNodes[0] : mm\then($reducedNodes);
+
+		return count($reducedNodes)==1 ? $reducedNodes[0] : new mm\then($reducedNodes);
 	}
 }
 
