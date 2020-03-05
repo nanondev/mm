@@ -41,16 +41,16 @@ function ej() {
 	//return new header(new tempo(new key(new time(new merge([new up8th(ej11()),ej11(),new down8th(ej11())]),3,4),"Fmaj"),array("composer"=>"Nan","title"=>"piano exercises"),1/4,300));	
 
 	$m=
-		(new header(["composer"=>"Nan","title"=>"piano exercises"]))
-		->addNode(new key("Fmaj"))
-		->addNode(new time(3,4))
-		->addNode(new tempo(1/4,200))
-		->addNode((new merge())
+		header::nw(["composer"=>"Nan","title"=>"piano exercises"])
+		->addNode(key::nw("Fmaj"))
+		->addNode(time::nw(3,4))
+		->addNode(tempo::nw(1/4,200))
+		->addNode(merge::nw()
 //			->addNode(ej11())
-			->addNode(ej11()->wrap(new up8th()))
+			->addNode(ej11()->wrap(up8th::nw()))
 			->addNode(ej11())
-			->addNode(ej11()->wrap(new down8th()))
-			->wrap(new rep(2))
+			->addNode(ej11()->wrap(down8th::nw()))
+			->wrap(rep::nw(2))
 		);
 
 	return $m;
