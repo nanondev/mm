@@ -77,6 +77,7 @@ class AbcTranslator extends StringReducer {
 		$nodes=$m->nodes();	
 		$n=$m->beatNote();
 		$m=$m->beatsByMinute();
+		print "TEMP: $n,$m\n";
 		$s="T:$n $m\n";
 		$s.=$this->reduce_nodes($nodes,$c);
 		return $s;
