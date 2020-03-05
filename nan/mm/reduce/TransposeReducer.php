@@ -1,9 +1,9 @@
 <?php
-namespace nan\mm\transpose;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\reduce;
 
-class TransposeReducer extends reduce\NodeReducer {
+
+class TransposeReducer extends NodeReducer {
 	function reduce_transpose($m,$c,$transposeDistance) {	
 		$co=$c->withTransposeDistance($c->transposeDistance()+$transposeDistance);
 		if (count($m->nodes())>0) {

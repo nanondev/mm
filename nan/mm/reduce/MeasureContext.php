@@ -1,7 +1,7 @@
 <?php
-namespace nan\mm\measure;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\measure;
+
 class MeasureContext {
 	var $time;
 	function __construct($time=null) {

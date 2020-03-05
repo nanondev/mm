@@ -1,7 +1,5 @@
 <?php 
-namespace nan\mm\chord;
-use nan\mm;
-use nan\mm\reduce;
+namespace nan\mm;
 
 class ChordNs {}
 

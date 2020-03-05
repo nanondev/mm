@@ -2,15 +2,10 @@
 namespace nan\mm\abc;
 use nan\mm;
 use nan\mm\reduce;
-use nan\mm\measure;
-use nan\mm\transpose;
-use nan\mm\merge;
-use nan\mm\arp;
-use nan\mm\multiplex;
 
 class AbcNs {}
 
-class AbcContext extends measure\MeasureContext {
+class AbcContext extends reduce\MeasureContext {
 	var $voice=0;
 
 	function hasMultipleVoices() {
@@ -62,11 +57,11 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 	public static function create() {
 
 		$r=(new AbcPrepareReducer())
-			->withReducer(new arp\ArpReducer())
-			->withReducer(new multiplex\MultiplexReducer())
-			->withReducer(new measure\MeasureReducer())
-			->withReducer(new transpose\TransposeReducer())
-			->withReducer(new merge\MergeReducer());
+			->withReducer(new reduce\ArpReducer())
+			->withReducer(new reduce\MultiplexReducer())
+			->withReducer(new reduce\MeasureReducer())
+			->withReducer(new reduce\TransposeReducer())
+			->withReducer(new reduce\MergeReducer());
 
 		return $r;
 	}
@@ -77,7 +72,7 @@ class AbcTranslator extends StringReducer {
 		$nodes=$m->nodes();	
 		$n=$m->beatNote();
 		$m=$m->beatsByMinute();
-		print "TEMP: $n,$m\n";
+		print "TEMP: $n,$m\n";	
 		$s="T:$n $m\n";
 		$s.=$this->reduce_nodes($nodes,$c);
 		return $s;

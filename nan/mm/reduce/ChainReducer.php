@@ -1,8 +1,7 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\measure;
-use nan\mm\abc;
+
 
 class ChainReducer extends NodeReducer {
 	var $reducers=[];

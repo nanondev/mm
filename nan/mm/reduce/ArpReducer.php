@@ -1,9 +1,8 @@
 <?php 
-namespace nan\mm\arp;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\reduce;
 
-class ArpReducer extends reduce\NodeReducer {
+class ArpReducer extends NodeReducer {
 	function reduce_arp($m,$c) {
 		$chord=$m->chord();
 		$chordNotes=$chord->nodes();

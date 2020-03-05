@@ -1,8 +1,10 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\measure;
 use nan\mm\abc;
+
+
+class NodeReducerContext extends abc\AbcContext {}
 
 class NodeReducer {
 	function reduce_nodes($nodes,$c) {
@@ -19,7 +21,7 @@ class NodeReducer {
 	}
 
 	function createContext() {
-		return new abc\AbcContext();
+		return new NodeReducerContext();
 	}
 
 	function reduce($m,$c=null) {

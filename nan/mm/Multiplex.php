@@ -1,7 +1,5 @@
 <?php
-namespace nan\mm\multiplex;
-use nan\mm;
-use nan\mm\reduce;
+namespace nan\mm;
 
 class multiplex extends mm\MusicNode {
 	var $channels;

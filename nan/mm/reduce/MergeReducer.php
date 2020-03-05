@@ -1,9 +1,9 @@
 <?php
-namespace nan\mm\merge;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\reduce;
 
-class MergeReducer extends reduce\NodeReducer {
+
+class MergeReducer extends NodeReducer {
 	function reduce_merge($m,$c) {
 		$parallels=[];
 		if (!$m->hasNodes()) return $m;

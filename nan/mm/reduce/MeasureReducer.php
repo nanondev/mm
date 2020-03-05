@@ -1,9 +1,11 @@
 <?php
-namespace nan\mm\measure;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\measure;
+namespace nan\mm\reduce;
+use nan\mm;
 
-class MeasureReducer extends mm\reduce\NodeReducer {
+
+class MeasureReducer extends NodeReducer {
 	function reduce_then ($m,$c) {
 		$nodes=$m->nodes();
 		$partial_nodes=array();

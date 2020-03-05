@@ -5,16 +5,12 @@ namespace nan\mm;
 
 use nan\mm;
 use nan\mm\abc;
-use nan\mm\measure;
-use nan\mm\transpose;
-use nan\mm\arp;
-use nan\mm\chord;
 
 require_once("autoloader.php");
 
 new mm\MmNs();
 new abc\ABCNs();
-new chord\ChordNs();
+new mm\ChordNs();
 
 function assert_equals($title,$a,$b) {
 	if ($a==$b) {

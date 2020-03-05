@@ -1,10 +1,10 @@
 <?php
-namespace nan\mm\multiplex;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\reduce;
 
 
-class MultiplexReducer extends reduce\NodeReducer {
+
+class MultiplexReducer extends NodeReducer {
 	function reduce_multiplex($m,$c) {
 		$reducedNodes=[];
 		foreach($m->nodes() as $mi) {

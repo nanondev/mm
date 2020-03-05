@@ -1,7 +1,7 @@
 <?php
-namespace nan\mm\transpose;
+namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\reduce;
+
 
 class TransposeContext {
 	var $transposeDistance;
