@@ -11,9 +11,6 @@ require_once("autoloader.php");
 
 new mm\MmNs();
 new abc\ABCNs();
-new measure\MeasureNs();
-new reduce\ReduceNs();
-new arp\ArpNs();
 
 /* ejemplos */
  function ej1_c1() {

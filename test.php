@@ -14,9 +14,6 @@ require_once("autoloader.php");
 
 new mm\MmNs();
 new abc\ABCNs();
-new measure\MeasureNs();
-new reduce\ReduceNs();
-new arp\ArpNs();
 new chord\ChordNs();
 
 function assert_equals($title,$a,$b) {

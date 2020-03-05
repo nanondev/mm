@@ -3,23 +3,6 @@ namespace nan\mm\transpose;
 use nan\mm;
 use nan\mm\reduce;
 
-class TransposeContext {
-	var $transposeDistance;
-	function __construct($transposeDistance=0) {
-		$this->transposeDistance=$transposeDistance;
-	}
-
-	function withTransposeDistance($transposeDistance) {
-		return new TransposeContext($transposeDistance);
-	}
-	function transposeDistance() {
-		return $this->transposeDistance;
-	}
-	function __toString() {
-		return sprintf("AbcContext <tr:%s>",$this->transposeDistance);
-	}
-}
-
 class TransposeReducer extends reduce\NodeReducer {
 	function reduce_transpose($m,$c,$transposeDistance) {	
 		$co=$c->withTransposeDistance($c->transposeDistance()+$transposeDistance);
