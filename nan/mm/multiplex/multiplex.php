@@ -23,11 +23,11 @@ class MultiplexReducer extends reduce\NodeReducer {
 			for($i=0;$i<$m->channels();$i++) {
 				$merged[]=$mi; //repetimos tantas veces como canales haya
 			}
-			$miReduced=new mm\merge($merged);
+			$miReduced=mm\merge::nw($merged);
 			$reducedNodes[]=$miReduced;
 		}
 
-		return count($reducedNodes)==1 ? $reducedNodes[0] : new mm\then($reducedNodes);
+		return count($reducedNodes)==1 ? $reducedNodes[0] : mm\then::nw($reducedNodes);
 	}
 }
 

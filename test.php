@@ -72,11 +72,11 @@ function test_measure_factions() {
 }
 
 function test_measure_44_2() {
-	assert_abc_equals("test_measure_44_2",notes("E2F2G3DE4F4")->wrap(new time(4,4)),"M:4/4\n|E2F2|G3D|E4|F4");	
+	assert_abc_equals("test_measure_44_2",notes("E2F2G3DE4F4")->wrap(time::nw(4,4)),"M:4/4\n|E2F2|G3D|E4|F4");	
 }
 
 function test_measure_34() {
-	assert_abc_equals("test_measure_34",notes("ABCDEFGA2")->wrap(new time(3,4)),"M:3/4\n|ABC|DEF|GA2");	
+	assert_abc_equals("test_measure_34",notes("ABCDEFGA2")->wrap(time::nw(3,4)),"M:3/4\n|ABC|DEF|GA2");	
 }
 
 function test_merge() {
@@ -110,29 +110,29 @@ function test_arp() {
 }
 
 function test_arp_2() {
-	assert_abc_equals("test_arp_2",(new arp([2,1,0,1,2,0],9,chord\amchord("Dm")))->wrap(new time(3,4)),"M:3/4\n|AFD|FAD|AFD");		
+	assert_abc_equals("test_arp_2",(new arp([2,1,0,1,2,0],9,chord\amchord("Dm")))->wrap(time::nw(3,4)),"M:3/4\n|AFD|FAD|AFD");		
 }
 
 function test_chord_Dm() {
 	assert_abc_equals("test_chord_Dm",
-		(new then())->withNodes(chord\amchord("Dm")->nodes()),"|DFA");
+		then::nw()->withNodes(chord\amchord("Dm")->nodes()),"|DFA");
 }
 
 function test_chord_D() {
 	assert_abc_equals("test_chord_D",
-		(new then())->withNodes(chord\amchord("D")->nodes()),"|D^FA");
+		then::nw()->withNodes(chord\amchord("D")->nodes()),"|D^FA");
 }
 
 function test_time_1() {
 	assert_abc_equals("test_time_1",
-		(new time(3,4))->addNode(notes("ABCDEF")),"M:3/4\n|ABC|DEF");
+		time::nw(3,4)->addNode(notes("ABCDEF")),"M:3/4\n|ABC|DEF");
 }
 
 function test_time_2() {
 	assert_abc_equals("test_time_2",
-		(new then())
-			->addNode((new time(3,4))->addNode(notes("ABCDEF")))
-			->addNode((new time(4,4))->addNode(notes("ABCDDEFG")))			
+		then::nw()
+			->addNode(time::nw(3,4)->addNode(notes("ABCDEF")))
+			->addNode(time::nw(4,4)->addNode(notes("ABCDDEFG")))			
 		,"M:3/4\n|ABC|DEF|M:4/4|ABCD|DEFG");
 }
 
@@ -142,6 +142,18 @@ assert_abc_equals("test_multiplex",
 			->addNode(notes("ABCD"))			
 		,"|(ABCD;ABCD)");
 
+}
+
+function test_rep() {
+	assert_abc_equals("test_rep",
+		rep::nw(2)->addNode(notes("ABCD"))			
+		,"|ABCD|ABCD");
+}
+
+function test_tempo() {
+	assert_abc_equals("test_tempo",
+		tempo::nw(1,128)->addNode(notes("ABCD"))			
+		,"T:128\n|ABCD");
 }
 
 function main() {
@@ -167,6 +179,8 @@ function main() {
 	test_chord_Dm();
 	test_chord_D();
 	test_multiplex();
+	test_rep();
+	test_tempo();
 }
 
 print main();

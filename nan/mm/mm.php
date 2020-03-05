@@ -162,6 +162,10 @@ class time extends MusicNode {
 		$this->quantity=$quantity;
 		$this->duration=$duration;
 	}
+	
+	static function nw($quantity,$duration,$nodes=[]) {
+		return new time($quantity,$duration,$nodes);
+	}
 
 	function quantity() {
 		return $this->quantity;
@@ -177,8 +181,12 @@ class time extends MusicNode {
 
 class measure extends MusicNode {
 
-	function __construct($nodes) {
+	function __construct($nodes=[]) {
 		parent::__construct("measure",$nodes);
+	}
+
+	static function nw($nodes=[]) {
+		return new measure($nodes);
 	}
 
 	function toStringCompact() {
@@ -191,6 +199,10 @@ class then extends MusicNode {
 
 	function __construct($nodes=[]) {
 		parent::__construct("then",$nodes);
+	}
+
+	static function nw($nodes=[]) {
+		return new then($nodes);
 	}
 
 	function toStringCompact() {
@@ -208,6 +220,10 @@ class header extends MusicNode {
 		$this->header=$header;
 	}
 
+	static function nw($header,$nodes=[]) {
+		return new header($header,$nodes);
+	}
+
 	function header() {
 		return $this->header;
 	}
@@ -220,6 +236,10 @@ class header extends MusicNode {
 class merge extends MusicNode {
 	function __construct($nodes=[]) {
 		parent::__construct("merge",$nodes);
+	}
+
+	static function nw($nodes=[]) {
+		return new merge($nodes);
 	}
 
 	function toStringCompact() {
@@ -242,6 +262,10 @@ class note extends MusicNode {
 		$this->note=$note;
 		$this->duration=$duration;
 		$this->accidentalModifier=$accidentalModifier;
+	}
+
+	static function nw($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE) {
+		return new note($note,$duration,$accidentalModifier);
 	}
 
 	function note() {
@@ -313,6 +337,10 @@ class rep extends MusicNode {
 		$this->reps=$reps;
 	}
 
+	static function nw($reps,$nodes=[]) {
+		return new rep($reps,$nodes);
+	}
+
 	function reps() {
 		return $this->reps;
 	}
@@ -327,7 +355,11 @@ class rep extends MusicNode {
 
 class up8th extends MusicNode {
 	function __construct($nodes=[]) {
-		parent::__construct("up8th",$nodes);		
+		parent::__construct("up8th",$nodes=[]);		
+	}
+
+	static function nw($nodes=[]) {
+		return new up8th($nodes);
 	}
 
 	function  toStringCompact() {
@@ -340,6 +372,10 @@ class down8th extends MusicNode {
 		parent::__construct("down8th",$nodes);		
 	}
 
+	static function nw($nodes=[]) {
+		return new down8th($nodes);
+	}
+
 	function  toStringCompact() {
 		return sprintf("8th-%s",$this->toStringNodes());
 	}
@@ -350,6 +386,10 @@ class key extends MusicNode	 {
 	function __construct($key,$nodes=[]) {
 		parent::__construct("key",$nodes);
 		$this->key=$key;
+	}
+
+	static function nw($key,$nodes=[]) {
+		return new key($key,$nodes);
 	}
 
 	function key() {
@@ -371,6 +411,11 @@ class tempo extends MusicNode {
 		$this->beatNote;
 		$this->beatsByMinute;
 	}
+
+	static function nw($beatNote,$beatsByMinute,$nodes=[]) {
+		return new tempo($beatNote,$beatsByMinute,$nodes);
+	}
+
 	function beatNote() {
 		return $this->beatNote;
 	}
@@ -383,6 +428,11 @@ class parallel extends MusicNode {
 	function __construct($nodes=[]) {
 		parent::__construct("parallel",$nodes);
 	}
+
+		static function nw($nodes=[]) {
+		return new parallel($nodes);
+	}
+
 }
 
 class arp extends MusicNode {
@@ -394,6 +444,10 @@ class arp extends MusicNode {
 		$this->orderPattern=$orderPattern;
 		$this->lengthInNotes=$lengthInNotes;
 	}	
+
+	function nw($orderPattern,$lengthInNotes,$nodes=[]) {
+		return new arp($orderPattern,$lengthInNotes,$nodes);
+	}
 
 	function chord() {
 		$chord=$this->uniqueNode();

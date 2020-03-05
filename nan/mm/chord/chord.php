@@ -10,6 +10,9 @@ class chord extends mm\MusicNode {
 		parent::__construct("chord",$nodes);
 	}
 
+	static function nw($nodes=[]) {
+		return new chord($nodes);
+	}
 
 	static function american($name) {
 		$notes=[];
@@ -29,10 +32,10 @@ class chord extends mm\MusicNode {
 
 		$fundamentalIndex=$base[$fundamental];
 		
-		$notes[]=new mm\note($fundamental,1,$accidentalModifier);
-		$notes[]=new mm\note($baseInv[$fundamentalIndex+2],1);
-		$notes[]=new mm\note($baseInv[$fundamentalIndex+4],1);
-		$m=new chord($notes);
+		$notes[]=mm\note::nw($fundamental,1,$accidentalModifier);
+		$notes[]=mm\note::nw($baseInv[$fundamentalIndex+2],1);
+		$notes[]=mm\note::nw($baseInv[$fundamentalIndex+4],1);
+		$m=chord::nw($notes);
 		return $m;
 	}
 }

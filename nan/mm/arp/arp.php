@@ -16,9 +16,9 @@ class ArpReducer extends reduce\NodeReducer {
 		for ($i=0;$i<$length;$i++) {
 			$patternIndex=$orderPattern[$i%count($orderPattern)];
 			$note=$chordNotes[$patternIndex%count($chordNotes)];
-			$notes[]=new mm\note($note);
+			$notes[]=mm\note::nw($note);
 		}
-		return new mm\then($notes);
+		return mm\then::nw($notes);
 	}
 }
 

@@ -24,7 +24,7 @@ class TransposeReducer extends reduce\NodeReducer {
 	function reduce_transpose($m,$c,$transposeDistance) {	
 		$co=$c->withTransposeDistance($c->transposeDistance()+$transposeDistance);
 		if (count($m->nodes())>0) {
-			$mo=new mm\then($this->reduce_nodes($m->nodes(),$co));
+			$mo=mm\then::nw($this->reduce_nodes($m->nodes(),$co));
 		} else {
 			$mo=$m->uniqueNode();
 		}
