@@ -63,9 +63,9 @@ class MusicNode {
 	}
 	function uniqueNode() {
 		if (count($this->nodes())>1) {
-			err("unique node expected, but many found: $m");
+			err("unique node expected, but many found: $this");
 		} else if (count($this->nodes())==0) {
-			err("unique node expected, but none found: $m");
+			err("unique node expected, but none found: $this");
 		}
 		return $this->nodes[0];
 	}

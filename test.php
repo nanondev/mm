@@ -8,9 +8,9 @@ use nan\mm\abc;
 
 require_once("autoloader.php");
 
-new mm\MmNs();
+new MmNs();
 new abc\ABCNs();
-new mm\ChordNs();
+//new mm\ChordNs();
 
 function assert_equals($title,$a,$b) {
 	if ($a==$b) {
@@ -99,21 +99,21 @@ function test_down8th() {
 }
 
 function test_arp() {
-	assert_abc_equals("test_arp",new arp([0,1,2,0],8,chord\amchord("C")),"|CEGC|CEGC");
+	assert_abc_equals("test_arp",new arp([0,1,2,0],8,chord::american("C")),"|CEGC|CEGC");
 }
 
 function test_arp_2() {
-	assert_abc_equals("test_arp_2",(new arp([2,1,0,1,2,0],9,chord\amchord("Dm")))->wrap(time::nw(3,4)),"M:3/4\n|AFD|FAD|AFD");		
+	assert_abc_equals("test_arp_2",(new arp([2,1,0,1,2,0],9,chord::american("Dm")))->wrap(time::nw(3,4)),"M:3/4\n|AFD|FAD|AFD");		
 }
 
 function test_chord_Dm() {
 	assert_abc_equals("test_chord_Dm",
-		then::nw()->withNodes(chord\amchord("Dm")->nodes()),"|DFA");
+		then::nw()->withNodes(chord::american("Dm")->nodes()),"|DFA");
 }
 
 function test_chord_D() {
 	assert_abc_equals("test_chord_D",
-		then::nw()->withNodes(chord\amchord("D")->nodes()),"|D^FA");
+		then::nw()->withNodes(chord::american("D")->nodes()),"|D^FA");
 }
 
 function test_time_1() {
@@ -131,8 +131,7 @@ function test_time_2() {
 
 function test_multiplex() {
 assert_abc_equals("test_multiplex",
-		(new multiplex\multiplex(2))
-			->addNode(notes("ABCD"))			
+		multiplex::nw(2)->addNode(notes("ABCD"))			
 		,"|(ABCD;ABCD)");
 
 }
@@ -147,6 +146,10 @@ function test_tempo() {
 	assert_abc_equals("test_tempo",
 		tempo::nw(1,128)->addNode(notes("ABCD"))			
 		,"T:128\n|ABCD");
+}
+
+function test_up8thmul() {
+	return assert_abc_equals("test_up8thmul",Up8thMul::nw(notes("ABCD")),"|(ABCD;A'B'C'D)");
 }
 
 function main() {
@@ -174,6 +177,8 @@ function main() {
 	test_multiplex();
 	test_rep();
 	test_tempo();
+	//test_mask();
+	test_up8thmul();
 }
 
 print main();

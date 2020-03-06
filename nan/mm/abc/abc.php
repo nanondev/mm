@@ -59,6 +59,7 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 		$r=(new AbcPrepareReducer())
 			->withReducer(new reduce\ArpReducer())
 			->withReducer(new reduce\MultiplexReducer())
+			->withReducer(new reduce\Up8thMulReducer())
 			->withReducer(new reduce\MeasureReducer())
 			->withReducer(new reduce\TransposeReducer())
 			->withReducer(new reduce\MergeReducer());

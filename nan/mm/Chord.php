@@ -3,7 +3,7 @@ namespace nan\mm;
 
 class ChordNs {}
 
-class chord extends mm\MusicNode {
+class chord extends MusicNode {
 	function __construct($nodes=[]) {
 		parent::__construct("chord",$nodes);
 	}
@@ -20,7 +20,7 @@ class chord extends mm\MusicNode {
 		
 		preg_match("/([_=^]?)([ABCDEFG])(m?)/",$name,$chord_match);
 		
-		$accidentalModifier=mm\note::ACCIDENTAL_MODIFIER_NONE;
+		$accidentalModifier=note::ACCIDENTAL_MODIFIER_NONE;
 		if ($chord_match[1]=="_") $accidentalModifier=-1;
 		if ($chord_match[1]=="=") $accidentalModifier=0;
 		if ($chord_match[1]=="^") $accidentalModifier=1;
@@ -30,9 +30,9 @@ class chord extends mm\MusicNode {
 
 		$fundamentalIndex=$base[$fundamental];
 		
-		$notes[]=mm\note::nw($fundamental,1,$accidentalModifier);
-		$notes[]=mm\note::nw($baseInv[$fundamentalIndex+2],1);
-		$notes[]=mm\note::nw($baseInv[$fundamentalIndex+4],1);
+		$notes[]=note::nw($fundamental,1,$accidentalModifier);
+		$notes[]=note::nw($baseInv[$fundamentalIndex+2],1);
+		$notes[]=note::nw($baseInv[$fundamentalIndex+4],1);
 		$m=chord::nw($notes);
 		return $m;
 	}

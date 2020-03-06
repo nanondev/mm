@@ -11,6 +11,9 @@ require_once("autoloader.php");
 
 new mm\MmNs();
 new abc\ABCNs();
+new measure\MeasureNs();
+new reduce\ReduceNs();
+new arp\ArpNs();
 
 /* ejemplos */
  function ej1_c1() {
@@ -49,7 +52,7 @@ function ej() {
 			->addNode(ej11()->wrap(down8th::nw()))
 			->wrap(rep::nw(2))
 		);
-
+		
 	return $m;
 }
 

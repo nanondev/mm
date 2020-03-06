@@ -12,8 +12,8 @@
  * - nombres de clase: respetar case
  * - completar casos de test para lo ya hecho
  * - notacion de acordes
- * - precondicion de reducciones  
- * - implementar mascaras|
+ * - precondicion de reducciones? no debería, ver como preservar algebra  
+ * - implementar mascaras
  * - eliminar NSs
  */
 namespace nan\mm;
@@ -70,5 +70,5 @@ function debug($msg){
 
 function err($msg) {
 	$fullMsg="error: $msg\n";
-	throw $fullMsg;
+	throw new \exception($fullMsg);
  }
