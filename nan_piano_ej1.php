@@ -11,9 +11,6 @@ require_once("autoloader.php");
 
 new mm\MmNs();
 new abc\ABCNs();
-new measure\MeasureNs();
-new reduce\ReduceNs();
-new arp\ArpNs();
 
 /* ejemplos */
  function ej1_c1() {
@@ -36,31 +33,38 @@ new arp\ArpNs();
  	return merge(ej1_cs8(),new rep(ej1_c2(),4));
  }
 
+//return new header(new tempo(new key(new time(new merge([new up8th(ej11()),ej11(),new down8th(ej11())]),3,4),"Fmaj"),array("composer"=>"Nan","title"=>"piano exercises"),1/4,300));	
 
-function ej() {
-	//return new header(new tempo(new key(new time(new merge([new up8th(ej11()),ej11(),new down8th(ej11())]),3,4),"Fmaj"),array("composer"=>"Nan","title"=>"piano exercises"),1/4,300));	
+class Ej extends MusicNode {
+	function __construct($nodes=[]) {
+					
+	}
 
-	$m=
-		header::nw(["composer"=>"Nan","title"=>"piano exercises"])
-		->addNode(key::nw("Fmaj"))
-		->addNode(time::nw(3,4))
-		->addNode(tempo::nw(1/4,200))
-		->addNode(merge::nw()
-//			->addNode(ej11())
-			->addNode(ej11()->wrap(up8th::nw()))
-			->addNode(ej11())
-			->addNode(ej11()->wrap(down8th::nw()))
-			->wrap(rep::nw(2))
-		);
-		
-	return $m;
+	static function ej11() {
+		return notes("CDEFGABAB2B2C2C2");		
+	}
+
+	static function nw($nodes=[]) {
+		return (new Ej($nodes))
+			->addNode(key::nw("Fmaj"))
+			->addNode(time::nw(3,4))
+			->addNode(tempo::nw(1/4,200))
+			->addNode(merge::nw()
+				->addNode(Ej::ej11())
+				->addNode(Ej::ej11()->wrap(up8th::nw()))
+				->addNode(Ej::ej11())
+				->addNode(Ej::ej11()->wrap(down8th::nw()))
+				->wrap(rep::nw(2))			
+			)->wrap(header::nw(["composer"=>"Nan","title"=>"piano exercises"]));
+	}
+
 }
+
 
 
 function main() {
 	mm\debug("main");
- 	$m=ej();
- 	$abcStr=(new abc\AbcReducer())->reduce($m);
+ 	$abcStr=(new abc\AbcReducer())->reduce(Ej::nw());
  	//$m_measured_tree=$m_measured->toStringTree();
  	//$reducer=new transpose\TransposeReducer();
  	//$reducer2=new merge\MergeReducer();
