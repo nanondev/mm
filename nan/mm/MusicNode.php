@@ -16,6 +16,7 @@ class MusicNode {
 
 	function __construct($name,$nodes=array(),$tag=null) {
 		$this->name=$name;
+		if (!is_string($name)) err("node name should be a string instead of $name");
 		if (!is_array($nodes)) $nodes=array($nodes);
 		if ($tag==null) $tag=new MusicNodeTag();
 		$this->nodes=$nodes;
@@ -61,6 +62,15 @@ class MusicNode {
 	function hasNodes() {
 		return count($this->nodes)>0;
 	}
+
+	function hasUniqueNode() {
+		return count($this->nodes)==1; 
+	}
+
+	function hasUniqueNodeOfType($clazz) {
+		return $this->hasUniqueNode() && get_class($this->nodes[0])==$clazz;
+	}
+
 	function uniqueNode() {
 		if (count($this->nodes())>1) {
 			err("unique node expected, but many found: $this");

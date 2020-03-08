@@ -4,8 +4,10 @@ use nan\mm;
 
 class Up8thMulReducer extends NodeReducer {
 	function reduce_Up8thMul($m,$c) {		
-		$mo=mm\merge::nw($m->nodes());	
-		$mo=$mo->addNode(mm\up8th::nw($m->nodes()));
+		$mo=mm\merge::nw($m->nodes())
+			->addNode(mm\up8th::nw(mm\then::nw($m->nodes())));
+
+		print "Nodo8mul:".$mo->toStringTree()."\n";
 		return $mo;
 	}
 }

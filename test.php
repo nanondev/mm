@@ -23,6 +23,7 @@ function assert_equals($title,$a,$b) {
 }
 
 function assert_abc_equals($title,$m,$abc) {
+	$pass=false;
 	$pass=assert_equals($title,(new abc\AbcReducer())->reduce($m),$abc);
 	if (!$pass) {
 		$r=new abc\AbcPrepareReducer();
@@ -130,7 +131,7 @@ function test_time_2() {
 }
 
 function test_multiplex() {
-assert_abc_equals("test_multiplex",
+	assert_abc_equals("test_multiplex",
 		multiplex::nw(2)->addNode(notes("ABCD"))			
 		,"|(ABCD;ABCD)");
 
@@ -145,7 +146,7 @@ function test_rep() {
 function test_tempo() {
 	assert_abc_equals("test_tempo",
 		tempo::nw(1,128)->addNode(notes("ABCD"))			
-		,"T:128\n|ABCD");
+		,"Q:1=128\n|ABCD");
 }
 
 function test_up8thmul() {
@@ -177,7 +178,7 @@ function main() {
 	test_multiplex();
 	test_rep();
 	test_tempo();
-	//test_mask();
+	//test_mask();*/
 	test_up8thmul();
 }
 

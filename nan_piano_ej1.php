@@ -37,7 +37,7 @@ new abc\ABCNs();
 
 class Ej extends MusicNode {
 	function __construct($nodes=[]) {
-					
+			parent::__construct("Ej",$nodes);		
 	}
 
 	static function ej11() {
@@ -60,11 +60,29 @@ class Ej extends MusicNode {
 
 }
 
+class Ej2 extends MusicNode {
+	function __construct($nodes=[]) {
+			parent::__construct("Ej",$nodes);		
+	}
+
+	static function phraseA() {
+		return notes("ABCD");		
+	}
+
+	static function nw($nodes=[]) {
+		return (new Ej($nodes))
+			->addNode(key::nw("Fmaj"))
+			->addNode(time::nw(3,4))
+			->addNode(tempo::nw(1/4,200))
+			->addNode(Ej2::phraseA())->wrap(header::nw(["composer"=>"Nan","title"=>"piano exercises"]));
+	}
+
+}
 
 
 function main() {
 	mm\debug("main");
- 	$abcStr=(new abc\AbcReducer())->reduce(Ej::nw());
+ 	$abcStr=(new abc\AbcReducer())->reduce(Ej2::nw());
  	//$m_measured_tree=$m_measured->toStringTree();
  	//$reducer=new transpose\TransposeReducer();
  	//$reducer2=new merge\MergeReducer();

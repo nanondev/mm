@@ -4,7 +4,7 @@ namespace nan\mm;
 
 class Up8thMul extends MusicNode {
 	function __construct($nodes=[]) {
-		parent::__construct("Up8thMul",$nodes=[]);		
+		parent::__construct("Up8thMul",$nodes);		
 	}
 
 	static function nw($nodes=[]) {

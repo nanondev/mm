@@ -15,6 +15,7 @@
  * - precondicion de reducciones? no debería, ver como preservar algebra  
  * - implementar mascaras
  * - eliminar NSs
+ * - determinar primitivas: cuales operadores son primitivos?
  */
 namespace nan\mm;
 

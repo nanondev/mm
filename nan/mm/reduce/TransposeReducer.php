@@ -2,7 +2,6 @@
 namespace nan\mm\reduce;
 use nan\mm;
 
-
 class TransposeReducer extends NodeReducer {
 	function reduce_transpose($m,$c,$transposeDistance) {	
 		$co=$c->withTransposeDistance($c->transposeDistance()+$transposeDistance);

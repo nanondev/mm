@@ -6,7 +6,11 @@ use nan\mm;
 
 
 class MeasureReducer extends NodeReducer {
-	function reduce_then ($m,$c) {
+	function reduce_then_simplify($m,$c) {
+		return $m->uniqueNode();
+	}
+
+	function reduce_then_measure($m,$c) {
 		$nodes=$m->nodes();
 		$partial_nodes=array();
 		$measured_nodes=array();	
@@ -29,7 +33,13 @@ class MeasureReducer extends NodeReducer {
 		}
 		$new_then=new mm\then($measured_nodes);
 		//debug("new_then:$new_then");
-		return $new_then;
+		return $new_then;		
+	}
+
+	function reduce_then ($m,$c) {
+		$simplify=$m->hasUniqueNodeOfType("nan\\mm\\then");
+		if ($simplify) return $this->reduce_then_simplify($m,$c);
+		return $this->reduce_then_measure($m,$c);
 	}
 
 	function reduce_measure($m,$c) { 

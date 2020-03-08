@@ -5,8 +5,8 @@ class tempo extends MusicNode {
 	var $beatNote,$beatsByMinute;
 	function __construct($beatNote,$beatsByMinute,$nodes=[]) {
 		parent::__construct("tempo",$nodes);
-		$this->beatNote;
-		$this->beatsByMinute;
+		$this->beatNote=$beatNote;
+		$this->beatsByMinute=$beatsByMinute;
 	}
 
 	static function nw($beatNote,$beatsByMinute,$nodes=[]) {
