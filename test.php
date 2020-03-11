@@ -5,6 +5,7 @@ namespace nan\mm;
 
 use nan\mm;
 use nan\mm\abc;
+use nan\mm\reduce;
 
 require_once("autoloader.php");
 
@@ -153,8 +154,17 @@ function test_up8thmul() {
 	return assert_abc_equals("test_up8thmul",Up8thMul::nw(notes("ABCD")),"|(ABCD;A'B'C'D)");
 }
 
+function test_up8th2() {
+	//then ( up8th([A,B,C,D]) ) ==> then ([up8th(A),up8th(B),up8th(C),up8th(D)])
+	$r=new reduce\TransposeReducer();
+	$r=new reduce\Up8thReducer();
+	print "reducido:".$r->reduce(then::nw(
+		Up8th::nw([notes("AB"),notes("CD")])
+	))->toStringTree();
+}
+
 function main() {
-	test_note_then();
+/*	test_note_then();
 	test_note_sharp();
 	test_note_natural();
 	test_note_flat();
@@ -179,7 +189,9 @@ function main() {
 	test_rep();
 	test_tempo();
 	//test_mask();*/
-	test_up8thmul();
+	//test_up8thmul();
+
+	test_up8th2();
 }
 
 print main();
