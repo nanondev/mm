@@ -23,7 +23,7 @@ class NodeList extends mm\MusicNode {
 }
 
 class Up8thReducer extends NodeReducer {
-	function distribute_node($m,$c,$clazz) {
+	/*function distribute_node($m,$c,$clazz) {
 		$distributed=[];
 		foreach($m->nodes() as $ni) {
 			if (get_class($ni)==$clazz) {
@@ -53,14 +53,52 @@ class Up8thReducer extends NodeReducer {
 			print "mo:".$mo->toStringTree()."\n";
 			return $mo;
 		}
+	}*/
+
+	function matchIgnore($m,$c) {
+		return get_class($m)==\nan\mm\up8th && $m->hasSingleNode() && !$m->hasSingleNodeOfType(\nan\mm\note);
+	}
+
+	function matchConsume($m,$c) {
+		return get_class($m)==\nan\mm\up8th && $m->hasSingleNode() && $m->hasSingleNodeOfType(\nan\mm\note);
+	}
+
+	function matchDistribute($m,$c) {
+		return get_class($m)==\nan\mm\up8th && !$m->hasSingleNode();
+	}
+
+	function matchExplore($m,$c) {
+		return get_class($m)!=\nan\mm\up8th && !$m->hasSingleNode();
+	}
+
+	function reduceIgnore($m,$c) {
+		mm\warn("ignoring reduce up8th at $m");
+		return $m;
+	}
+
+	function reduceConsume($m,$c) {
+		return $m->withTransposeDistance($m->transposeDistance()+12);
+	}
+
+	function reduceDistribute($m,$c) {
+		
+	}
+
+	function reduceExplore($m,$c) {
+		return $m->withNodes($this->reduceNodes($m->nodes(),$c));
+	}
+	
+	function reduceNodes($m,$c) {
+		$ns=[];
 	}
 
 	function reduce($m,$c=null) {
-		//reduce n1[n2:ns]==>n1 [reduce n1: reduce_nodes ns]
-		//reduce n1[(up8th ns2):ns3]==>n1 [reduce n1: reduce_nodes ns]
-		
-		//return $this->distribute_node($m,$c,"\\nan\\mm\\up8th");
-		return $this->reduce_up8th($m,$c);
+		$mo=null;
+		if ($this->matchIgnore($m,$c)) $mo=$this->reduceIgnore($m,$c);
+		else if ($this->matchConsume($m,$c)) $mo=$this->reduceConsume($m,$c);
+		else if ($this->matchDistribute($m,$c)) $mo=$this->reduceDistribute($m,$c);
+		else if ($this->matchExplore($m,$c)) $mo=$this->reduceExplore($m,$c);
+		return $mo;
 	}
 }
 
