@@ -2,26 +2,31 @@
 
 namespace nan\mm;
 
-class rep extends MusicNode {
+class Rep extends UnaryNode {
 	var $reps;
-	function __construct($reps,$nodes=[]) {
-		parent::__construct("rep",$nodes);
+	function __construct($reps,$uniqueNode) {
+		parent::__construct($uniqueNode);
 		$this->reps=$reps;
 	}
 
-	static function nw($reps,$nodes=[]) {
-		return new rep($reps,$nodes);
+	static function nw($reps,$uniqueNode) {
+		return new Rep($reps,$uniqueNode);
 	}
 
 	function reps() {
 		return $this->reps;
 	}
+
+	function toStringAttributes() {
+		return sprintf(sprintf("reps:%s",$this->reps));
+	}
+
 	function  toStringCompact() {
 		return sprintf("%s*%s",$this->reps,$this->toStringNodes());
 	}
 
-	function toStringSeparator() {
-		return "";
+	static function clazz() {
+		return get_class(Rep::nw(1,Note::nw("C")));
 	}
 }
 

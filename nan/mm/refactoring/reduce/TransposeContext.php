@@ -15,6 +15,7 @@ class TransposeContext {
 	function transposeDistance() {
 		return $this->transposeDistance;
 	}
+
 	function __toString() {
 		return sprintf("AbcContext <tr:%s>",$this->transposeDistance);
 	}

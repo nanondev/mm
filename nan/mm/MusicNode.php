@@ -2,54 +2,25 @@
 
 namespace nan\mm;
 
-/* 
- * base para nodos del arbol musical.
- *
- * propiedades:
- * -es inmutable
- * 
- */
-class MusicNode {
-	var $name;
+abstract class MusicNode  {
 	var $tag;
-	var $nodes=array();
 
-	function __construct($name,$nodes=array(),$tag=null) {
-		$this->name=$name;
-		if (!is_string($name)) err("node name should be a string instead of $name");
-		if (!is_array($nodes)) $nodes=array($nodes);
-		if ($tag==null) $tag=new MusicNodeTag();
-		$this->nodes=$nodes;
+	function __construct($tag=null) {
 		$this->tag=$tag;
 	}	
-
+	
 	function name() {
-		return $this->name;
-	}
-	function nodes() {
-		return $this->nodes;
-	}
-
-	function withNodes($nodes) {
-		$mm=clone $this;
-		$mm->nodes=$nodes;
-		return $mm;
-	}	
-
-	function addNode($node) {
-		$mm=clone $this;
-		$mm->nodes=$this->nodes;
-		$mm->nodes[]=$node;
-		return $mm;
+		$n=get_class($this);
+		$fg=explode("\\",$n);
+		return $fg[count($fg)-1];
 	}
 
 	function wrap($m) {
-		$wrapped=$m->withNodes([$this]);
+		$wrapped=$m->withUniqueNode($this);
 		return $wrapped;
 	}
 
 	function withTag($tag) {
-		//throw new exception("class must implement withTag: ".get_class($this));
 		$mm=clone $this;
 		$mm->tag=$tag;
 		return $mm;
@@ -59,68 +30,53 @@ class MusicNode {
 		return $this->tag;
 	}
 
-	function hasNodes() {
-		return count($this->nodes)>0;
-	}
-
-	function hasUniqueNode() {
-		return count($this->nodes)==1; 
-	}
-
-	function hasUniqueNodeOfType($clazz) {
-		return $this->hasUniqueNode() && get_class($this->nodes[0])==$clazz;
-	}
-
-	function uniqueNode() {
-		if (count($this->nodes())>1) {
-			err("unique node expected, but many found: $this");
-		} else if (count($this->nodes())==0) {
-			err("unique node expected, but none found: $this");
-		}
-		return $this->nodes[0];
-	}
-
-	function firstNode() {
-		return $this->nodes[0];		
-	}
-
 	function __toString() {
 		return $this->toStringCompact();
 	}
 	
 	function toStringTree() {
-		$str=sprintf("%s:%s%s%s ",$this->name(),$this->toStringComplementary(),$this->tag->__toString(),$this->toStringNodes(true));
+		$tagStr=("".$this->tag);
+		$str=sprintf("%s%s%s",$this->name(),$this->toStringAttributesEnclosed(),$tagStr);
 		return $str;
 	}
 
 	function toStringCompact() {
-		$name=$this->name;
-		$compl=$this->toStringComplementary();
+		$name=$this->name();
+		$tagStr=("".$this->tag);
 		$separator=$this->toStringSeparator();
-		$nodesStr=$this->toStringNodes();
-		return sprintf('%s%s%s%s%s',$name,$separator,$compl,$this->tag->__toString(),$nodesStr);
-	}
-
-
-	function toStringNodes($asTree=false) {
-		$nodesStr="";
-		$separator=$this->toStringSeparator();
-		foreach($this->nodes() as $ni) {
-			$nodesStr.=sprintf("%s%s",$asTree ? $ni->toStringTree() : $ni->__toString(),$separator);
-		}			
-		if (count($this->nodes())>1) {
-			$nodesStr="[$nodesStr]";
-		}		
-		return $nodesStr;
+		$attrStr=$this->toStringAttributes();
+		return sprintf('%s%s%s%s',$name,$separator,$attrStr,
+			$tagStr);
 	}
 
 	function toStringSeparator() {
 		return " ";
 	}	
 
-	function toStringComplementary() {
+	function toStringAttributes() {
 		return "";
 	}
+
+	function toStringAttributesEnclosed() {
+		$s=$this->toStringAttributes();
+		if (strlen($s)>0) {
+			$s="<$s>";
+		}
+		return $s;
+	}
+
+	function toStringList($list) {
+		$s="";
+		foreach($list as $li) {
+			if (strlen($s)>0) $s.=",";
+			$s.=$li;
+		}
+		$s="[$s]";
+		return $s;
+	}
+
+	static abstract function clazz();
+
 }
 
 ?>

@@ -1,19 +1,27 @@
 <?php
 namespace nan\mm;
 
-class multiplex extends MusicNode {
+class Multiplex extends UnaryNode {
 	var $channels;
-	function __construct($channels,$nodes=[]) {
-		parent::__construct("multiplex",$nodes);
+	function __construct($channels,$uniqueNode) {
+		parent::__construct($uniqueNode);
 		$this->channels=$channels;
 	}
 
-	static function nw($channels,$nodes=[]) {
-		return new multiplex($channels,$nodes);
+	static function nw($channels,$uniqueNode) {
+		return new Multiplex($channels,$uniqueNode);
 	}
 	
 	function channels() {
 		return $this->channels;
+	}
+
+	static function clazz() {
+		return get_class(Multiplex::nw(1,Note::nw("C")));
+	}
+
+	function toStringAttributes() {
+		return sprintf("channels:%s",$this->channels);
 	}
 }
 

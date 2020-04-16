@@ -3,15 +3,22 @@ namespace nan\mm;
 
 class ChordNs {}
 
-class chord extends MusicNode {
-	function __construct($nodes=[]) {
-		parent::__construct("chord",$nodes);
+class Chord extends TerminalNode {
+	var $notes;
+
+	function __construct($notes=[]) {
+		parent::__construct();
+		$this->notes=$notes;
 	}
 
-	static function nw($nodes=[]) {
-		return new chord($nodes);
+	static function nw($notes=[]) {
+		return new Chord($notes);
 	}
 
+	function notes() {
+		return $this->notes;
+	}
+	
 	static function american($name) {
 		$notes=[];
 		$base=["C"=>0,"D"=>1,"E"=>2,"F"=>3,"G"=>4,"A"=>5,"B"=>6];
@@ -36,9 +43,19 @@ class chord extends MusicNode {
 		$m=chord::nw($notes);
 		return $m;
 	}
+
+	static function clazz() {
+		return get_class([Note::nw("C")]);
+	}
+
+	function toStringAttributes() {
+		$notesStr=$this->toStringList($this->notes);
+		return "notes:$notesStr";
+	}
 }
 
 function amchord($name) {
 	return chord::american($name);
 }
+
 ?>

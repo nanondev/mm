@@ -1,0 +1,961 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"is_",
+				"is_array"
+			],
+			[
+				"test",
+				"test_multiplexreducer_2"
+			],
+			[
+				"test_mult",
+				"test_multiplexreducer_1"
+			],
+			[
+				"orderP",
+				"orderPatternStr"
+			],
+			[
+				"order",
+				"orderPatternStr"
+			],
+			[
+				"toString",
+				"toStringFn1"
+			],
+			[
+				"reduce_pa",
+				"reduce_pass_unary"
+			],
+			[
+				"hasUni",
+				"hasUniqueNodeOfType"
+			],
+			[
+				"accident",
+				"accidentalModifier"
+			],
+			[
+				"reduce_t",
+				"reduce_then_measure"
+			],
+			[
+				"accide",
+				"accidentalModifier"
+			],
+			[
+				"beat",
+				"beatSeconds"
+			],
+			[
+				"transpon",
+				"transposeDistance"
+			],
+			[
+				"MusicNode",
+				"MusicNodeTag"
+			],
+			[
+				"get_cal",
+				"get_class"
+			],
+			[
+				"duratio",
+				"duration"
+			],
+			[
+				"node_reduce",
+				"node_reduce_pass"
+			],
+			[
+				"toStringNodes",
+				"toStringNodesWith"
+			],
+			[
+				"toStri",
+				"toStringNodes"
+			],
+			[
+				"toStringC",
+				"toStringComplementary"
+			],
+			[
+				"abc2",
+				"abc2midi_runner"
+			],
+			[
+				"mm_de",
+				"mm_debug_enabled"
+			],
+			[
+				"nodes",
+				"nodesStr"
+			],
+			[
+				"patia",
+				"partial_nodes"
+			],
+			[
+				"IDINS",
+				"IDINSCRIPCION"
+			],
+			[
+				"idInsp",
+				"idInscripcionFiltro"
+			],
+			[
+				"id",
+				"idinscripcion_activo"
+			],
+			[
+				"tipo",
+				"tipopersona_change"
+			],
+			[
+				"docu",
+				"documentoProveedor"
+			],
+			[
+				"docuemntoca",
+				"documentosCatalogo"
+			],
+			[
+				"idPR",
+				"idProveedor"
+			],
+			[
+				"IDDOCUMENT",
+				"IDDOCUMENTOPROVEEDORCATALOGO"
+			],
+			[
+				"idPROV",
+				"IDPROVEEDOR"
+			],
+			[
+				"IDPROV",
+				"IDPROVEEDOR"
+			],
+			[
+				"IDPRO",
+				"IDPROVEEDOR"
+			],
+			[
+				"docuemntoRE",
+				"documentoRechazado"
+			],
+			[
+				"ID",
+				"IDDOCUMENTOPROVEEDORCATALOGO"
+			],
+			[
+				"idDo",
+				"idDocumentoProveedorCatalogo"
+			],
+			[
+				"estadoRe",
+				"estadoRevision"
+			],
+			[
+				"comentario",
+				"comentarioRevisionArr"
+			],
+			[
+				"idDoc",
+				"idDocumentoProveedorCatalogoArr"
+			],
+			[
+				"idDocu",
+				"idDocumentoProveedorArr"
+			],
+			[
+				"ingresoAUtor",
+				"ingresoAutorizadoOnlineBool"
+			],
+			[
+				"indica",
+				"indicaRevisionTarea"
+			],
+			[
+				"DOCUMENTOPRO",
+				"DEDOCUMENTOPROVEEDORCATALOGO"
+			],
+			[
+				"CONE",
+				"conectorDB"
+			],
+			[
+				"fila",
+				"fila_oculta"
+			],
+			[
+				"puntaje",
+				"puntaje_check_entre"
+			],
+			[
+				"calcul",
+				"calcular_check_count"
+			],
+			[
+				"check",
+				"check_count"
+			],
+			[
+				"calcular",
+				"calcular_puntaje_checks"
+			],
+			[
+				"insert",
+				"insert_query"
+			],
+			[
+				"tabla",
+				"tabla_original"
+			],
+			[
+				"array_key",
+				"array_key_exists"
+			],
+			[
+				"PORCE",
+				"LEGAJO_PORCENTAJEPARTICIPACION"
+			],
+			[
+				"LEGAJO",
+				"LEGAJO_MODULO4"
+			],
+			[
+				"LEGAO",
+				"LEGAJO_MODULO3"
+			],
+			[
+				"suf",
+				"sufijo"
+			],
+			[
+				"columna",
+				"columna_tamano"
+			],
+			[
+				"extra",
+				"extra_class"
+			],
+			[
+				"condi",
+				"condicional_si_change"
+			],
+			[
+				"peri",
+				"periodofin"
+			],
+			[
+				"valor_",
+				"valor_guardado"
+			],
+			[
+				"MODULO4",
+				"LEGAJO_MODULO4"
+			],
+			[
+				"LEJ",
+				"LEGAJO_MODULO4"
+			],
+			[
+				"sufijo",
+				"sufijo_input"
+			],
+			[
+				"prefijo",
+				"prefijo_input"
+			],
+			[
+				"seleccionado",
+				"seleccionado_str"
+			],
+			[
+				"existe",
+				"existe_columna"
+			],
+			[
+				"insert_",
+				"insert_keys"
+			],
+			[
+				"valor",
+				"valor_str"
+			],
+			[
+				"contro",
+				"control_tabla"
+			],
+			[
+				"CALCU",
+				"calculo_monto"
+			],
+			[
+				"generar_schema",
+				"generar_schema_control"
+			],
+			[
+				"ing",
+				"ingresoAutorizadoOnline"
+			],
+			[
+				"output",
+				"outputCsv"
+			],
+			[
+				"filtro_",
+				"filtro_altas"
+			],
+			[
+				"array_ke",
+				"array_key_exists"
+			],
+			[
+				"inpu",
+				"inputPasswordRepeat"
+			],
+			[
+				"out",
+				"output_files"
+			],
+			[
+				"REFR",
+				"refresh_link"
+			],
+			[
+				"refresh",
+				"refresh_link"
+			],
+			[
+				"veri",
+				"verificarSesionInicio"
+			],
+			[
+				"tiempo",
+				"tiempo_timeout"
+			],
+			[
+				"Proved",
+				"proveedor_planificacion"
+			],
+			[
+				"proo",
+				"proveedor_planificacion"
+			],
+			[
+				"blaqueo",
+				"blanqueo_nouser"
+			],
+			[
+				"blanqeuo",
+				"blanqueo_age"
+			],
+			[
+				"blanque",
+				"blanqueo_hash"
+			],
+			[
+				"destina",
+				"destinatario2"
+			],
+			[
+				"debug",
+				"debug_email"
+			],
+			[
+				"destinat",
+				"destinatario1"
+			],
+			[
+				"desti",
+				"destinatario2"
+			],
+			[
+				"consularpor",
+				"consultarListadoProveedoresRiesgoServicio"
+			],
+			[
+				"DESC",
+				"DESCRIPCION"
+			],
+			[
+				"activo",
+				"activoCols"
+			],
+			[
+				"activo3",
+				"activo3_extra"
+			],
+			[
+				"desc",
+				"DESCRIPCION"
+			],
+			[
+				"activ",
+				"activo3_vals_extra"
+			],
+			[
+				"c",
+				"cuEmpleado"
+			],
+			[
+				"idEmpleadoEsta",
+				"idEmpleadoEstadoDoc"
+			],
+			[
+				"etiqueta",
+				"etiquetaCodigo"
+			],
+			[
+				"idact",
+				"idactivotipo"
+			],
+			[
+				"backg",
+				"background-color\tproperty"
+			],
+			[
+				"start",
+				"start_line"
+			],
+			[
+				"tra",
+				"trace_frags"
+			],
+			[
+				"trace",
+				"trace_lines"
+			],
+			[
+				"as",
+				"asinh"
+			],
+			[
+				"autor",
+				"autorizacion_numerica"
+			],
+			[
+				"ida",
+				"idactivotipo"
+			],
+			[
+				"COI",
+				"CODIGOMAQUINARIA"
+			],
+			[
+				"CODIGO",
+				"CODIGOVEHICULO"
+			],
+			[
+				"cuit",
+				"cuitduplicado"
+			],
+			[
+				"param",
+				"param_output"
+			],
+			[
+				"IDPR",
+				"IDPROVEEDOR"
+			],
+			[
+				"accio",
+				"accion_forzar_cierre"
+			],
+			[
+				"cantidad",
+				"CANTIDADARCHIVOS"
+			],
+			[
+				"conect",
+				"conectorDB"
+			],
+			[
+				"base64",
+				"base64_encode"
+			],
+			[
+				"_",
+				"_GET"
+			],
+			[
+				"LL_CLIENT_",
+				"ll_client_active"
+			],
+			[
+				"ll_client",
+				"ll_client_id"
+			],
+			[
+				"store",
+				"store_picture_from_file"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "/C/web-mios/mm/test.php",
+			"settings":
+			{
+				"buffer_size": 7181,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Chord.php",
+			"settings":
+			{
+				"buffer_size": 1312,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Estimados, quiero pagar mi factura del mes pero atento a la emergencia sanitaria decretada me veo imposibilitada de hacerlo fisicamente por el medio de pago en efectivo como lo vengo haciendo usualmente por favor indicarme otros medios de pago, saludos, Serena Ortiz Ortiz",
+			"settings":
+			{
+				"buffer_size": 272,
+				"line_ending": "Windows",
+				"name": "Estimados, quiero pagar mi factura del mes pero at"
+			}
+		},
+		{
+			"file": "Arp.php",
+			"settings":
+			{
+				"buffer_size": 935,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/web-mios/mm",
+		"/C/web-mios/mm/nan",
+		"/C/web-mios/mm/nan/mm",
+		"/C/web-mios/mm/nan/mm/reduce"
+	],
+	"file_history":
+	[
+		"/C/web-mios/mm/nan/mm/MusicNode.php",
+		"/C/web-mios/mm/nan/mm/reduce/ArpReducer.php",
+		"/C/web-mios/mm/nan/mm/Chord.php",
+		"/C/web-mios/mm/nan/mm/refactoring/reduce/ArpReducer.php",
+		"/C/web-mios/mm/nan/mm/refactoring/reduce/TransposeReducer.php",
+		"/C/web-mios/mm/nan/mm/BinaryNode.php",
+		"/C/web-mios/mm/nan/mm/reduce/MultiplexReducer.php",
+		"/C/web-mios/mm/nan/mm/reduce/NodeReducer.php",
+		"/C/web-mios/mm/nan/mm/mm.php",
+		"/C/web-mios/mm/nan/mm/Note.php",
+		"/C/web-mios/mm/nan/mm/UnaryNode.php",
+		"/C/web-mios/mm/nan/mm/TerminalNode.php",
+		"/C/web-mios/mm/nan/mm/refactoring/reduce/ChainReducer.php",
+		"/C/web-mios/mm/nan/mm/Arp.php",
+		"/C/web-mios/mm/nan/mm/Rep.php",
+		"/C/web-mios/mm/nan/mm/Time.php",
+		"/C/web-mios/mm/nan/mm/Tempo.php",
+		"/C/web-mios/mm/nan/mm/Measure.php",
+		"/C/web-mios/mm/nan/mm/Multiplex.php",
+		"/C/web-mios/mm/nan/mm/Header.php",
+		"/C/web-mios/mm/nan/mm/refactoring/reduce/NodeReducer.php",
+		"/C/web-mios/mm/nan/mm/NodeReducer.php",
+		"/C/web-mios/mm/nan/mm/refactoring/Up8thMul.php",
+		"/C/web-mios/mm/nan/mm/Parallel.php",
+		"/C/web-mios/mm/nan/mm/refactoring/mm.php",
+		"/C/web-mios/mm/nan/mm/Merge.php",
+		"/C/web-mios/mm/nan/mm/Then.php",
+		"/C/web-mios/mm/nan/mm/Key.php",
+		"/C/web-mios/mm/nan/mm/Up8th.php",
+		"/C/web-mios/mm/nan/mm/Down8th.php",
+		"/C/web-mios/mm/nan/mm/test.php",
+		"/C/web-mios/mm/nan/mm/thinking.txt",
+		"/C/web-mios/mm/nan/mm/reduce/MeasureContext.php",
+		"/C/web-mios/mm/nan/mm/reduce/TransposeReducer.php",
+		"/C/web-mios/mm/nan/mm/abc/StringReducer.php",
+		"/C/web-mios/mm/nan/mm/abc/AbcReducer.php",
+		"/C/web-mios/mm/nan/mm/abc/AbcPrepareReducer.php",
+		"/C/web-mios/mm/nan/mm/abc/AbcTranslator.php",
+		"/C/web-mios/mm/test.bat",
+		"/C/Users/aspire/Desktop/returnordersales-8135-gonza.txt",
+		"/C/web-mios/mm/nan/mm/abc/abc.php",
+		"/C/web-mios/mm/sample.abc",
+		"/C/Users/aspire/Desktop/returnordersales-8135-gonza.xlsx",
+		"/C/web-mios/mm/autoloader.php",
+		"/C/web-mios/mm/nan/mm/reduce/TransposeContext.php",
+		"/C/web-mios/mm/nan_piano_ej1.php",
+		"/C/web-mios/mm/test.php",
+		"/C/web-mios/mm/nan_piano_ej1.bat",
+		"/C/web-mios/mm/nan/mm/reduce/Up8thMulReducer.php",
+		"/C/web-mios/mm/nan/mm/abc/AbcContext.php",
+		"/C/web-mios/mm/nan/mm/reduce/MeasureReducer.php",
+		"/C/web-mios/mm/nan/mm/Up8thMul.php",
+		"/C/web-mios/mm/nan/mm/multiplex/multiplex.php",
+		"/C/web-mios/mm/nan/mm/arp/arp.php",
+		"/C/web-mios/mm/nan/mm/chord/chord.php",
+		"/C/web-mios/mm/nan/mm/measure/measure.php",
+		"/C/web-mios/mm/nan/mm/merge/merge.php",
+		"/C/web-mios/mm/nan/mm/transpose/transpose.php",
+		"/C/mm/nan/mm/measure/measure.php",
+		"/C/mm/ej.abc",
+		"/C/mm/nan/mm/reduce/reduce.php",
+		"/C/mm/nan_piano_ej1.bat",
+		"/C/mm/sample.abc",
+		"/C/mm/nan/mm/mm.php",
+		"/C/mm/autoloader.php",
+		"/C/mm/test..bat",
+		"/C/mm/test.php",
+		"/C/mm/nan/abc/abc.php",
+		"/C/mm/A/A.php",
+		"/C/mm/B/B.php",
+		"/C/mm/mm.php",
+		"/C/mm/mm_abc.php",
+		"/C/mm/mm_measure.php",
+		"/C/mm/test2.php",
+		"/C/Users/aspire/Desktop/trevisionempleado.sql",
+		"/C/Users/aspire/Desktop/tareas-econ.txt",
+		"/C/web/local.e-contratistas.com/sistema/reportes/form_utils.php",
+		"/C/web/local.e-contratistas.com/sistema/reportes/informe_legajo_form.php",
+		"/C/web/local.e-contratistas.com/sistema/reportes/informe_legajo.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/save_abmproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/layout/layout_head.php",
+		"/C/Users/aspire/Desktop/test-reaper.rpp",
+		"/C/web/local.e-contratistas.com/sistema/layout/layout.php",
+		"/C/web/local.e-contratistas.com/sistema/revision/save_abmrevisarproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/revision/consultarrevisarproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/consultarproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/amproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/revision/listarrevisarproveedores.php",
+		"/C/web/local.e-contratistas.com/sistema/revision/amrevisarproveedor.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_schemaUpdater.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_excelsos.php",
+		"/C/Users/aspire/Desktop/mm.java",
+		"/C/web/local.e-contratistas.com/sistema/layout/layout_footer.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_formularios.php",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/20190719_Misleidy_MacroEmpleadoNoAutoriza/_ayuda.txt",
+		"/C/web/local.e-contratistas.com/sistema/administracion/save_abmusuario.php",
+		"/C/Users/aspire/Downloads/aaa.txt",
+		"/C/web/local.e-contratistas.com/sistema/ingresar.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_mail.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/listarproveedores.php",
+		"/C/web/local.e-contratistas.com/sistema/administracion/listarcontrolesempleados.php",
+		"/C/web/local.e-contratistas.com/sistema/reportes/testsautomatizados.php",
+		"/C/web/local.e-contratistas.com/sistema/funciones/login.php",
+		"/C/web/local.e-contratistas.com/sistema/reportes/listartablerocontrol.php",
+		"/C/Users/aspire/Downloads/tablero-de-control-20190731.235549.csv",
+		"/C/web/local.e-contratistas.com/sistema/reportes/export_tablero_control.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_tokenizar.php",
+		"/C/Users/aspire/Desktop/legajo.sql",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_queries.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/listarnominaempleados.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/consultarnominaempleado.php",
+		"/C/web/local.e-contratistas.com/sistema/acceso/buscarautorizacion.php",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/000_hrancati_PendientesGenerales/_tareas.txt",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/20190912_misleidy_zarate_FalloAutorizacionAcceso/_ayuda.txt",
+		"/C/web/local.e-contratistas.com/sistema/modulos/logicanegocio.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_vigencia.php",
+		"/C/web/local.e-contratistas.com/sistema/administracion/save_abmperfil.php",
+		"/C/Users/aspire/Desktop/test.html",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_conectorDB_settings.php",
+		"/C/web/local.e-contratistas.com/sistema/revision/amrevisarempleado.php",
+		"/C/Users/aspire/Desktop/LEGAJO_PORCENTAJEPARTICIPACION.sql",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/20190820_carlos_AltasZarteEnvianMailIsIncorrectos/_tareas.txt",
+		"/C/web/local.e-contratistas.com/sistema/datos/save_abmcargamasiva.php",
+		"/C/web/local.e-contratistas.com/sistema/datos/save_abmempleado.php",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/_000-hrancati-PendientesGenerales",
+		"/C/web/local.e-contratistas.com/sistema/_tickets/20190802_CopiarPeriodosAClientesNuevos/_tareas.txt",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_debug_prefills.php",
+		"/C/web/local.e-contratistas.com/sistema/modulos/mod_debug.php"
+	],
+	"find":
+	{
+		"height": 42.4
+	},
+	"find_in_files":
+	{
+		"height": 125.6,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"test_chord",
+			"test_chord_Dm",
+			"test_chord",
+			"test_arp",
+			"clazz",
+			"toStringComplementary",
+			"transposeDistanceStr",
+			"name",
+			"Ignore",
+			"test_up8thmul2",
+			"new ",
+			"new",
+			"then",
+			"time"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/web-mios/mm/test.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7181,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5717,
+								5717
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2340.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Chord.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1312,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1232,
+								1240
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 272,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								272,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Estimados, quiero pagar mi factura del mes pero at",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "Arp.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 935,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								833,
+								833
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 320.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 29.0
+	},
+	"input":
+	{
+		"height": 46.4
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "mm.notebook.sublime-project",
+	"replace":
+	{
+		"height": 54.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\web\\local.llcapacitacion.excelsos.com\\local.llcapacitacion.excelsos.sublime-workspace"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 232.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,14 +1,18 @@
 <?php
 namespace nan\mm;
 
-class measure extends MusicNode {
+class Measure extends UnaryNode {
 
-	function __construct($nodes=[]) {
-		parent::__construct("measure",$nodes);
+	function __construct($uniqueNode) {
+		parent::__construct($uniqueNode);
 	}
 
-	static function nw($nodes=[]) {
-		return new measure($nodes);
+	static function nw($uniqueNode) {
+		return new Measure($uniqueNode);
+	}
+
+	static function clazz() {
+		return get_class(Measure::nw(Note::nw("C")));
 	}
 
 	function toStringCompact() {

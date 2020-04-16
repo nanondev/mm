@@ -2,21 +2,17 @@
 
 namespace nan\mm;
 
-class merge extends MusicNode {
-	function __construct($nodes=[]) {
-		parent::__construct("merge",$nodes);
+class Merge extends BinaryNode {
+	function __construct($firstNode,$secondNode) {
+		parent::__construct($firstNode,$secondNode);
 	}
 
-	static function nw($nodes=[]) {
-		return new merge($nodes);
+	static function nw($firstNode,$secondNode) {
+		return new Merge($firstNode,$secondNode);
 	}
 
-	function toStringCompact() {
-		return "".($this->toStringNodes()); //dejamos simplemente los corchetes.
-	}
-
-	function toStringSeparator() {
-		return "";
+	static function clazz() {
+		return get_class(Parallel::nw(note::nw("A"),note::nw("B")));
 	}
 }
 

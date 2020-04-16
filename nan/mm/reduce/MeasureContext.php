@@ -6,7 +6,7 @@ class MeasureContext {
 	var $time;
 	function __construct($time=null) {
 		if ($time==null) {
-			$this->time=mm\time::nw(4,4);
+			$this->time=mm\time::nw(4,4,mm\note::nw("C"));
 		} else {
 			$this->time=$time;
 		}

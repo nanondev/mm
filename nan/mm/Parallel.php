@@ -2,15 +2,18 @@
 
 namespace nan\mm;
 
-class parallel extends MusicNode {
-	function __construct($nodes=[]) {
-		parent::__construct("parallel",$nodes);
+class Parallel extends BinaryNode {
+	function __construct($firstNode,$secondNode) {
+		parent::__construct($firstNode,$secondNode);
 	}
 
-		static function nw($nodes=[]) {
-		return new parallel($nodes);
+	static function nw($firstNode,$secondNode) {
+		return new Parallel($firstNode,$secondNode);
 	}
 
+	static function clazz() {
+		return get_class(Parallel::nw(note::nw("A"),note::nw("B")));
+	}
 }
 
 ?>

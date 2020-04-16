@@ -1,16 +1,16 @@
 <?php
 namespace nan\mm;
 
-class tempo extends MusicNode {
+class Tempo extends UnaryNode {
 	var $beatNote,$beatsByMinute;
-	function __construct($beatNote,$beatsByMinute,$nodes=[]) {
-		parent::__construct("tempo",$nodes);
+	function __construct($beatNote,$beatsByMinute,$uniqueNode) {
+		parent::__construct($uniqueNode);
 		$this->beatNote=$beatNote;
 		$this->beatsByMinute=$beatsByMinute;
 	}
 
-	static function nw($beatNote,$beatsByMinute,$nodes=[]) {
-		return new tempo($beatNote,$beatsByMinute,$nodes);
+	static function nw($beatNote,$beatsByMinute,$uniqueNode) {
+		return new Tempo($beatNote,$beatsByMinute,$uniqueNode);
 	}
 
 	function beatNote() {
@@ -18,6 +18,14 @@ class tempo extends MusicNode {
 	}
 	function beatsByMinute() {
 		return $this->beatsByMinute;
+	}
+
+	static function clazz() {
+		return get_class(Tempo::nw(1,60,Note::nw("C")));
+	}
+
+	function toStringAttributes() {
+		return sprintf("beatNote:%s,beatsByMinute:%s",$this->beatNote,$this->beatsByMinute);
 	}
 }
 

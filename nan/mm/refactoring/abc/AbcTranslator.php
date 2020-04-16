@@ -103,8 +103,22 @@ class AbcTranslator extends StringReducer {
 		return $s;
 	}
 
-	function reduce_pass($m,$c) {
-		return $this->reduce_nodes($m->nodes,$c);
+	function reduce_pass_unary($m,$c) {
+		return $m
+			->withUniqueNode($this->reduce($m->uniqueNode(),$c));
+	}
+
+	function reduce_pass_binary($m,$c) {
+		return $m
+			->withFirstNode($this->reduce($m->firstNode(),$c))
+			->withSecondNode($this->reduce($m->secondNode(),$c));
+	}
+
+	function reduce_pass($m,$c) {	
+		if ($m instanceof mm\TerminalNode) return $m;		
+		if ($m instanceof mm\UnaryNode) return $this->reduce_pass_unary($m,$c);
+		if ($m instanceof mm\BinaryNode) return $this->reduce_pass_binary($m,$c);	
+		mm\err("unsupported node type: $m class:".get_class($m));
 	}
 
 	public static function create() {

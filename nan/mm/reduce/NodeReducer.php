@@ -4,20 +4,25 @@ use nan\mm;
 use nan\mm\abc;
 
 
-class NodeReducerContext extends abc\AbcContext {}
+class NodeReducerContext {} // extends abc\AbcContext {}
 
 class NodeReducer {
-	function reduce_nodes($nodes,$c) {
-		$nodesOut=array();
-		if (!is_array($nodes)) mm\warn("wrong argument: $nodes");
-		foreach ($nodes as $ni) {
-			$nodesOut[]=$this->reduce($ni,$c);
-		}
-		return $nodesOut;	
+	function reducePassUnary($m,$c) {
+		return $m
+			->withUniqueNode($this->reduce($m->uniqueNode(),$c));
 	}
 
-	function reduce_pass($m,$c) {
-		return $m->withNodes($this->reduce_nodes($m->nodes(),$c));
+	function reducePassBinary($m,$c) {
+		return $m
+			->withFirstNode($this->reduce($m->firstNode(),$c))
+			->withSecondNode($this->reduce($m->secondNode(),$c));
+	}
+
+	function reducePass($m,$c) {
+		if ($m instanceof mm\TerminalNode) return $m;		
+		if ($m instanceof mm\UnaryNode) return $this->reducePassUnary($m,$c);
+		if ($m instanceof mm\BinaryNode) return $this->reducePassBinary($m,$c);	
+		mm\err("unsupported node type: $m class:".get_class($m));
 	}
 
 	function createContext() {
@@ -25,16 +30,17 @@ class NodeReducer {
 	}
 
 	function reduce($m,$c=null) {
+		if ($m==null) mm\err("reduce call on null");
 		if ($c==null) {
 			$c=$this->createContext();
 		}
-		$name=$m->name();
-		$fn="reduce_".$name;
+
+		$frags=explode("\\",$m->clazz());
+		$fn="reduce".ucfirst($frags[count($frags)-1]);
 		if (!method_exists($this,$fn)) {
-		$fn="reduce_pass";
+		$fn="reducePass";
 		}
 		$mo=$this->$fn($m,$c);
-		
 		return $mo;
 	}
 }

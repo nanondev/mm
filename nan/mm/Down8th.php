@@ -2,17 +2,17 @@
 
 namespace nan\mm;
 
-class down8th extends MusicNode {
-	function __construct($nodes=[]) {
-		parent::__construct("down8th",$nodes);		
+class Down8th extends UnaryNode {
+	function __construct($uniqueNode) {
+		parent::__construct($uniqueNode);		
 	}
 
-	static function nw($nodes=[]) {
-		return new down8th($nodes);
+	static function nw($uniqueNode) {
+		return new Down8th($uniqueNode);
 	}
 
-	function  toStringCompact() {
-		return sprintf("8th-%s",$this->toStringNodes());
+	static function clazz() {
+		return get_class(Down8th::nw(note::nw("C")));
 	}
 }
 

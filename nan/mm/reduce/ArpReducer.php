@@ -3,7 +3,7 @@ namespace nan\mm\reduce;
 use nan\mm;
 
 class ArpReducer extends NodeReducer {
-	function reduce_arp($m,$c) {
+	function reduceArp($m,$c) {
 		$chord=$m->chord();
 		$chordNotes=$chord->nodes();
 

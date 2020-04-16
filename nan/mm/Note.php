@@ -1,21 +1,36 @@
 <?php
 namespace nan\mm;
 
-class note extends MusicNode {
+class Note extends TerminalNode {
 	var $note;
 	var $duration;
 	var $accidentalModifier;
+	var $transposeDistance;
+
 	const ACCIDENTAL_MODIFIER_NONE=-999;
 
-	function __construct($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE) {
-		parent::__construct("note");		
+	function __construct($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
+		parent::__construct(null);
 		$this->note=$note;
 		$this->duration=$duration;
 		$this->accidentalModifier=$accidentalModifier;
+		$this->transposeDistance=$transposeDistance;
 	}
 
-	static function nw($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE) {
-		return new note($note,$duration,$accidentalModifier);
+	static function nw($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
+		return new Note($note,$duration,$accidentalModifier,$transposeDistance);
+	}
+
+	static function clazz() {
+		return get_class(Note::nw("C"));
+	}
+
+	function transposeDistance() {
+		return $this->transposeDistance;
+	}
+
+	function withTransposeDistance($d) {
+		return Note::nw($this->note,$this->duration,$this->accidentalModifier,$d);
 	}
 
 	function note() {
@@ -69,14 +84,46 @@ class note extends MusicNode {
 		return $d==1 ? "" : "".$d;
 	}
 
-	function toStringComplementary() {
+	function transposeDistanceStr($useBrackets=false) {
+		$t=$this->transposeDistance;
+		$str="";
+		if ($t>0 && $t%12==0) {
+			$octaves=$t/12;
+			while ($octaves>0) {
+				$str.="'";
+				--$octaves;
+			}
+		} else  if ($t<0 && abs($t)%12==0) {
+			$octaves=abs($t)/12;
+			while ($octaves>0) {
+				$str.=",";
+				--$octaves;
+			}
+		} else if ($t!=0) {
+			$s=$t>0 ? "+":"";
+			$str="tr:$s$t";
+			if (strlen($str)>0) $str="<$str>";
+		}
+		return $str;
+	}
+
+	function toStringAttributes() {
+		$trStr=$this->transposeDistance;
 		$durationStr = $this->duration>1 ? $this->duration : "";
-		return sprintf("%s%s",$this->accidental(),$this->note,$durationStr);
+		$accidentalStr=$this->accidental();
+		if ($accidentalStr=="") $accidentalStr="none";
+
+		return sprintf("note:%s accidental:%s transposeDistance:%s duration:%s",$this->note,$accidentalStr,$this->transposeDistance,$this->duration);
 	}
 
 	function toStringCompact() {
+		$trStr=$this->transposeDistanceStr(true);
 		$durationStr = $this->duration>1 ? $this->duration : "";
-		return sprintf("%s%s%s%s",$this->accidental(),$this->note,$durationStr,$this->tag());
+		return sprintf("%s%s%s%s",$this->accidental(),$this->note,$trStr,$durationStr);
+	}
+
+	function __toString() {
+		return $this->toStringCompact();
 	}
 }
 
