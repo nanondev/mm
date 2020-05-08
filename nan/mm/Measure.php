@@ -14,10 +14,6 @@ class Measure extends UnaryNode {
 	static function clazz() {
 		return get_class(Measure::nw(Note::nw("C")));
 	}
-
-	function toStringCompact() {
-		return "|".($this->toStringNodes()).$this->tag();
-	}
 }
 
 ?>

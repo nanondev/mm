@@ -75,7 +75,9 @@ abstract class MusicNode  {
 		return $s;
 	}
 
-	static abstract function clazz();
+	static function clazz() {
+		err("should only be called on concrete node classes");
+	}
 
 }
 

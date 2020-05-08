@@ -5,56 +5,46 @@ namespace nan\mm\reduce;
 use nan\mm;
 
 
-class MeasureReducer extends NodeReducer {
-	function reduceThenMeasure($m,$c) {
-		$nodes=$m->nodes();
-		$partial_nodes=array();
-		$measured_nodes=array();	
-		$measure_size=$c->time()->quantity();
-		$partial_durations=0;
-		for($i=0;$i<count($nodes);$i++){
-			$ni=$nodes[$i];
-			$partial_nodes[]=$ni;
-			$partial_durations+=$ni->duration();
-			$is_measure_full=$partial_durations>=$measure_size;
-			if ($is_measure_full) {
-				$measured_nodes[]=new mm\measure($partial_nodes,$c);
-				$partial_nodes=array();
-				$partial_durations=0;
-			}
-		}
-		if (count($partial_nodes)>0) { // agregamos el resto inconcluso
-			mm\warn("partial measure found in: $m");
-			$measured_nodes[]=new mm\measure($partial_nodes,$c);
-		}
-		$new_then=new mm\then($measured_nodes);
-		//debug("new_then:$new_then");
-		return $new_then;		
-	}
+class MeasureReducer extends NodeReducer {	
 
-	function listToThen($ms) {		
-		$first=null;
-		for($i=count($ms)-1;$i>=0;$i--) {
-			$mi=$m[$i];
-			if ($first==null) {
-				$first=$mi;
-			} else  {
-				$first=Then::nw($first,$mi);
+	function nextMeasure($notes,$c) {
+		$measure_complete=false;
+		$index=0;
+		$measure_size=2;		
+		$measure_load=0;
+		if (count($notes)==0) return null;
+
+		do {
+			$note=$notes[$index];
+			$note_duration=$note->duration();
+			$measure_load=$measure_load+$note_duration;
+			$measure_complete=$measure_load>=$measure_size;
+		} while(!$measure_complete && $index++<count($notes));
+
+		if($measure_complete) {	
+			$measure_partial=$measure_load>$measure_size;
+			if ($measure_partial) { // quitamos una note.
+				--$index;
 			}
+			$measure_notes=array_slice($notes,0,$index+1);
+			$then=mm\list_to_then($measure_notes);
+			$measure=mm\Measure::nw($then); 
+			return $measure;
 		}
-		return $first;
 	}
 
 	function reduceThen($m,$c) {
-		//return $this->reduce_then_measure($m,$c);		
+		$notes=mm\then_to_list($m);
+		$notes_left=$notes;
 		$measures=[];
 		do {
-			$m=$this->nextMeasure($m,$c);
+			$m=$this->nextMeasure($notes_left,$c);
+			$notes_left=array_slice($notes_left,mm\then_note_count($m));
 			if ($m!=null) {
 				$measures[]=$m;
 			}
 		} while($m!=null);
-		return $this->listToThen($measures);
+		return mm\list_to_then($measures);
 	}
 
 	function reduceMeasure($m,$c) { 

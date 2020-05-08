@@ -47,6 +47,49 @@ function notes($s) {
 	return $firstNode;
 }
 
+function then_to_list($m) {
+	$nodes=[];
+	return then_to_list_rec($m,$nodes);
+}
+
+function then_to_list_rec($m,&$nodes) {	
+	if ($m instanceof BinaryNode) {
+		then_to_list_rec($m->firstNode(),$nodes);
+		then_to_list_rec($m->secondNode(),$nodes);
+	} else if ($m instanceof UnaryNode) {
+		then_to_list_rec($m->uniqueNode(),$nodes);
+	} else if ($m instanceof Note) {
+		$nodes[]=$m;
+	}
+	return $nodes;
+}
+
+function list_to_then($ms) {		
+	$first=null;
+	for($i=count($ms)-1;$i>=0;$i--) {
+		$mi=$ms[$i];
+		if ($first==null) {
+			$first=$mi;
+		} else  {
+			$first=Then::nw($mi,$first);
+		}
+	}
+	return $first;
+}
+
+function then_note_count($m) {	
+	if ($m instanceof BinaryNode) {
+		return then_note_count($m->firstNode())
+			+then_note_count($m->secondNode());
+	} else if ($m instanceof UnaryNode) {
+		return then_note_count($m->uniqueNode());
+	} else if ($m instanceof Note) {
+		return 1;
+	}
+	return 0;
+}
+
+
 function warn($msg) {
 	global $warn_enabled;
 	if ($warn_enabled) {
