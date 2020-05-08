@@ -4,6 +4,8 @@ use nan\mm\reduce;
 
 require_once("autoloader.php");
 
+new mm\MmNs();
+
 function list2str($arr) {
 	$s="";
 	foreach ($arr as $v) {
@@ -20,9 +22,17 @@ function assert_equals($title,$a,$b) {
 	} else {
 		$aStr=$a;
 		$bStr=$b;
-		if (is_array($a)) $aStr=list2str($a);
-		if (is_array($b)) $bStr=list2str($b);
-		print "[FAIL] $title ($aStr != $bStr)\n";
+		if (is_array($a)) {
+			$aStr=list2str($a);
+		}
+		if (is_array($b)) {
+			$bStr=list2str($b);
+		}
+		if ($aStr==$bStr) {
+			print "[PASS] $title\n";
+		} else {
+			print "[FAIL] $title ($aStr != $bStr)\n";
+		}
 		return false;
 	}
 }
@@ -164,6 +174,10 @@ function test_chord() {
 		mm\Chord::american("Dm")->notes(),["D","F","A"]);
 	assert_equals("test_chord_D",
 		mm\Chord::american("D")->notes(),["D","^F","A"]);
+	assert_equals("test_chord_C",
+		mm\Chord::american("C")->notes(),["C","E","G"]);
+	assert_equals("test_chord_Cm",
+		mm\Chord::american("Cm")->notes(),["C","_E","G"]);
 }
 
 function test_nodes() {
@@ -204,10 +218,16 @@ function test_multiplexreducer_3() {
 	assert_tree_equals("test_multiplexreducer_3",$r->reduce($m),"Merge[Merge[Merge[Then[A B] Then[A B]] D] Merge[Merge[Then[A B] Then[A B]] D]]");
 }
 
-function test_measurereducer() {
+function test_measurereducer_1() {
 	$m=mm\Time::nw(2,4,mm\notes("ABCD"));
 	$r=new reduce\MeasureReducer();
-	assert_tree_equals("test_measureReducer",$r->reduce($m),"Then[Measure[Then[A B]] Measure[Then[C D]]]");
+	assert_tree_equals("test_measureReducer",$r->reduce($m)->uniqueNode(),"Then[Measure[Then[A B]] Measure[Then[C D]]]");
+}
+
+function test_measurereducer_2() {
+	$m=mm\Time::nw(4,4,mm\notes("ABCD"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("test_measureReducer",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
 }
 
 function test_chainreducer() {
@@ -225,15 +245,36 @@ function test_multiplexreducer() {
 function test_reducers() {
 	test_multiplexreducer();
 	test_chainreducer();
-	test_measurereducer();
+	test_measurereducer_1();
+	test_measurereducer_2();
 }
 
+function test_thentolist() {
+	$m=mm\notes("ABCD");	
+	assert_equals("test_thentolist",mm\then_to_list($m),"A,B,C,D");	
+}
+
+function test_listtothen() {
+	$notes=mm\then_to_list(mm\notes("ABCD"));	
+	assert_tree_equals("test_listtothen",mm\list_to_then($notes),"Then[A Then[B Then[C D]]]");	
+}
+
+function test_testthennotecount() {
+	assert_equals("test_testthennotecount",mm\then_note_count(mm\notes("ABCD")),4);
+}
+
+function test_utils() {
+	test_thentolist();
+	test_listtothen();
+	test_testthennotecount();
+}
 // testeos pendientes: clazz,nw,toStringCompact,customs-unary,customs-binary
 //tag/withTag vs. constructor - definir bien esto.
 //abstract para method clazz.verificar que esté definido en todos (no está)
 
 function test() {
 	test_nodes();
+	test_utils();
 	test_reducers();
 }
 
