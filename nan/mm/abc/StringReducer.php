@@ -28,10 +28,15 @@ class StringReducer {
 		if ($c==null) {
 			$c=$this->createContext();
 		}
-		$fn="reduce_".(get_class($m));
+
+		$frags=explode("\\",$m->clazz());
+		$fn="reduce".ucfirst($frags[count($frags)-1]);
 		if (!method_exists($this,$fn)) {
-			$fn="reduce_pass";
+			$fn="reducePass";
 		}
+
+		//mm\err("string-reduce:$fn");
+
 		$s=$this->$fn($m,$c);
 		return $s;
 	}

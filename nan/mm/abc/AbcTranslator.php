@@ -4,56 +4,54 @@ use nan\mm;
 use nan\mm\reduce;
 
 class AbcTranslator extends StringReducer {
-	function reduce_tempo($m,$c) {
-		$nodes=$m->nodes();	
+	function reduceTempo($m,$c) {
 		$n=$m->beatNote();
 		$m=$m->beatsByMinute();
 		$s="Q:$n=$m\n";
-		$s.=$this->reduce_nodes($nodes,$c);
+		$s.=$this->reduce($m->uniqueNode(),$c);
 		return $s;
 	}
 
-	function reduce_time($m,$c) {
-		$nodes=$m->nodes();	
+	function reduceTime($m,$c) {
 		$q=$m->quantity();
 		$d=$m->duration();
 		$s="M:$q/$d\n";
-		$s.=$this->reduce_nodes($nodes,$c);
+		$s.=$this->reduce($m->uniqueNode(),$c);
 		return $s;	
 	}
-	function reduce_key($m,$c) {
+
+	function reduceKey($m,$c) {
 		$nodes=$m->nodes();	
 		$k=$m->key();
 		$s="K:$k\n";
-		$s.=$this->reduce_nodes($nodes,$c);
+		$s.=$this->reduce($m->uniqueNode(),$c);
 		return $s;
 	}
 
-	function reduce_rep($m,$c) {
+	function reduceRep($m,$c) {
 		$nodes=$m->nodes();	
 		$s="";
 		for($i=0;$i<$m->reps();$i++) {
-			for ($j=0;$j<count($nodes);$j++) {
-				$s.=$this->reduce($nodes[$j],$c);
-			}
+			$s.=$this->reduce($m->uniqueNode(),$c);
 		}
 		return $s;
 	}
 
-	function reduce_then($m,$c) {
-		return $this->reduce_nodes($m->nodes(),$c);
+	function reduceThen($m,$c) {
+		return $this->reduce($m->firstNode(),$c)
+			.$this->reduce($m->secondNode(),$c);
 	}
 
-	function reduce_header($m,$c) {
+	function reduceHeader($m,$c) {
 		$nodes=$m->nodes();
 		$header=$m->header();
 		$composer=$header["composer"];	
 		$title=$header["title"];
 		$s="X:1\nT:$title\nC:$composer\n";
-		return $s.$this->reduce_nodes($m->nodes(),$c);
+		return $s.$this->reduce($m->uniqueNode(),$c);
 	}
 
-	function reduce_note($m,$c) {
+	function reduceNote($m,$c) {
 		$t=$m->tag()->transposeDistance();
 		$up=($t>0);
 		$down=($t<0);
@@ -69,7 +67,7 @@ class AbcTranslator extends StringReducer {
 		return $m->accidental().$m->note().$m->toStringDuration().$octave_suffix;
 	}
 
-	function reduce_merge($m,$c) { // TODO URG mergear todos
+	function reduceMerge($m,$c) { // TODO URG mergear todos
 		$nodes=$m->nodes();
 		$s="";
 		foreach($nodes as $ni) {
@@ -78,19 +76,18 @@ class AbcTranslator extends StringReducer {
 		return $s;
 	}
 
-	function reduce_measure($m,$c) {
-		//print "reduce_measure: ".($m->toStringTree())."\n";
+	function reduceMeasure($m,$c) {
 		$s="";
 		if ($c->hasMultipleVoices()) {
 				if ($c->voice()>1) $s.=";";
-				$s.="(".($this->reduce_nodes($m->nodes(),$c)).")";
+				$s.="(".($this->reduceNodes($m->nodes(),$c)).")";
 		} else {
-				$s.="|".($this->reduce_nodes($m->nodes(),$c));			
+				$s.="|".($this->reduceNodes($m->nodes(),$c));			
 		}
 		return $s;
 	}
 
-	function reduce_parallel($m,$c) {
+	function reduceParallel($m,$c) {
 		//print "reduce_measure: ".($m->toStringTree())."\n";
 		$s="|";
 		$index=1;
@@ -114,7 +111,7 @@ class AbcTranslator extends StringReducer {
 			->withSecondNode($this->reduce($m->secondNode(),$c));
 	}
 
-	function reduce_pass($m,$c) {	
+	function reducePass($m,$c) {	
 		if ($m instanceof mm\TerminalNode) return $m;		
 		if ($m instanceof mm\UnaryNode) return $this->reduce_pass_unary($m,$c);
 		if ($m instanceof mm\BinaryNode) return $this->reduce_pass_binary($m,$c);	

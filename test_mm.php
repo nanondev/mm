@@ -1,6 +1,7 @@
 <?php
 use nan\mm;
 use nan\mm\reduce;
+use nan\mm\test;
 
 require_once("autoloader.php");
 

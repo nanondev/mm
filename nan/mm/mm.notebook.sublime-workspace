@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"third",
+				"thirdAccidentalModifier"
+			],
+			[
+				"note",
+				"note_duration"
+			],
+			[
+				"then_to",
+				"then_to_list_rec"
+			],
+			[
+				"Multip",
+				"MultiplexReducer"
+			],
+			[
 				"is_",
 				"is_array"
 			],
@@ -500,19 +516,84 @@
 	"buffers":
 	[
 		{
-			"file": "/C/web-mios/mm/test.php",
+			"file": "MusicNode.php",
 			"settings":
 			{
-				"buffer_size": 7181,
+				"buffer_size": 1353,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Chord.php",
+			"contents": "<?php\nnamespace nan\\mm\\test;\nuse nan\\mm;\n\nclass TestNs {}\n\nfunction list2str($arr) {\n\t$s=\"\";\n\tforeach ($arr as $v) {\n\t\tif (strlen($s)>0) $s.=\",\";\n\t\t$s.=\"\".$v;\n\t}\n\treturn $s;\n}\n\nfunction assert_equals($title,$a,$b) {\n\tif ($a==$b) {\n\t\tprint \"[PASS] $title\\n\";\n\t\treturn true;\n\t} else {\n\t\t$aStr=$a;\n\t\t$bStr=$b;\n\t\tif (is_array($a)) {\n\t\t\t$aStr=list2str($a);\n\t\t}\n\t\tif (is_array($b)) {\n\t\t\t$bStr=list2str($b);\n\t\t}\n\t\tif ($aStr==$bStr) {\n\t\t\tprint \"[PASS] $title\\n\";\n\t\t} else {\n\t\t\tprint \"[FAIL] $title ($aStr != $bStr)\\n\";\n\t\t}\n\t\treturn false;\n\t}\n}\n\nfunction assert_tree_equals($title,$m,$str) {\n\tassert_equals($title,$m->ToStringTree(),$str);\n}\n\nfunction assert_compact_equals($title,$m,$str) {\n\tassert_equals($title,$m->ToStringCompact(),$str);\n}\n?>",
+			"file": "/C/web-mios/mm/test.php",
+			"file_size": 782,
+			"file_write_time": 132334537943579625,
 			"settings":
 			{
-				"buffer_size": 1312,
+				"buffer_size": 738,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "abc/AbcReducer.php",
+			"settings":
+			{
+				"buffer_size": 354,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/web-mios/mm/test_abc.php",
+			"settings":
+			{
+				"buffer_size": 5492,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/aspire/Downloads/Facundo.txt",
+			"settings":
+			{
+				"buffer_size": 619706,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Es  Tucumán  un  país  tropical,  en  donde  la  naturaleza  ha  hecho\nostentación  de  sus  más  pomposas  galas;  es  el  Edén  de  América,  sin rival en toda la redondez de la tierra. Imaginaos los Andes cubiertos de un manto verdinegro de vegetación colosal, dejando escapar por debajo de la orla de este vestido doce ríos que corren  a distancias iguales en dirección  paralela,  hasta  que  empiezan  a  inclinarse  todos  hacia  un rumbo, y forman, reunidos, un  canal navegable que se aventura en  el corazón  de  la  América.  El  país  comprendido  entre  los  afluentes  y el\ncanal  tiene,  a  lo más,  cincuenta  leguas.  Los bosques que encubren  la\nsuperficie del país son primitivos, pero en ellos las pompas de la India\nestán revestidas de las gracias de la Grecia.\n\nEl nogal entreteje su anchuroso ramaje con el caoba y el ébano; el\ncedro  deja  crecer  a  su  lado  el  clásico  laurel,  que  a  su  vez  \nresguarda\nbajo su  follaje el  mirto consagrado a  Venus,  dejando todavía  espacio\npara  que  alcen  sus  varas  el  nardo  balsámico  y  la  azucena  de  los\ncampos.\n\nEl  odorífero  cedro  se  ha  apoderado  por  ahí  de  una  cenefa  de\nterreno que interrumpe el bosque, y el rosal cierra el paso en otras, con sus tupidos y espinosos mimbres.\n\nLos  troncos  añosos  sirven  de  terreno  a  diversas  especies  de\nmusgos   florecientes,   y  las   lianas   y  moreras   festonan,   enredan   y\nconfunden todas estas diversas generaciones de plantas.\n\nSobre  toda  esta  vegetación,  que  agotaría  la  paleta  fantástica  en\ncombinaciones   y   riqueza   de   colorido,   revolotean   enjambres   de\nmariposas doradas, de esmaltados picaflores, millones de loros color de\nesmeralda,  urracas  azules  y tucanes  naranjados.  El  estrépito  de  estas\naves  vocingleras  os  aturde  todo  el  día,  cual  si  fuera  el  ruido  de  \nuna\ncanora catarata. El mayor Andrews, un viajero inglés que ha dedicado\nmuchas páginas a la descripción de tantas maravillas, cuenta que salía\npor las mañanas a extasiarse en la contemplación de aquella soberbia y\nbrillante  vegetación;   que  penetraba   en   los  bosques  aromáticos,   y\ndelirando, arrebatado por la enajenación que lo dominaba, se internaba\nen donde veía que había oscuridad, espesura, hasta que al fin regresaba\na su casa, donde le hacían notar que se había desgarrado los vestidos,\nrasguñado y herido la cara, de la que venía a veces, destilando sangre,\nsin que él lo hubiese sentido. La ciudad está cercada por un bosque de\nmuchas leguas, formado exclusivamente de naranjos dulces, acopados\na  determinada  altura,  de  manera  de  formar  una  bóveda  sin  límites,\nsostenida  por  un  millón  de  columnas  lisas  y torneadas.  Los  rayos  de\naquel  sol  tórrido  no  han  podido  mirar  nunca  las  escenas  que  tienen\nlugar sobre la alfombra de verdura que cubre la tierra bajo aquel toldo\ninmenso. ¡Y qué escenas! Los domingos van las beldades tucumanas a\npasar  el  día  en  aquellas  galerías  sin  límites;  cada  familia  escoge  un\nlugar  aparente: apártanse las naranjas que embarazan  el paso, si es el otoño, o bien, sobre la gruesa alfombra de azahares que tapiza el suelo se balancean  las parejas de baile, y con  los perfumes de sus flores se dilatan,  debilitándose a  lo lejos,  los sonidos melodiosos de los tristes cantares  que  acompaña  la  guitarra.  ¿Creéis,  por  ventura,  que  esta descripción  es  plagiada  de Las  mil  y  una  noches u  otros  cuentos  de hadas a la oriental? Daos prisa, más bien, a imaginaros lo que no digo de la voluptuosidad y belleza de las mujeres que nacen bajo un cielo de fuego,  y que,  desfallecidas,  van,  a  la  siesta,  a  reclinarse muellementevbajo la sombra de los mirtos y laureles, a dormirse embriagadas por las esencias que ahogan al que no está habituado a aquella atmósfera.\n",
+			"settings":
+			{
+				"buffer_size": 3833,
+				"line_ending": "Windows",
+				"name": "Es  Tucumán  un  país  tropical,  en  donde  la  n"
+			}
+		},
+		{
+			"file": "mm.php",
+			"settings":
+			{
+				"buffer_size": 2455,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reduce/MeasureReducer.php",
+			"settings":
+			{
+				"buffer_size": 1339,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Measure.php",
+			"settings":
+			{
+				"buffer_size": 294,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
@@ -569,14 +650,28 @@
 	[
 		"/C/web-mios/mm",
 		"/C/web-mios/mm/nan",
-		"/C/web-mios/mm/nan/mm",
-		"/C/web-mios/mm/nan/mm/reduce"
+		"/C/web-mios/mm/nan/mm"
 	],
 	"file_history":
 	[
+		"/C/web-mios/mm/nan/mm/abc/abc.php",
+		"/C/web-mios/mm/test.php",
+		"/C/web-mios/mm/test_abc.bat",
+		"/C/web-mios/mm/nan/mm/test_,mm.php",
+		"/C/web-mios/mm/nan/mm/test.php",
+		"/C/web-mios/mm/test_mm.bat",
+		"/C/web-mios/mm/nan/mm/Chord.php",
+		"/C/web-mios/mm/autoloader.php",
+		"/C/web-mios/mm/nan/mm/reduce/ChainReducer.php",
+		"/C/Users/aspire/Desktop/Nuevo documento de texto.txt",
+		"/C/Users/aspire/Desktop/cuento-boll.txt",
+		"/C/Users/aspire/Desktop/dergrossewildenberg.html",
+		"/C/Users/aspire/Desktop/scorpion.html",
+		"/C/Users/aspire/Desktop/aleman/AufDerFlucht.html",
+		"/C/web-mios/mm/nan/mm/refactoring/reduce/MergeReducer.php",
+		"/C/web-mios/mm/nan/mm/MeasureReducer.php",
 		"/C/web-mios/mm/nan/mm/MusicNode.php",
 		"/C/web-mios/mm/nan/mm/reduce/ArpReducer.php",
-		"/C/web-mios/mm/nan/mm/Chord.php",
 		"/C/web-mios/mm/nan/mm/refactoring/reduce/ArpReducer.php",
 		"/C/web-mios/mm/nan/mm/refactoring/reduce/TransposeReducer.php",
 		"/C/web-mios/mm/nan/mm/BinaryNode.php",
@@ -604,7 +699,6 @@
 		"/C/web-mios/mm/nan/mm/Key.php",
 		"/C/web-mios/mm/nan/mm/Up8th.php",
 		"/C/web-mios/mm/nan/mm/Down8th.php",
-		"/C/web-mios/mm/nan/mm/test.php",
 		"/C/web-mios/mm/nan/mm/thinking.txt",
 		"/C/web-mios/mm/nan/mm/reduce/MeasureContext.php",
 		"/C/web-mios/mm/nan/mm/reduce/TransposeReducer.php",
@@ -614,13 +708,10 @@
 		"/C/web-mios/mm/nan/mm/abc/AbcTranslator.php",
 		"/C/web-mios/mm/test.bat",
 		"/C/Users/aspire/Desktop/returnordersales-8135-gonza.txt",
-		"/C/web-mios/mm/nan/mm/abc/abc.php",
 		"/C/web-mios/mm/sample.abc",
 		"/C/Users/aspire/Desktop/returnordersales-8135-gonza.xlsx",
-		"/C/web-mios/mm/autoloader.php",
 		"/C/web-mios/mm/nan/mm/reduce/TransposeContext.php",
 		"/C/web-mios/mm/nan_piano_ej1.php",
-		"/C/web-mios/mm/test.php",
 		"/C/web-mios/mm/nan_piano_ej1.bat",
 		"/C/web-mios/mm/nan/mm/reduce/Up8thMulReducer.php",
 		"/C/web-mios/mm/nan/mm/abc/AbcContext.php",
@@ -690,18 +781,7 @@
 		"/C/web/local.e-contratistas.com/sistema/_tickets/20190912_misleidy_zarate_FalloAutorizacionAcceso/_ayuda.txt",
 		"/C/web/local.e-contratistas.com/sistema/modulos/logicanegocio.php",
 		"/C/web/local.e-contratistas.com/sistema/modulos/mod_vigencia.php",
-		"/C/web/local.e-contratistas.com/sistema/administracion/save_abmperfil.php",
-		"/C/Users/aspire/Desktop/test.html",
-		"/C/web/local.e-contratistas.com/sistema/modulos/mod_conectorDB_settings.php",
-		"/C/web/local.e-contratistas.com/sistema/revision/amrevisarempleado.php",
-		"/C/Users/aspire/Desktop/LEGAJO_PORCENTAJEPARTICIPACION.sql",
-		"/C/web/local.e-contratistas.com/sistema/_tickets/20190820_carlos_AltasZarteEnvianMailIsIncorrectos/_tareas.txt",
-		"/C/web/local.e-contratistas.com/sistema/datos/save_abmcargamasiva.php",
-		"/C/web/local.e-contratistas.com/sistema/datos/save_abmempleado.php",
-		"/C/web/local.e-contratistas.com/sistema/_tickets/_000-hrancati-PendientesGenerales",
-		"/C/web/local.e-contratistas.com/sistema/_tickets/20190802_CopiarPeriodosAClientesNuevos/_tareas.txt",
-		"/C/web/local.e-contratistas.com/sistema/modulos/mod_debug_prefills.php",
-		"/C/web/local.e-contratistas.com/sistema/modulos/mod_debug.php"
+		"/C/web/local.e-contratistas.com/sistema/administracion/save_abmperfil.php"
 	],
 	"find":
 	{
@@ -719,6 +799,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mm\\assert_abc_equals",
+			"test_note_then",
+			"unaryNode",
+			"ntoes",
+			"test_time",
 			"test_chord",
 			"test_chord_Dm",
 			"test_chord",
@@ -740,6 +825,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"assert_abc_equals"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -750,54 +836,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/web-mios/mm/test.php",
+					"file": "MusicNode.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7181,
+						"buffer_size": 1353,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5717,
-								5717
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false,
-							"word_wrap": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2340.8,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "Chord.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 1312,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1232,
-								1240
+								0,
+								0
 							]
 						],
 						"settings":
@@ -809,11 +865,240 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/web-mios/mm/test.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 738,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "abc/AbcReducer.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 354,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/web-mios/mm/test_abc.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5492,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								181,
+								181
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/Users/aspire/Downloads/Facundo.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 619706,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								408842,
+								412867
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 228145.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								3833
+							]
+						],
+						"settings":
+						{
+							"auto_name": "Es  Tucumán  un  país  tropical,  en  donde  la  n",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2904.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "mm.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2455,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								458,
+								458
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 359.2,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "reduce/MeasureReducer.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1339,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1034,
+								1034
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 704.8,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "Measure.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								237,
+								237
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
 					"semi_transient": false,
 					"settings":
 					{
@@ -824,8 +1109,8 @@
 						"selection":
 						[
 							[
-								272,
-								0
+								18,
+								18
 							]
 						],
 						"settings":
@@ -837,11 +1122,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 10,
 					"file": "Arp.php",
 					"semi_transient": false,
 					"settings":
@@ -863,10 +1148,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 320.0,
+						"translation.y": 240.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 10,
 					"type": "text"
 				}
 			]
@@ -911,7 +1196,7 @@
 	"project": "mm.notebook.sublime-project",
 	"replace":
 	{
-		"height": 54.0
+		"height": 74.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -953,7 +1238,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 232.0,
+	"side_bar_width": 216.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

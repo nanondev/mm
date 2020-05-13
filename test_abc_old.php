@@ -1,95 +1,56 @@
 <?php
-// http://abcnotation.com/wiki/abc:standard:v2.1
-
-namespace nan\mm;
-
-use nan\mm;
-use nan\mm\abc;
-use nan\mm\reduce;
-
-require_once("autoloader.php");
-
-new MmNs();
-new abc\ABCNs();
-//new mm\ChordNs();
-
-function assert_equals($title,$a,$b) {
-	if ($a==$b) {
-		print "[PASS] $title\n";
-		return true;
-	} else {
-		print "[FAIL] $title ($a != $b)\n";
-		return false;
-	}
-}
-
-function assert_abc_equals($title,$m,$abc) {
-	$pass=false;
-	$pass=assert_equals($title,(new abc\AbcReducer())->reduce($m),$abc);
-	if (!$pass) {
-		$r=new abc\AbcPrepareReducer();
-		$mp=$r->reduce($m);
-		print "failed-node-tree:".($m->toStringTree())."\n";
-		print "failed-node-prepared-tree:".($mp->toStringTree())."\n";
-		exit();
-	}	
-}
-
-function test_note_then() {
-	assert_abc_equals("test_note_then",notes("AB"),"|AB");
-}
 
 function test_note_sharp() {
-	assert_abc_equals("test_note_sharp",notes("A^B"),"|A^B");
+	assert_abc_equals("test_note_sharp",mm\notes("A^B"),"|A^B");
 }
 
 function test_note_natural() {
-	assert_abc_equals("test_note_natural",notes("A=B"),"|A=B");
+	assert_abc_equals("test_note_natural",mm\notes("A=B"),"|A=B");
 }
 
 function test_note_flat() {
-	assert_abc_equals("test_note_flat",notes("A_B"),"|A_B");
+	assert_abc_equals("test_note_flat",mm\notes("A_B"),"|A_B");
 }
 
 function test_note_fraction() {
-	assert_abc_equals("test_note_fraction",notes("A/2"),"|A/2");
+	assert_abc_equals("test_note_fraction",mm\notes("A/2"),"|A/2");
 }
 
 function test_note_fraction_2() {
-	assert_abc_equals("test_note_fraction_2",notes("A/3"),"|A/3");
+	assert_abc_equals("test_note_fraction_2",mm\notes("A/3"),"|A/3");
 }
 
 function test_measure_44() {
-	assert_abc_equals("test_measure_44",notes("ABCDEFGA"),"|ABCD|EFGA");	
+	assert_abc_equals("test_measure_44",mm\notes("ABCDEFGA"),"|ABCD|EFGA");	
 }
 
 function test_measure_factions() {
-	assert_abc_equals("test_measure_fractions",notes("A/2B/2CDEABCD"),"|A/2B/2CDE|ABCD");	
+	assert_abc_equals("test_measure_fractions",mm\notes("A/2B/2CDEABCD"),"|A/2B/2CDE|ABCD");	
 }
 
 function test_measure_44_2() {
-	assert_abc_equals("test_measure_44_2",notes("E2F2G3DE4F4")->wrap(time::nw(4,4)),"M:4/4\n|E2F2|G3D|E4|F4");	
+	assert_abc_equals("test_measure_44_2",mm\notes("E2F2G3DE4F4")->wrap(time::nw(4,4)),"M:4/4\n|E2F2|G3D|E4|F4");	
 }
 
 function test_measure_34() {
-	assert_abc_equals("test_measure_34",notes("ABCDEFGA2")->wrap(time::nw(3,4)),"M:3/4\n|ABC|DEF|GA2");	
+	assert_abc_equals("test_measure_34",mm\notes("ABCDEFGA2")->wrap(time::nw(3,4)),"M:3/4\n|ABC|DEF|GA2");	
 }
 
 function test_merge() {
 	assert_abc_equals("test_merge",
-		(new merge())->addNode(notes("ABCD"))->addNode(notes("DEFG"))
+		(new merge())->addNode(mm\notes("ABCD"))->addNode(mm\notes("DEFG"))
 	,"|(ABCD);(DEFG)");	
 }
 
 function test_merge_2() {
 	assert_abc_equals("test_merge_2",
-		(new merge())->addNode(notes("ABCDEFGA"))->addNode(notes("DEFGABCD"))
+		(new merge())->addNode(mm\notes("ABCDEFGA"))->addNode(mm\notes("DEFGABCD"))
 	,"|(ABCD);(DEFG)|(EFGA);(ABCD)");	
 }
 
 function test_merge_3() {
 	assert_abc_equals("test_merge_3",
-		(new merge())->addNode(notes("D4EFGA"))->addNode(notes("DEFGA4"))
+		(new merge())->addNode(mm\notes("D4EFGA"))->addNode(mm\notes("DEFGA4"))
 	,"|(D4);(DEFG)|(EFGA);(A4)");	
 }
 
@@ -121,20 +82,20 @@ function test_chord_D() {
 
 function test_time_1() {
 	assert_abc_equals("test_time_1",
-		time::nw(3,4,notes("ABCDEF")),"M:3/4\n|ABC|DEF");
+		time::nw(3,4,mm\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
 }
 
 function test_time_2() {
 	assert_abc_equals("test_time_2",
 		then::nw()
-			->addNode(time::nw(3,4)->addNode(notes("ABCDEF")))
-			->addNode(time::nw(4,4)->addNode(notes("ABCDDEFG")))			
+			->addNode(time::nw(3,4)->addNode(mm\notes("ABCDEF")))
+			->addNode(time::nw(4,4)->addNode(mm\notes("ABCDDEFG")))			
 		,"M:3/4\n|ABC|DEF|M:4/4|ABCD|DEFG");
 }
 
 function test_multiplex() {
 	assert_abc_equals("test_multiplex",
-		multiplex::nw(2)->addNode(notes("ABCD"))			
+		multiplex::nw(2)->addNode(mm\notes("ABCD"))			
 		,"|(ABCD;ABCD)");
 
 }
@@ -199,40 +160,5 @@ function test_up8th04() {
 			)
 		)),"[[A'B'][C'D']]");
 }
-
-function main() {
-	test_note_then();
-/*	test_up8th01();
-	test_up8th02();
-	test_up8th03();
-	test_up8th04();
-	test_note_sharp();
-	test_note_natural();
-	test_note_flat();
-	test_note_fraction();
-	test_note_fraction_2();
-	test_time_1();
-	test_time_2();
-	test_up8th();
-	test_down8th();
-	test_measure_44();
-	test_measure_factions();
-	test_measure_44_2();
-	test_measure_34();
-	test_merge();
-	test_merge_2();
-	test_merge_3();
-	test_arp();
-	test_arp_2();
-	test_chord_Dm();
-	test_chord_D();
-	test_multiplex();
-	test_rep();
-	test_tempo();
-	//test_mask();
-	//test_up8thmul();*/
-}
-
-print main();
 
 ?>

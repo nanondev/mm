@@ -9,7 +9,8 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 		$r=(new reduce\ChainReducer())
 			->withReducer(new reduce\ArpReducer())
 			->withReducer(new reduce\MultiplexReducer())
-			->withReducer(new reduce\Up8thMulReducer());
+			//->withReducer(new reduce\Up8thMulReducer())
+			;
 
 		return $r;
 	}
@@ -17,8 +18,9 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 	public static function PrimitiveSimplifierReducer() {
 		$r=(new reduce\ChainReducer())
 			->withReducer(new reduce\MeasureReducer())
-			->withReducer(new reduce\TransposeReducer())
-			->withReducer(new reduce\MergeReducer());		
+			//->withReducer(new reduce\TransposeReducer())
+			->withReducer(new reduce\MergeReducer())
+			;		
 		return $r;
 	}
 	public static function create() {
