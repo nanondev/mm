@@ -52,7 +52,7 @@ class AbcTranslator extends StringReducer {
 	}
 
 	function reduceNote($m,$c) {
-		$t=$m->tag()->transposeDistance();
+		$t=$m->transposeDistance();
 		$up=($t>0);
 		$down=($t<0);
 		$o=abs($t)/12;

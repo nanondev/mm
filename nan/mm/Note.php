@@ -77,12 +77,10 @@ class Note extends TerminalNode {
 	}
 
 	function toStringDuration() {
-		throw new exception("exxx");
 		$d=$this->duration;
 		for($i=2;$i<=64;$i++) {
 			if ($d==1/$i) return "/$i";		
 		}
-		print "d:$d\n";
 		return $d==1 ? "" : "".$d;
 	}
 

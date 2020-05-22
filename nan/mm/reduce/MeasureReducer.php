@@ -10,7 +10,7 @@ class MeasureReducer extends NodeReducer {
 	function nextMeasure($notes,$c) {
 		$measure_complete=false;
 		$index=0;
-		$measure_size=2;		
+		$measure_size=$c->time()->quantity();		
 		$measure_load=0;
 		if (count($notes)==0) return null;
 

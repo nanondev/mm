@@ -23,7 +23,7 @@ class Time extends UnaryNode {
 	}
 
 	function  toStringCompact() {
-		return sprintf("(%s/%s)(%s)%s",$this->quantity,$this->duration,$this->toStringNodes(),$this->tag());
+		return sprintf("(%s/%s)(%s)%s",$this->quantity,$this->duration,$this->uniqueNode()->toStringCompact(),$this->tag());
 	}
 
 	function toStringAttributes() {

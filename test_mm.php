@@ -228,13 +228,17 @@ function test_measurereducer_1() {
 function test_measurereducer_2() {
 	$m=mm\Time::nw(4,4,mm\notes("ABCD"));
 	$r=new reduce\MeasureReducer();
-	assert_tree_equals("test_measureReducer",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
+	assert_tree_equals("test_measureReducer_2",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
+}
+
+function test_measurereducer_3() {
+	$m=mm\Time::nw(2,2,mm\notes("ABCD"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("TODO","testear duraciones distintas de x/4");
 }
 
 function test_chainreducer() {
-	$m=mm\Multiplex::nw(2,mm\notes("AB"));
-	$r=new reduce\ChainReducer([new reduce\MultiplexReducer(),new reduce\MultiplexReducer()]);
-	assert_tree_equals("test_chainreducer",$r->reduce($m),"Merge[Then[A B] Then[A B]]");
+	assert_equals("test_chainreducer","TODO","testear duraciones distintas de x/4");
 }
 
 function test_multiplexreducer() {
@@ -248,6 +252,7 @@ function test_reducers() {
 	test_chainreducer();
 	test_measurereducer_1();
 	test_measurereducer_2();
+	test_measurereducer_3();
 }
 
 function test_thentolist() {

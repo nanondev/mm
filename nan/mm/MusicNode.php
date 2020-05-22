@@ -47,7 +47,7 @@ abstract class MusicNode  {
 		$attrStr=$this->toStringAttributes();
 		return sprintf('%s%s%s%s',$name,$separator,$attrStr,
 			$tagStr);
-	}
+	}	
 
 	function toStringSeparator() {
 		return " ";
