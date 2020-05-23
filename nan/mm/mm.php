@@ -10,11 +10,27 @@
  */
 namespace nan\mm;
 
-$debug_enabled=true;
-$warn_enabled=true;
 
-class MmNs {}
+class MmNs {
+	static $debugEnabled=false;
+	static $warnEnabled=false;
+	static function debugEnabled() {
+		return MmNs::$debugEnabled;
+	}
 
+	static function warnEnabled() {
+		return MmNs::$warnEnabled;
+	}
+}
+
+function list2str($arr) {
+	$s="";
+	foreach ($arr as $v) {
+		if (strlen($s)>0) $s.=",";
+		$s.="".$v;
+	}
+	return $s;
+}
 
 function notes($s) {
 	$firstNode=null;
@@ -91,16 +107,13 @@ function then_note_count($m) {
 
 
 function warn($msg) {
-	global $warn_enabled;
-	if ($warn_enabled) {
+	if (MmNs::warnEnabled()) {
 		echo "warning:$msg\n";		
 	}
 }
 
 function debug($msg){ 
-	global $debug_enabled;
-	$debug_enabled=false;
-	if ($debug_enabled) {
+	if (MmNs::debugEnabled()) {
 		echo "debug: $msg\n";
 	}
 }

@@ -80,9 +80,9 @@ class AbcTranslator extends StringReducer {
 		$s="";
 		if ($c->hasMultipleVoices()) {
 				if ($c->voice()>1) $s.=";";
-				$s.="(".($this->reduceNodes($m->nodes(),$c)).")";
+				$s.="(".($this->reduce($m->uniqueNode(),$c)).")";
 		} else {
-				$s.="|".($this->reduceNodes($m->nodes(),$c));			
+				$s.="|".($this->reduce($m->uniqueNode(),$c));			
 		}
 		return $s;
 	}

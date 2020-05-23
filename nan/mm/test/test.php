@@ -5,14 +5,6 @@ use nan\mm;
 new TestNs();
 class TestNs {}
 
-function list2str($arr) {
-	$s="";
-	foreach ($arr as $v) {
-		if (strlen($s)>0) $s.=",";
-		$s.="".$v;
-	}
-	return $s;
-}
 
 function assert_todo($title) {
 	print "[TODO] $title\n";
@@ -26,10 +18,10 @@ function assert_equals($title,$a,$b) {
 		$aStr=$a;
 		$bStr=$b;
 		if (is_array($a)) {
-			$aStr=list2str($a);
+			$aStr=mm\list2str($a);
 		}
 		if (is_array($b)) {
-			$bStr=list2str($b);
+			$bStr=mm\list2str($b);
 		}
 		if ($aStr==$bStr) {
 			print "[PASS] $title\n";

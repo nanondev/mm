@@ -28,34 +28,33 @@ function assert_abc_equals($title,$m,$abc) {
 		$mp=$r->reduce($m);
 		print "failed-node-tree:".($m->toStringTree())."\n";
 		print "failed-node-prepared-tree:".($mp->toStringTree())."\n";
-		exit();
 	}	
 }
 
 function test_abctranslator_then() {
-	assert_abc_equals("test_abctranslator_then",mm\notes("AB"),"AB");
+	assert_abc_equals("test_abctranslator_then",mm\notes("AB"),"|AB");
 }
 
 
 function test_abctranslator_natural() {
-	assert_abc_equals("test_abctranslator_natural",mm\notes("A=B"),"A=B");
+	assert_abc_equals("test_abctranslator_natural",mm\notes("A=B"),"|A=B");
 }
 
 function test_abctranslator_flat() {
-	assert_abc_equals("test_abctranslator_flat",mm\notes("A_B"),"A_B");
+	assert_abc_equals("test_abctranslator_flat",mm\notes("A_B"),"|A_B");
 }
 
 function test_abctranslator_fraction() {
-	assert_abc_equals("test_abctranslator_fraction",mm\notes("A/2"),"A/2");
+	assert_abc_equals("test_abctranslator_fraction",mm\notes("A/2"),"|A/2");
 }
 
 function test_abctranslator_fraction_2() {
-	assert_abc_equals("test_abctranslator_fraction_2",mm\notes("A/3"),"A/3");
+	assert_abc_equals("test_abctranslator_fraction_2",mm\notes("A/3"),"|A/3");
 }
 
 function test_abctranslator_time_1() {
 	assert_abc_equals("test_time_1",
-		mm\Time::nw(3,4,mm\notes("ABCDEF")),"M:3/4\n|ABC");
+		mm\Time::nw(3,4,mm\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
 }
 
 function test_abctranslator_time_2() {
