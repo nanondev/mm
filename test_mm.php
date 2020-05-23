@@ -238,7 +238,8 @@ function test_measurereducer_3() {
 }
 
 function test_chainreducer() {
-	assert_equals("test_chainreducer","TODO","testear duraciones distintas de x/4");
+	assert_todo("volver a programar test chain reducer perdido");
+	assert_todo("testear duraciones distintas de x/4");
 }
 
 function test_multiplexreducer() {

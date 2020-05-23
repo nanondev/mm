@@ -17,8 +17,13 @@ new test\TestNs();
 
 function assert_abc_equals($title,$m,$abc) {
 	$pass=false;
-	$r=new abc\AbcTranslator(); // new abc\AbcReducer();
-	$pass=assert_equals($title,$r->reduce($m),$abc);
+	$r=(new reduce\ChainReducer())
+		->withReducer(new reduce\NodeReducer())
+		->withReducer(new reduce\MeasureReducer());
+
+	$t=new abc\AbcTranslator(); // new abc\AbcReducer();
+	$mo=$r->reduce($m);
+	$pass=assert_equals($title,$t->reduce($mo),$abc);
 	if (!$pass) {
 		$mp=$r->reduce($m);
 		print "failed-node-tree:".($m->toStringTree())."\n";

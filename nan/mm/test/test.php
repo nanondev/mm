@@ -13,6 +13,9 @@ function list2str($arr) {
 	return $s;
 }
 
+function assert_todo($title) {
+	print "[TODO] $title\n";
+}
 function assert_equals($title,$a,$b) {
 	if ($a==$b) {
 		print "[PASS] $title\n";
