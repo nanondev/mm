@@ -1,4 +1,5 @@
 <?php
+namespace nan\mm\test;
 use nan\mm;
 use nan\mm\reduce;
 use nan\mm\test;
@@ -6,45 +7,7 @@ use nan\mm\test;
 require_once("autoloader.php");
 
 new mm\MmNs();
-
-function list2str($arr) {
-	$s="";
-	foreach ($arr as $v) {
-		if (strlen($s)>0) $s.=",";
-		$s.="".$v;
-	}
-	return $s;
-}
-
-function assert_equals($title,$a,$b) {
-	if ($a==$b) {
-		print "[PASS] $title\n";
-		return true;
-	} else {
-		$aStr=$a;
-		$bStr=$b;
-		if (is_array($a)) {
-			$aStr=list2str($a);
-		}
-		if (is_array($b)) {
-			$bStr=list2str($b);
-		}
-		if ($aStr==$bStr) {
-			print "[PASS] $title\n";
-		} else {
-			print "[FAIL] $title ($aStr != $bStr)\n";
-		}
-		return false;
-	}
-}
-
-function assert_tree_equals($title,$m,$str) {
-	assert_equals($title,$m->ToStringTree(),$str);
-}
-
-function assert_compact_equals($title,$m,$str) {
-	assert_equals($title,$m->ToStringCompact(),$str);
-}
+new test\TestNs();
 
 function test_note_build() {
 	assert_tree_equals("note_A",mm\Note::nw("A"),"Note<note:A accidental:none transposeDistance:0 duration:1>");
@@ -231,12 +194,6 @@ function test_measurereducer_2() {
 	assert_tree_equals("test_measureReducer_2",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
 }
 
-function test_measurereducer_3() {
-	$m=mm\Time::nw(2,2,mm\notes("ABCD"));
-	$r=new reduce\MeasureReducer();
-	assert_tree_equals("TODO","testear duraciones distintas de x/4");
-}
-
 function test_chainreducer() {
 	assert_todo("volver a programar test chain reducer perdido");
 	assert_todo("testear duraciones distintas de x/4");
@@ -253,7 +210,6 @@ function test_reducers() {
 	test_chainreducer();
 	test_measurereducer_1();
 	test_measurereducer_2();
-	test_measurereducer_3();
 }
 
 function test_thentolist() {

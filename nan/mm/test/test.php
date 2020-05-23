@@ -2,6 +2,7 @@
 namespace nan\mm\test;
 use nan\mm;
 
+new TestNs();
 class TestNs {}
 
 function list2str($arr) {
@@ -16,6 +17,7 @@ function list2str($arr) {
 function assert_todo($title) {
 	print "[TODO] $title\n";
 }
+
 function assert_equals($title,$a,$b) {
 	if ($a==$b) {
 		print "[PASS] $title\n";
