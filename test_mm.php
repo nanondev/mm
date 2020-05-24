@@ -194,9 +194,16 @@ function test_measurereducer_2() {
 	assert_tree_equals("test_measureReducer_2",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
 }
 
+function test_measurereducer_3() {
+	$m=mm\Time::nw(4,4,mm\notes("A"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("test_measureReducer_3",$r->reduce($m)->uniqueNode(),"Measure[A]");
+}
+
 function test_chainreducer() {
 	assert_todo("volver a programar test chain reducer perdido");
 	assert_todo("testear duraciones distintas de x/4");
+	assert_todo("testear que todos los constructores nw funcionen sin parametros (defaults razonables)");
 }
 
 function test_multiplexreducer() {
@@ -210,6 +217,7 @@ function test_reducers() {
 	test_chainreducer();
 	test_measurereducer_1();
 	test_measurereducer_2();
+	test_measurereducer_3();
 }
 
 function test_thentolist() {

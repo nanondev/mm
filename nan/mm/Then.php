@@ -8,7 +8,9 @@ class Then extends BinaryNode {
 	}
 
 
-	static function nw($firstNode,$secondNode) {
+	static function nw($firstNode=null,$secondNode=null) {
+		if ($firstNode==null) $firstNode=Note::nw("C");
+		if ($secondNode==null) $secondNode=Note::nw("C");
 		return new then($firstNode,$secondNode);
 	}
 

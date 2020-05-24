@@ -40,6 +40,13 @@ class MeasureReducer extends NodeReducer {
 		}
 	}
 
+	function reduceNote($m,$c) {
+		mm\debug("MeasureReducer: reduceNote: m:".$m->toStringTree());
+		$notes=[$m];
+		$measure=$this->nextMeasure($notes,$c);
+		return $measure;
+	}
+
 	function reduceThen($m,$c) {
 		mm\debug("MeasureReducer: reduceThen: m:".$m->toStringTree());
 		$notes=mm\then_to_list($m);

@@ -59,7 +59,7 @@ function test_abctranslator_time_1() {
 
 function test_abctranslator_time_2() {
 	assert_abc_equals("test_time_2",
-		then::nw()
+		mm\then::nw()
 			->withFirstNode(mm\Time::nw(3,4,mm\notes("ABC")))
 			->withSecondNode(mm\Time::nw(4,4,mm\notes("ABCD")))	
 		,"M:3/4\n|ABC|DEF|M:4/4|ABCD|DEFG");
