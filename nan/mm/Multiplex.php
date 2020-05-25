@@ -8,7 +8,8 @@ class Multiplex extends UnaryNode {
 		$this->channels=$channels;
 	}
 
-	static function nw($channels,$uniqueNode) {
+	static function nw($channels=2,$uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		return new Multiplex($channels,$uniqueNode);
 	}
 	

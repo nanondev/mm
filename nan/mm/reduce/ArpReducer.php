@@ -5,7 +5,7 @@ use nan\mm;
 class ArpReducer extends NodeReducer {
 	function reduceArp($m,$c) {
 		$chord=$m->chord();
-		$chordNotes=$chord->nodes();
+		$chordNotes=$chord->notes();
 
 		$length=$m->lengthInNotes();
 		$orderPattern=$m->orderPattern();
@@ -15,7 +15,7 @@ class ArpReducer extends NodeReducer {
 			$note=$chordNotes[$patternIndex%count($chordNotes)];
 			$notes[]=mm\note::nw($note);
 		}
-		return mm\then::nw($notes);
+		return mm\list_to_then($notes);
 	}
 }
 

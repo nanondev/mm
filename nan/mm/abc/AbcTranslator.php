@@ -29,7 +29,6 @@ class AbcTranslator extends StringReducer {
 	}
 
 	function reduceRep($m,$c) {
-		$nodes=$m->nodes();	
 		$s="";
 		for($i=0;$i<$m->reps();$i++) {
 			$s.=$this->reduce($m->uniqueNode(),$c);
@@ -88,10 +87,11 @@ class AbcTranslator extends StringReducer {
 	}
 
 	function reduceParallel($m,$c) {
-		//print "reduce_measure: ".($m->toStringTree())."\n";
+		print "reduce_measure: ".($m->toStringTree())."\n";
 		$s="|";
 		$index=1;
-		foreach($m->nodes() as $ni) {
+		$nodes=[$m->firstNode(),$m->secondNode()];
+		foreach($nodes as $ni) {
 			$ci=$c->withVoice($index);
 			$s.="".($this->reduce($ni,$ci))."";
 			++$index;

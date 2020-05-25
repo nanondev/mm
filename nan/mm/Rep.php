@@ -9,7 +9,8 @@ class Rep extends UnaryNode {
 		$this->reps=$reps;
 	}
 
-	static function nw($reps,$uniqueNode) {
+	static function nw($reps=2,$uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		return new Rep($reps,$uniqueNode);
 	}
 

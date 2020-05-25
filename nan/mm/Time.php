@@ -11,7 +11,8 @@ class Time extends UnaryNode {
 		$this->duration=$duration;
 	}
 	
-	static function nw($quantity,$duration,$uniqueNode) {
+	static function nw($quantity=4,$duration=4,$uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		return new Time($quantity,$duration,$uniqueNode);
 	}
 

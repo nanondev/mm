@@ -9,7 +9,7 @@ class Note extends TerminalNode {
 
 	const ACCIDENTAL_MODIFIER_NONE=-999;
 
-	function __construct($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
+	function __construct($note="C",$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
 		parent::__construct(null);
 		$this->note=$note;
 		$this->duration=$duration;
@@ -17,7 +17,7 @@ class Note extends TerminalNode {
 		$this->transposeDistance=$transposeDistance;
 	}
 
-	static function nw($note,$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
+	static function nw($note="C",$duration=1,$accidentalModifier=self::ACCIDENTAL_MODIFIER_NONE,$transposeDistance=0) {
 		return new Note($note,$duration,$accidentalModifier,$transposeDistance);
 	}
 

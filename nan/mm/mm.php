@@ -93,6 +93,19 @@ function list_to_then($ms) {
 	return $first;
 }
 
+function list_to_merge($ms) {		
+	$first=null;
+	for($i=count($ms)-1;$i>=0;$i--) {
+		$mi=$ms[$i];
+		if ($first==null) {
+			$first=$mi;
+		} else  {
+			$first=Merge::nw($mi,$first);
+		}
+	}
+	return $first;
+}
+
 function then_note_count($m) {	
 	if ($m instanceof BinaryNode) {
 		return then_note_count($m->firstNode())

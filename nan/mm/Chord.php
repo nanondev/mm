@@ -49,7 +49,7 @@ class Chord extends TerminalNode {
 	}
 
 	static function clazz() {
-		return get_class([Note::nw("C")]);
+		return get_class(Chord::nw());
 	}
 
 	function toStringAttributes() {

@@ -8,6 +8,7 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 	public static function NonPrimitiveReducer() {
 		$r=(new reduce\ChainReducer())
 			->withReducer(new reduce\ArpReducer())
+			->withReducer(new reduce\ChordReducer())
 			->withReducer(new reduce\MultiplexReducer())
 			//->withReducer(new reduce\Up8thMulReducer())
 			;
@@ -19,7 +20,7 @@ class AbcPrepareReducer extends reduce\ChainReducer {
 		$r=(new reduce\ChainReducer())
 			->withReducer(new reduce\MeasureReducer())
 			//->withReducer(new reduce\TransposeReducer())
-			->withReducer(new reduce\MergeReducer())
+			//->withReducer(new reduce\MergeReducer())
 			;		
 		return $r;
 	}

@@ -200,10 +200,18 @@ function test_measurereducer_3() {
 	assert_tree_equals("test_measureReducer_3",$r->reduce($m)->uniqueNode(),"Measure[A]");
 }
 
+function test_chordreducer() { 
+	$m=mm\Chord::american("D");
+	$r=new reduce\ChordReducer();
+	assert_tree_equals("tetest_chordreducer",$r->reduce($m),"Merge[D Merge[^F A]]");
+}
+
 function test_chainreducer() {
 	assert_todo("volver a programar test chain reducer perdido");
 	assert_todo("testear duraciones distintas de x/4");
 	assert_todo("testear que todos los constructores nw funcionen sin parametros (defaults razonables)");
+	assert_todo("verificar que todos los tipos de nodos tengan testeo(ej. arp/chord/rep");
+	assert_todo("verificar que todos los tipos de nodos tengan testeo de sus reducciones especificas (ej arp/chord/rep)");
 }
 
 function test_multiplexreducer() {
@@ -218,6 +226,7 @@ function test_reducers() {
 	test_measurereducer_1();
 	test_measurereducer_2();
 	test_measurereducer_3();
+	test_chordreducer();
 }
 
 function test_thentolist() {
