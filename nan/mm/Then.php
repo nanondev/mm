@@ -3,19 +3,19 @@ namespace nan\mm;
 
 class Then extends BinaryNode {
 
-	function __construct($firstNode,$secondNode) {
+	function __construct($firstNode=null,$secondNode=null) {
+		if ($firstNode==null) $firstNode=Note::nw("C");
+		if ($secondNode==null) $secondNode=Note::nw("C");
 		parent::__construct($firstNode,$secondNode);
 	}
 
 
 	static function nw($firstNode=null,$secondNode=null) {
-		if ($firstNode==null) $firstNode=Note::nw("C");
-		if ($secondNode==null) $secondNode=Note::nw("C");
 		return new then($firstNode,$secondNode);
 	}
 
 	static function clazz() {
-		return get_class(then::nw(note::nw("A"),note::nw("B")));
+		return get_class(Then::nw());
 	}
 
 	function toStringCompact() {

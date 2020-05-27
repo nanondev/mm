@@ -47,6 +47,11 @@ class MeasureReducer extends NodeReducer {
 		return $measure;
 	}
 
+	function reduceMerge($m,$c) {
+		mm\debug("MeasureReducer: reduceMerge: m:".$m->toStringTree());
+		mm\err("TODO");
+	}
+
 	function reduceThen($m,$c) {
 		mm\debug("MeasureReducer: reduceThen: m:".$m->toStringTree());
 		$notes=mm\then_to_list($m);

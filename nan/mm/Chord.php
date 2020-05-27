@@ -6,12 +6,13 @@ class ChordNs {}
 class Chord extends TerminalNode {
 	var $notes;
 
-	function __construct($notes=[]) {
+	function __construct($notes=null) {
+		if ($notes==null) $notes=[Note::nw()];
 		parent::__construct();
 		$this->notes=$notes;
 	}
 
-	static function nw($notes=[]) {
+	static function nw($notes=null) {
 		return new Chord($notes);
 	}
 

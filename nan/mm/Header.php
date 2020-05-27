@@ -3,12 +3,13 @@ namespace nan\mm;
 
 class Header extends UnaryNode {
 	var $header;
-	function __construct($header,$unaryNode) {
+	function __construct($header=[],$unaryNode=null) {
+		if ($unaryNode==null) $unaryNode=Note::nw();
 		parent::__construct($unaryNode);
 		$this->header=$header;
 	}
 
-	static function nw($header,$unaryNode) {
+	static function nw($header=[],$unaryNode=null) {
 		return new Header($header,$unaryNode);
 	}
 
@@ -17,7 +18,7 @@ class Header extends UnaryNode {
 	}
 
 	function toStringCompact() {
-		return sprintf("<%s>:\n%s\n",join(', ',$this->header),($this->toStringNodes()));
+		return sprintf("<%s>:\n%s\n",join(', ',$this->header),($this->toStringNodes(true)));
 	}
 
 	function toStringAttributes() {
@@ -30,7 +31,7 @@ class Header extends UnaryNode {
 	}
 	
 	static function clazz() {
-		return get_class(Header::nw([],Note::nw("C")));
+		return get_class(Header::nw());
 	}
 
 	function mapToString() {

@@ -5,16 +5,16 @@ namespace nan\mm;
 class Arp extends TerminalNode {
 	var $orderPattern;
 	var $lengthInNotes;
-
-	function __construct($orderPattern,$lengthInNotes,$chord) {
+	function __construct($orderPattern=[0],$lengthInNotes=1,$chord=null) {
+		if ($chord==null) $chord=Chord::nw();
 		parent::__construct();
 		$this->orderPattern=$orderPattern;
 		$this->lengthInNotes=$lengthInNotes;
 		$this->chord=$chord;
 	}	
 
-	static function nw($orderPattern,$lengthInNotes,$notes) {
-		return new Arp($orderPattern,$lengthInNotes,$notes);
+	static function nw($orderPattern=[0],$lengthInNotes=1,$chord=null) {	
+		return new Arp($orderPattern,$lengthInNotes,$chord);
 	}
 
 	function chord() {

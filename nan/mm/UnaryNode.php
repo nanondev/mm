@@ -9,7 +9,7 @@ abstract class UnaryNode extends MusicNode {
 
 	function __construct($uniqueNode,$tag=null) {
 		parent::__construct($tag);
-		if (!is_object($uniqueNode)) err("uniqueNode $uniqueNode is not a node");
+		if (!($uniqueNode instanceof MusicNode)) err("uniqueNode $uniqueNode is not a node ($uniqueNode)");
 		$this->uniqueNode=$uniqueNode;
 	}	
 	

@@ -12,7 +12,7 @@ namespace nan\mm;
 
 
 class MmNs {
-	static $debugEnabled=false;
+	static $debugEnabled=true;
 	static $warnEnabled=false;
 	static function debugEnabled() {
 		return MmNs::$debugEnabled;

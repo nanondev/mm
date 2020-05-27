@@ -90,6 +90,15 @@ function test_time() {
 		mm\Time::nw(3,4,mm\Note::nw("C"))->uniqueNode(),"C");
 }
 
+function test_key() {
+	assert_tree_equals("test_key_1",
+		mm\Key::nw("C",mm\Note::nw("C")),"Key<key:C>[C]");
+	assert_tree_equals("test_key_2",
+		mm\Key::nw("G",mm\Note::nw("C")),"Key<key:G>[C]");
+	assert_compact_equals("time_uniqueNode",
+		mm\Key::nw("G",mm\Note::nw("C"))->uniqueNode(),"C");
+}
+
 function test_tempo() {
 	assert_tree_equals("tempo_tree",
 		mm\Tempo::nw(4,60,mm\Note::nw("C")),"Tempo<beatNote:4,beatsByMinute:60>[C]");
@@ -162,6 +171,7 @@ function test_nodes() {
 	test_notes();
 	test_chord();
 	test_arp();
+	test_key();
 }
 
 function test_multiplexreducer_1() {
@@ -204,6 +214,22 @@ function test_chordreducer() {
 	$m=mm\Chord::american("D");
 	$r=new reduce\ChordReducer();
 	assert_tree_equals("tetest_chordreducer",$r->reduce($m),"Merge[D Merge[^F A]]");
+}
+
+function test_nodes_nw() {
+	assert_tree_equals("test_node_nw_chord",mm\Chord::nw(),"Chord<notes:[C]>");
+	assert_tree_equals("test_node_nw_arp",mm\Arp::nw(),"Arp<orderPattern:[0],lengthInNotes:1,chord:Chord<notes:[C]>>");
+	assert_tree_equals("test_node_nw_header",mm\Header::nw(),"Header<header:>[C]");
+	assert_tree_equals("test_node_nw_key",mm\Key::nw(),"Key<key:C>[C]");
+	assert_tree_equals("test_node_nw_measure",mm\Measure::nw(),"Measure[C]");
+	assert_tree_equals("test_node_nw_merge",mm\Merge::nw(),"Merge[C C]");
+	assert_tree_equals("test_node_nw_multiplex",mm\Multiplex::nw(),"Multiplex<channels:2>[C]");
+	assert_equals("test_node_nw_note",mm\Note::nw()->toStringCompact(),"C");
+	assert_tree_equals("test_node_nw_parallel",mm\Parallel::nw(),"Parallel[C C]");
+	assert_tree_equals("test_node_nw_rep",mm\Rep::nw(),"Rep<reps:2>[C]");
+	assert_tree_equals("test_node_nw_tempo",mm\Tempo::nw(),"Tempo<beatNote:1,beatsByMinute:60>[C]");
+	assert_tree_equals("test_node_nw_then",mm\Then::nw(),"Then[C C]");
+	assert_tree_equals("test_node_nw_time",mm\Time::nw(),"Time<quantity:4,duration:4>[C]");
 }
 
 function test_chainreducer() {
@@ -253,9 +279,10 @@ function test_utils() {
 //abstract para method clazz.verificar que esté definido en todos (no está)
 
 function test() {
-	test_nodes();
-	test_utils();
-	test_reducers();
+//	test_nodes();
+	test_nodes_nw();
+//	test_utils();
+//	test_reducers();
 }
 
 test();

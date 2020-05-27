@@ -24,8 +24,9 @@ class ChainReducer extends NodeReducer {
 			if ($c==null) {
 				$ci=$ri->createContext();
 			}
-			mm\debug(sprintf("ChainReducer: reduce class:%s m:%s",get_class($ri),$m->toStringTree() ));
+			mm\debug(sprintf("ChainReducer: reduce class:%s input m:%s",get_class($ri),$mi->toStringTree() ));
 			$mi=$ri->reduce($mi,$c);
+			mm\debug(sprintf("ChainReducer: reduce class:%s output m:%s",get_class($ri),$mi->toStringTree() ));
 		}
 		return $mi;
 	}

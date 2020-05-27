@@ -3,11 +3,12 @@ namespace nan\mm;
 
 class Measure extends UnaryNode {
 
-	function __construct($uniqueNode) {
+	function __construct($uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		parent::__construct($uniqueNode);
 	}
 
-	static function nw($uniqueNode) {
+	static function nw($uniqueNode=null) {
 		return new Measure($uniqueNode);
 	}
 

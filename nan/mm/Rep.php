@@ -4,13 +4,13 @@ namespace nan\mm;
 
 class Rep extends UnaryNode {
 	var $reps;
-	function __construct($reps,$uniqueNode) {
+	function __construct($reps=2,$uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		parent::__construct($uniqueNode);
 		$this->reps=$reps;
 	}
 
 	static function nw($reps=2,$uniqueNode=null) {
-		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		return new Rep($reps,$uniqueNode);
 	}
 

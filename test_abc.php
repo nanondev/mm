@@ -99,6 +99,8 @@ function test_rep() {
 }
 
 function main() {
+	test_chord_Dm();
+	exit();
 	test_abctranslator_then();
 	test_abctranslator_natural();
 	test_abctranslator_flat();

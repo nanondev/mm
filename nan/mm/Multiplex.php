@@ -3,13 +3,13 @@ namespace nan\mm;
 
 class Multiplex extends UnaryNode {
 	var $channels;
-	function __construct($channels,$uniqueNode) {
+	function __construct($channels=2,$uniqueNode=null) {
+		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		parent::__construct($uniqueNode);
 		$this->channels=$channels;
 	}
 
 	static function nw($channels=2,$uniqueNode=null) {
-		if ($uniqueNode==null) $uniqueNode=Note::nw();
 		return new Multiplex($channels,$uniqueNode);
 	}
 	
