@@ -230,6 +230,8 @@ function test_nodes_nw() {
 	assert_tree_equals("test_node_nw_tempo",mm\Tempo::nw(),"Tempo<beatNote:1,beatsByMinute:60>[C]");
 	assert_tree_equals("test_node_nw_then",mm\Then::nw(),"Then[C C]");
 	assert_tree_equals("test_node_nw_time",mm\Time::nw(),"Time<quantity:4,duration:4>[C]");
+	assert_tree_equals("test_node_nw_up8th",mm\Up8th::nw(),"Up8th[C]");
+	assert_tree_equals("test_node_nw_down8th",mm\Down8th::nw(),"Down8th[C]");
 }
 
 function test_chainreducer() {
