@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm\reduce;
+namespace nan\node\reduce;
 use nan\mm;
 
 
@@ -10,7 +10,7 @@ class MergeReducer extends NodeReducer {
 		$measure_count=count($m->firstNode()->nodes()); // m contiene nodos tipo (then->measure*)
 		$nodes=$m->nodes();
 		for($i=0;$i<$measure_count;$i++) {
-			$p=mm\parallel::nw();
+			$p=node\parallel::nw();
 			foreach ($nodes as $nj) {
 				$measures=$nj->nodes();
 				$measure=$measures[$i];
@@ -19,7 +19,7 @@ class MergeReducer extends NodeReducer {
 			$parallels[]=$p;
 		}		
 		
-		return mm\then::nw($parallels);
+		return node\then::nw($parallels);
 	}
 }
 

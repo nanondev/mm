@@ -1,6 +1,6 @@
 <?php
 
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Rep extends UnaryNode {
 	var $reps;

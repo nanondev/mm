@@ -1,6 +1,7 @@
 <?php 
 namespace nan\mm\reduce;
 use nan\mm;
+use nan\mm\node;
 
 class ArpReducer extends NodeReducer {
 	function reduceArp($m,$c) {
@@ -13,9 +14,9 @@ class ArpReducer extends NodeReducer {
 		for ($i=0;$i<$length;$i++) {
 			$patternIndex=$orderPattern[$i%count($orderPattern)];
 			$note=$chordNotes[$patternIndex%count($chordNotes)];
-			$notes[]=mm\note::nw($note);
+			$notes[]=node\note::nw($note);
 		}
-		return mm\list_to_then($notes);
+		return node\list_to_then($notes);
 	}
 }
 

@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm\reduce;
+namespace nan\node\reduce;
 use nan\mm;
 
 class TransposeReducer extends NodeReducer {
@@ -8,15 +8,15 @@ class TransposeReducer extends NodeReducer {
 class Up8thReducer extends NodeReducer {
 
 	function matchConsume($m,$c) {
-		return get_class($m)==mm\up8th::clazz() && $m->uniqueNodeHasClazz(mm\note::clazz());
+		return get_class($m)==node\up8th::clazz() && $m->uniqueNodeHasClazz(node\note::clazz());
 	}
 
 	function matchThenDistribute($m,$c) {
-		return get_class($m)==mm\up8th::clazz() && $m->uniqueNodeHasClazz(mm\then::clazz());
+		return get_class($m)==node\up8th::clazz() && $m->uniqueNodeHasClazz(node\then::clazz());
 	}
 
 	function matchParallelDistribute($m,$c) {
-		return get_class($m)==mm\up8th::clazz() && $m->uniqueNodeHasClazz(mm\parallel::clazz());
+		return get_class($m)==node\up8th::clazz() && $m->uniqueNodeHasClazz(node\parallel::clazz());
 	}
 
 	function reduceConsume($m,$c) {
@@ -26,17 +26,17 @@ class Up8thReducer extends NodeReducer {
 	
 	function reduceThenDistribute($m,$c) {
 		$then=$m->uniqueNode();
-		return mm\then::nw(
-			$this->reduce(mm\up8th::nw($then->firstNode()),$c),
-			$this->reduce(mm\up8th::nw($then->secondNode()),$c)
+		return node\then::nw(
+			$this->reduce(node\up8th::nw($then->firstNode()),$c),
+			$this->reduce(node\up8th::nw($then->secondNode()),$c)
 		);
 	}
 
 	function reduceParallelDistribute($m,$c) {
 		$then=$m->uniqueNode();
-		return mm\then::nw(
-			$this->reduce(mm\up8th::nw($then->firstNode()),$c),
-			$this->reduce(mm\up8th::nw($then->secondNode()),$c)
+		return node\then::nw(
+			$this->reduce(node\up8th::nw($then->firstNode()),$c),
+			$this->reduce(node\up8th::nw($then->secondNode()),$c)
 		);
 	}
 	

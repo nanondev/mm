@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Key extends UnaryNode	 {
 	var $key;

@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm\reduce;
+namespace nan\node\reduce;
 use nan\mm;
 
 

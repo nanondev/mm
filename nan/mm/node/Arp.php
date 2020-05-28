@@ -1,6 +1,6 @@
 <?php
 
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Arp extends TerminalNode {
 	var $orderPattern;

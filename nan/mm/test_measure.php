@@ -1,0 +1,86 @@
+<?php
+namespace nan\mm\test;
+use nan\mm;
+use nan\mm\node;
+use nan\mm\reduce;
+use nan\mm\test;
+
+require_once("autoloader.php");
+
+new mm\MmNs();
+new node\NodeNs();
+new test\TestNs();
+
+function test_multiplexreducer_1() {
+	$m=node\Multiplex::nw(3,node\notes("C"));
+	$r=new reduce\MultiplexReducer();
+	assert_tree_equals("test_multiplexreducer_1",$r->reduce($m),"Merge[C Merge[C C]]");		
+}
+
+function test_multiplexreducer_2() {
+	$m=node\Multiplex::nw(2,node\notes("CD"));
+	$r=new reduce\MultiplexReducer();
+	assert_tree_equals("test_multiplexreducer_2",$r->reduce($m),"Merge[Then[C D] Then[C D]]");		
+}
+
+function test_multiplexreducer_3() {
+	$m=node\Multiplex::nw(2,node\Merge::nw(node\Multiplex::nw(2,node\notes("AB")),node\notes("D")));
+	$r=new reduce\MultiplexReducer();
+	assert_tree_equals("test_multiplexreducer_3",$r->reduce($m),"Merge[Merge[Merge[Then[A B] Then[A B]] D] Merge[Merge[Then[A B] Then[A B]] D]]");
+}
+
+function test_measurereducer_1() {
+	$m=node\Time::nw(2,4,node\notes("ABCD"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("test_measureReducer",$r->reduce($m)->uniqueNode(),"Then[Measure[Then[A B]] Measure[Then[C D]]]");
+}
+
+function test_measurereducer_2() {
+	$m=node\Time::nw(4,4,node\notes("ABCD"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("test_measureReducer_2",$r->reduce($m)->uniqueNode(),"Measure[Then[A Then[B Then[C D]]]]");
+}
+
+function test_measurereducer_3() {
+	$m=node\Time::nw(4,4,node\notes("A"));
+	$r=new reduce\MeasureReducer();
+	assert_tree_equals("test_measureReducer_3",$r->reduce($m)->uniqueNode(),"Measure[A]");
+}
+
+function test_chordreducer() { 
+	$m=node\Chord::american("D");
+	$r=new reduce\ChordReducer();
+	assert_tree_equals("tetest_chordreducer",$r->reduce($m),"Merge[D Merge[^F A]]");
+}
+
+function test_chainreducer() {
+	assert_todo("volver a programar test chain reducer perdido");
+	assert_todo("verificar que todos los tipos de nodos tengan testeo de sus reducciones especificas (ej arp/chord/rep)");
+}
+
+function test_multiplexreducer() {
+	test_multiplexreducer_1();
+	test_multiplexreducer_2();
+	test_multiplexreducer_3();
+}
+
+function test_reducers() {
+	test_multiplexreducer();
+	test_chainreducer();
+	test_measurereducer_1();
+	test_measurereducer_2();
+	test_measurereducer_3();
+	test_chordreducer();
+}
+
+// testeos pendientes: clazz,nw,toStringCompact,customs-unary,customs-binary
+//tag/withTag vs. constructor - definir bien esto.
+//abstract para method clazz.verificar que esté definido en todos (no está)
+
+function test() {
+	test_reducers();
+}
+
+test();
+
+?>

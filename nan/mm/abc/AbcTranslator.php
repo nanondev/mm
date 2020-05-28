@@ -1,6 +1,7 @@
 <?php
 namespace nan\mm\abc;
 use nan\mm;
+use nan\mm\node;
 use nan\mm\reduce;
 
 class AbcTranslator extends StringReducer {
@@ -112,9 +113,9 @@ class AbcTranslator extends StringReducer {
 	}
 
 	function reducePass($m,$c) {	
-		if ($m instanceof mm\TerminalNode) return $m;		
-		if ($m instanceof mm\UnaryNode) return $this->reduce_pass_unary($m,$c);
-		if ($m instanceof mm\BinaryNode) return $this->reduce_pass_binary($m,$c);	
+		if ($m instanceof node\TerminalNode) return $m;		
+		if ($m instanceof node\UnaryNode) return $this->reduce_pass_unary($m,$c);
+		if ($m instanceof node\BinaryNode) return $this->reduce_pass_binary($m,$c);	
 		mm\err("unsupported node type: $m class:".get_class($m));
 	}
 

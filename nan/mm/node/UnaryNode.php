@@ -1,6 +1,6 @@
 <?php 
 
-namespace nan\mm;
+namespace nan\mm\node;
 
 abstract class UnaryNode extends MusicNode {
 	var $tag;

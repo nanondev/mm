@@ -2,14 +2,14 @@
 namespace nan\mm;
 
 use nan\mm;
-use nan\mm\abc;
-use nan\mm\measure;
-use nan\mm\transpose;
-use nan\mm\arp;
+use nan\node\abc;
+use nan\node\measure;
+use nan\node\transpose;
+use nan\node\arp;
 
 require_once("autoloader.php");
 
-new mm\MmNs();
+new node\MmNs();
 new abc\ABCNs();
 
 /* ejemplos */

@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Time extends UnaryNode {
 	var $quantity;

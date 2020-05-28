@@ -1,11 +1,12 @@
 <?php
 namespace nan\mm\abc;
 use nan\mm;
+use nan\mm\node;
 use nan\mm\reduce;
 
 class AbcNs {}
 
-function abc2midi($abcfile) {
+function abc_to_midi($abcfile) {
 	$abc2midi_runner="\"C:\\Program Files (x86)\\runabc\\abc2midi.exe\"";
 	$abc2midi_cmd="$abc2midi_runner $abcfile -o $abcfile.midi";
 	$out=array();

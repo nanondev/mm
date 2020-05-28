@@ -1,7 +1,7 @@
 <?php
-
 namespace nan\mm\abc;
 use nan\mm;
+use nan\mm\node;
 use nan\mm\reduce;
 
 class AbcContext extends reduce\MeasureContext {

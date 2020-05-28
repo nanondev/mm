@@ -1,6 +1,6 @@
 <?php
 
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Merge extends BinaryNode {
 	function __construct($firstNode=null,$secondNode=null) {

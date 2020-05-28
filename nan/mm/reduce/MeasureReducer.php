@@ -1,9 +1,7 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
-namespace nan\mm\reduce;
-use nan\mm;
-
+use nan\mm\node;
 
 class MeasureReducer extends NodeReducer {	
 
@@ -28,8 +26,8 @@ class MeasureReducer extends NodeReducer {
 			--$index;
 		}
 		$measure_notes=array_slice($notes,0,$index+1);
-		$then=mm\list_to_then($measure_notes);
-		$measure=mm\Measure::nw($then); 
+		$then=node\list_to_then($measure_notes);
+		$measure=node\Measure::nw($then); 
 
 		if($measure_complete) {	
 			mm\debug("MeasureReducer: nextMeasure: built measure: $measure");
@@ -54,17 +52,17 @@ class MeasureReducer extends NodeReducer {
 
 	function reduceThen($m,$c) {
 		mm\debug("MeasureReducer: reduceThen: m:".$m->toStringTree());
-		$notes=mm\then_to_list($m);
+		$notes=node\then_to_list($m);
 		$notes_left=$notes;
 		$measures=[];
 		do {
 			$m=$this->nextMeasure($notes_left,$c);
-			$notes_left=array_slice($notes_left,mm\then_note_count($m));
+			$notes_left=array_slice($notes_left,node\then_note_count($m));
 			if ($m!=null) {
 				$measures[]=$m;
 			}
 		} while($m!=null);
-		return mm\list_to_then($measures);
+		return node\list_to_then($measures);
 	}
 
 	function reduceMeasure($m,$c) { 

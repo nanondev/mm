@@ -1,12 +1,13 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
+use nan\mm\node;
 
 class MeasureContext {
 	var $time;
 	function __construct($time=null) {
 		if ($time==null) {
-			$this->time=mm\time::nw(4,4,mm\note::nw("C"));
+			$this->time=node\time::nw(4,4,node\note::nw("C"));
 		} else {
 			$this->time=$time;
 		}

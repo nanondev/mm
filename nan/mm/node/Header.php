@@ -1,5 +1,5 @@
 <?php
-namespace nan\mm;
+namespace nan\mm\node;
 
 class Header extends UnaryNode {
 	var $header;

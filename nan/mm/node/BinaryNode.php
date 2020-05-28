@@ -1,6 +1,6 @@
 <?php
 
-namespace nan\mm;
+namespace nan\mm\node;
 
 /* 
  * base para nodos del arbol musical.

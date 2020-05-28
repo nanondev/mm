@@ -1,10 +1,9 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
-use nan\mm\abc;
+use nan\mm\node;
 
-
-class NodeReducerContext {} // extends abc\AbcContext {}
+class NodeReducerContext {} 
 
 class NodeReducer {
 	function reducePassUnary($m,$c) {
@@ -19,9 +18,9 @@ class NodeReducer {
 	}
 
 	function reducePass($m,$c) {
-		if ($m instanceof mm\TerminalNode) return $m;		
-		if ($m instanceof mm\UnaryNode) return $this->reducePassUnary($m,$c);
-		if ($m instanceof mm\BinaryNode) return $this->reducePassBinary($m,$c);	
+		if ($m instanceof node\TerminalNode) return $m;		
+		if ($m instanceof node\UnaryNode) return $this->reducePassUnary($m,$c);
+		if ($m instanceof node\BinaryNode) return $this->reducePassBinary($m,$c);	
 		mm\err("unsupported node type: $m class:".get_class($m));
 	}
 

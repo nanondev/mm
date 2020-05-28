@@ -1,6 +1,7 @@
 <?php
 namespace nan\mm\reduce;
 use nan\mm;
+use nan\mm\node;
 
 class MultiplexReducer extends NodeReducer {
 	function reduceMultiplex($m,$c) {
@@ -10,7 +11,7 @@ class MultiplexReducer extends NodeReducer {
 				if ($i==$last) {
 					$firstNode=$m->uniqueNode();
 				} else {
-					$firstNode=mm\merge::nw($m->uniqueNode(),$firstNode);
+					$firstNode=node\Merge::nw($m->uniqueNode(),$firstNode);
 				}
 
 			}
