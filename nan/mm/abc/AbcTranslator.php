@@ -68,12 +68,9 @@ class AbcTranslator extends StringReducer {
 	}
 
 	function reduceMerge($m,$c) { // TODO URG mergear todos
-		$nodes=$m->nodes();
-		$s="";
-		foreach($nodes as $ni) {
-		 $s.=$this->reduce($ni,$c);
-		}
-		return $s;
+		return
+			$this->reduce($m->firstNode(),$c)
+			.$this->reduce($m->secondNode(),$c);
 	}
 
 	function reduceMeasure($m,$c) {

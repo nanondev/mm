@@ -13,7 +13,7 @@ spl_autoload_register(function($class) {
 	} else if (file_exists($ns_file)) {
 		require_once($ns_file);	
 	} else {
-		print "error: cannt load class $class with class file $file nor namespace file: $ns_file\n";
+		print "error: cannot load class $class with class file $file nor namespace file: $ns_file\n";
 	}
 	
 });

@@ -7,6 +7,9 @@ use nan\mm\reduce;
 class AbcNs {}
 
 function abc_to_midi($abcfile) {
+	if (!file_exists($abcfile)) {
+		mm\err("abc_to_midi: file:'$abcfile': does not exist");
+	}
 	$abc2midi_runner="\"C:\\Program Files (x86)\\runabc\\abc2midi.exe\"";
 	$abc2midi_cmd="$abc2midi_runner $abcfile -o $abcfile.midi";
 	$out=array();

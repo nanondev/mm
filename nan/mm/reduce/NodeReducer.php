@@ -37,7 +37,6 @@ class NodeReducer {
 		$frags=explode("\\",$m->clazz());
 		$classFrag=ucfirst($frags[count($frags)-1]);
 		$fn="reduce".$classFrag;
-
 		if (!method_exists($this,$fn)) {
 			$fn="reducePass";
 		}

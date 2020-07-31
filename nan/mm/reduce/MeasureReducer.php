@@ -45,9 +45,26 @@ class MeasureReducer extends NodeReducer {
 		return $measure;
 	}
 
+	function nodeDuration($m) {
+		if ($m instanceof node\Merge) {
+			return max($this->nodeDuration($m->firstNode()),
+				$this->nodeDuration($m->secondNode()));
+		} else if ($m instanceof node\Note) {
+			return $m->duration();
+		} else {
+			mm\err("TODO: node type:".$m->clazz());		
+		}
+	}
+
 	function reduceMerge($m,$c) {
 		mm\debug("MeasureReducer: reduceMerge: m:".$m->toStringTree());
-		mm\err("TODO");
+
+		$measure_size=$c->time()->quantity();		
+		if ($this->nodeDuration($m)<$measure_size) {
+			return $m;
+		} else {
+			mm\err("TODO");			
+		}
 	}
 
 	function reduceThen($m,$c) {

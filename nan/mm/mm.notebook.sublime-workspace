@@ -515,6 +515,49 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "test_measure.php",
+			"settings":
+			{
+				"buffer_size": 2527,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_abc.php",
+			"settings":
+			{
+				"buffer_size": 3189,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "test_midi.php",
+			"settings":
+			{
+				"buffer_size": 185,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "refactoring/reduce/TransposeContext.php",
+			"settings":
+			{
+				"buffer_size": 471,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/web-musica-discos/youtube-dl/_youtubedl.bat",
+			"settings":
+			{
+				"buffer_size": 74,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -550,18 +593,23 @@
 	[
 		"/C/web-mios/mm",
 		"/C/web-mios/mm/nan",
-		"/C/web-mios/mm/nan/mm",
-		"/C/web-mios/mm/nan/mm/reduce",
-		"/C/web-mios/mm/nan/mm/test"
+		"/C/web-mios/mm/nan/mm"
 	],
 	"file_history":
 	[
+		"/C/web-mios/mm/nan/mm/abc/abc.php",
+		"/C/web-musica-discos/youtube-dl/_youtubedl.bat",
+		"/C/web-mios/mm/test_midi..bat",
+		"/C/web-mios/mm/nan/mm/refactoring/Up8thMul.php",
+		"/C/web-mios/mm/nan/mm/mm.php",
+		"/C/web-mios/mm/test_measure.bat",
+		"/C/web-mios/mm/nan/mm/test_node.php",
+		"/C/web-mios/mm/nan/mm/test_mm.php",
 		"/C/web-mios/mm/test_abc.php",
 		"/C/web-mios/mm/nan/mm/abc/AbcTranslator.php",
 		"/C/web-mios/mm/nan/mm/abc/StringReducer.php",
 		"/C/web-mios/mm/nan/mm/reduce/MeasureReducer.php",
 		"/C/web-mios/mm/nan/mm/reduce/NodeReducer.php",
-		"/C/web-mios/mm/nan/mm/abc/abc.php",
 		"/C/web-mios/mm/nan/mm/abc/AbcReducer.php",
 		"/C/web-mios/mm/nan/mm/abc/AbcPrepareReducer.php",
 		"/C/web-mios/mm/nan/mm/abc/AbcContext.php",
@@ -573,7 +621,6 @@
 		"/C/web-mios/mm/nan/mm/reduce/ChainReducer.php",
 		"/C/web-mios/mm/nan/mm/refactoring/root/nan_piano_ej1.php",
 		"/C/web-mios/mm/nan/mm/node/node.php",
-		"/C/web-mios/mm/nan/mm/mm.php",
 		"/C/web-mios/mm/nan/mm/test/test.php",
 		"/C/web-mios/mm/nan/mm/node/Up8th.php",
 		"/C/web-mios/mm/nan/mm/node/UnaryNode.php",
@@ -640,7 +687,6 @@
 		"/C/web-mios/mm/nan/mm/refactoring/reduce/ChainReducer.php",
 		"/C/web-mios/mm/nan/mm/refactoring/reduce/NodeReducer.php",
 		"/C/web-mios/mm/nan/mm/NodeReducer.php",
-		"/C/web-mios/mm/nan/mm/refactoring/Up8thMul.php",
 		"/C/web-mios/mm/nan/mm/refactoring/mm.php",
 		"/C/web-mios/mm/nan/mm/thinking.txt",
 		"/C/web-mios/mm/nan/mm/reduce/TransposeReducer.php",
@@ -678,16 +724,11 @@
 		"/C/Users/aspire/Desktop/trevisionempleado.sql",
 		"/C/Users/aspire/Desktop/tareas-econ.txt",
 		"/C/web/local.e-contratistas.com/sistema/reportes/form_utils.php",
-		"/C/web/local.e-contratistas.com/sistema/reportes/informe_legajo_form.php",
-		"/C/web/local.e-contratistas.com/sistema/reportes/informe_legajo.php",
-		"/C/web/local.e-contratistas.com/sistema/datos/save_abmproveedor.php",
-		"/C/web/local.e-contratistas.com/sistema/layout/layout_head.php",
-		"/C/Users/aspire/Desktop/test-reaper.rpp",
-		"/C/web/local.e-contratistas.com/sistema/layout/layout.php"
+		"/C/web/local.e-contratistas.com/sistema/reportes/informe_legajo_form.php"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 29.0
 	},
 	"find_in_files":
 	{
@@ -763,8 +804,152 @@
 	"groups":
 	[
 		{
+			"selected": 4,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "test_measure.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2527,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								141,
+								128
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 240.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "test_abc.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3189,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1638,
+								1638
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1100.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "test_midi.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 185,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162,
+								162
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 20.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "refactoring/reduce/TransposeContext.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/C/web-musica-discos/youtube-dl/_youtubedl.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 74,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16,
+								16
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

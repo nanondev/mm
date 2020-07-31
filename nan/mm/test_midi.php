@@ -7,9 +7,9 @@ new mm\MmNs();
 new abc\AbcNs();
 
 function test() {
-	abc\abc_to_midi("sample.abc");
-	echo "ok";
+	abc\abc_to_midi("nan/mm/samples/abc/sample1.abc");
 }
 
 test();
 ?>
+ 

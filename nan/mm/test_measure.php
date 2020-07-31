@@ -53,8 +53,21 @@ function test_chordreducer() {
 	assert_tree_equals("tetest_chordreducer",$r->reduce($m),"Merge[D Merge[^F A]]");
 }
 
+
+class TestReducer extends reduce\NodeReducer {
+	function reduceNote($m) {
+		return $m->withDuration($m->duration()*2);
+	}
+}
+
 function test_chainreducer() {
-	assert_todo("volver a programar test chain reducer perdido");
+	$m=node\Note::nw("C");
+	$r=(new reduce\ChainReducer())
+		->withReducer(new TestReducer())
+		->withReducer(new TestReducer());
+
+	$mo=$r->reduce($m);
+	assert_equals("test_chainreducer","".$mo,"C4");
 	assert_todo("verificar que todos los tipos de nodos tengan testeo de sus reducciones especificas (ej arp/chord/rep)");
 }
 
@@ -64,7 +77,7 @@ function test_multiplexreducer() {
 	test_multiplexreducer_3();
 }
 
-function test_reducers() {
+function test_reducers() {	
 	test_multiplexreducer();
 	test_chainreducer();
 	test_measurereducer_1();

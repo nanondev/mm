@@ -41,6 +41,9 @@ class Note extends TerminalNode {
 		return $this->duration;
 	}
 
+	function withDuration($duration) {
+		return Note::nw($this->note,$duration,$this->accidentalModifier,$this->transposeDistance);
+	}
 	function isSharp() {
 		return $this->accidentalModifier==1;
 	}
