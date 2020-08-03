@@ -14,7 +14,7 @@ class Merge extends BinaryNode {
 	}
 
 	static function clazz() {
-		return get_class(Merge::nw(note::nw(),note::nw()));
+		return get_class(Merge::nw());
 	}
 }
 

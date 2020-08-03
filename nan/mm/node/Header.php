@@ -33,7 +33,7 @@ class Header extends UnaryNode {
 	static function clazz() {
 		return get_class(Header::nw());
 	}
-
+	
 	function mapToString() {
 
 	}

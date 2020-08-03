@@ -194,13 +194,31 @@ function test_nodes_nw() {
 	assert_tree_equals("test_node_nw_down8th",node\Down8th::nw(),"Down8th[C]");
 }
 
-// testeos pendientes: clazz,nw,toStringCompact,customs-unary,customs-binary
+function sample_nodes() {
+	return [node\Note::nw(),node\Arp::nw(),node\Chord::nw(),
+		node\Down8th::nw(),node\Header::nw(),node\Key::nw(),
+		node\Measure::nw(),node\Merge::nw(),node\Multiplex::nw(),
+		node\Parallel::nw(),node\Rep::nw(),node\Tempo::nw(),
+		node\Then::nw(),node\Time::nw(),node\Up8th::nw(),
+	];
+}
+
+function test_nodes_clazz() {
+	$nodes=sample_nodes();
+	foreach($nodes as $node) {
+		$node_clazz=$node->clazz();
+		$nodeName=$node->name();
+		assert_true("test_nodes_clazz nodeName:$nodeName",strlen($node_clazz)>0);
+	}
+}
+
+// testeos pendientes: nw,toStringCompact,customs-unary,customs-binary
 //tag/withTag vs. constructor - definir bien esto.
-//abstract para method clazz.verificar que esté definido en todos (no está)
 
 function test() {
 	test_nodes();
 	test_nodes_nw();
+	test_nodes_clazz();
 }
 
 test();

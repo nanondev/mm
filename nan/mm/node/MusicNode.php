@@ -1,6 +1,7 @@
 <?php
 
 namespace nan\mm\node;
+use nan\mm;
 
 abstract class MusicNode  {
 	var $tag;
@@ -76,7 +77,7 @@ abstract class MusicNode  {
 	}
 
 	static function clazz() {
-		err("should only be called on concrete node classes");
+		mm\err("should only be called on concrete node classes instead of ".get_class($this));
 	}
 
 }

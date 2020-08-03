@@ -10,6 +10,16 @@ function assert_todo($title) {
 	print "[TODO] $title\n";
 }
 
+function assert_true($title,$bool) {
+	if ($bool) {
+		print "[PASS] $title\n";
+		return true;		
+	} else {
+		print "[FAIL] $title\n";
+		return true;				
+	}
+}
+
 function assert_equals($title,$a,$b) {
 	if ($a==$b) {
 		print "[PASS] $title\n";

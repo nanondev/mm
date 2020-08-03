@@ -86,10 +86,6 @@ function test_reducers() {
 	test_chordreducer();
 }
 
-// testeos pendientes: clazz,nw,toStringCompact,customs-unary,customs-binary
-//tag/withTag vs. constructor - definir bien esto.
-//abstract para method clazz.verificar que esté definido en todos (no está)
-
 function test() {
 	test_reducers();
 }

@@ -29,6 +29,10 @@ class Key extends UnaryNode	 {
 	function toStringSeparator() {
 		return "";
 	}
+
+	static function clazz() {
+		return get_class(Key::nw());
+	}
 }
 
 ?>
