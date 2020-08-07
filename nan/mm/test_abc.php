@@ -53,11 +53,17 @@ function test_abctranslator_fraction_2() {
 
 function test_abctranslator_time_1() {
 	assert_abc_equals("test_time_1",
-		node\Time::nw(3,4,node\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
+		node\Time::nw(4,4,node\notes("ABCDEF")),"M:4/4\n|ABCD|EF");
 }
+
 
 function test_abctranslator_time_2() {
 	assert_abc_equals("test_time_2",
+		node\Time::nw(3,4,node\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
+}
+
+function test_abctranslator_time_3() {
+	assert_abc_equals("test_time_3",
 		node\then::nw()
 			->withFirstNode(node\Time::nw(3,4,node\notes("ABCDEF")))
 			->withSecondNode(node\Time::nw(4,4,node\notes("ABCDDEFG")))	
@@ -87,7 +93,37 @@ function test_time_1() {
 		node\Time::nw(3,4,node\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
 }
 
-function test_multiplex() {
+function test_measure_1() {
+	assert_abc_equals("test_measure_1",
+		node\notes("AB"),"|AB");
+}
+
+function test_measure_2() {
+	assert_abc_equals("test_measure_2",
+		node\notes("ABCD"),"|ABCD");
+}
+
+function test_measure_3() {
+	assert_abc_equals("test_measure_3",
+		node\notes("ABCDEF"),"|ABCD|EF");
+}
+
+function test_measure_4() {
+	assert_abc_equals("test_measure_4",
+		node\notes("ABCDEFGA"),"|ABCD|EFGA");
+}
+
+function test_measure_5() {
+	assert_abc_equals("test_measure_5",
+		node\notes("ABCDEFGAABCDEFGA"),"|ABCD|EFGA|ABCD|EFGA");
+}
+
+function test_measure_6() {
+	assert_abc_equals("test_measure_6",
+		node\Time::nw(3,4,node\notes("ABCDEF")),"M:3/4\n|ABC|DEF");
+}
+
+function test_multiplex() {	
 	assert_abc_equals("test_multiplex",
 		node\Multiplex::nw(2)->withUniqueNode(node\notes("ABCD"))			
 		,"|(ABCD;ABCD)");
@@ -101,21 +137,28 @@ function test_rep() {
 }
 
 function main() {
-	test_chord_Dm();
-	exit();
+	//test_measure_1();
+	//test_measure_2();
+	test_measure_3();
+	test_measure_4();
+	test_measure_5();
+	test_measure_6();
+	test_abctranslator_time_1();
+	test_abctranslator_time_2();
+	test_abctranslator_time_3();
+
+/*	test_chord_Dm();
 	test_abctranslator_then();
 	test_abctranslator_natural();
 	test_abctranslator_flat();
 	test_abctranslator_fraction();
 	test_abctranslator_fraction_2();
-	test_abctranslator_time_1();
-	test_abctranslator_time_2();
 	test_arp();
 	test_arp_2();
 	test_chord_Dm();
 	test_chord_D();
 	test_multiplex();
-	test_rep();
+	test_rep();*/
 
 /*	test_up8th01();
 	test_up8th02();
