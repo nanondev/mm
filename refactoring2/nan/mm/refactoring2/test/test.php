@@ -1,14 +1,16 @@
 <?php
-namespace nan\mm\Test;
+namespace nan\mm\test;
 use nan\mm;
 
-class Functions { const Load=1; }
+new TestNs();
+class TestNs {}
 
-function assertTodo($title) {
+
+function assert_todo($title) {
 	print "[TODO] $title\n";
 }
 
-function assertTrue($title,$bool) {
+function assert_true($title,$bool) {
 	if ($bool) {
 		print "[PASS] $title\n";
 		return true;		
@@ -18,11 +20,7 @@ function assertTrue($title,$bool) {
 	}
 }
 
-function assertFalse($title,$bool) {
-	return assertTrue($title,!$bool);
-}
-
-function assertEquals($title,$a,$b) {
+function assert_equals($title,$a,$b) {
 	if ($a==$b) {
 		print "[PASS] $title\n";
 		return true;
@@ -44,4 +42,11 @@ function assertEquals($title,$a,$b) {
 	}
 }
 
+function assert_tree_equals($title,$m,$str) {
+	assert_equals($title,$m->ToStringTree(),$str);
+}
+
+function assert_compact_equals($title,$m,$str) {
+	assert_equals($title,$m->ToStringCompact(),$str);
+}
 ?>
