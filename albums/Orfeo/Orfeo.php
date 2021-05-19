@@ -8,6 +8,7 @@ use nan\mm;
 use nan\mm\Midi;
 use nan\mm\ChordProgression;
 use nan\mm\Voice;
+use nan\mm\Tempo;
 
 Midi\Functions::Load;
 
@@ -61,19 +62,19 @@ function voice41() {
 
 function arrangement1() {
 	return Arrangement::nw()
-		->withTempo(Tempo::nw()->withBeatsPerMinute(120))
+		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(120))
 		->withVoice(voice11());
 }
 
 function arrangement2() {
 	return Arrangement::nw()
-		->withTempo(Tempo::nw()->withBeatsPerMinute(60))
+		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(60))
 		->withVoice(voice21());
 }
 
 function arrangement3() {
 	return Arrangement::nw()
-		->withTempo(Tempo::nw()->withBeatsPerMinute(30))
+		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(30))
 		->withVoice(voice31());
 }
 
