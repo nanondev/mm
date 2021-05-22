@@ -54,7 +54,7 @@ const SevenToneToAmerican=array(
 	E=>"E",
 	F=>"F",
 	G=>"G",
-	Rest=>"-"
+	Rest=>"r"
 );
 
 const AmericanToSevenTone=array(
@@ -65,7 +65,7 @@ const AmericanToSevenTone=array(
 	"E"=>E,
 	"F"=>F,
 	"G"=>G,
-	"-"=>Rest
+	"r"=>Rest
 );
 
 function isSevenTone($tone) {

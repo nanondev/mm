@@ -31,7 +31,7 @@ class ChordedNote {
 		return $chordedNote;
 	}
 	function __toString() {
-		chordedNoteToCanonical($this);
+		return chordedNoteToCanonical($this);
 	}
 
 	function attack() {
@@ -56,9 +56,9 @@ class ChordedNote {
 }
 
 function chordedNoteToCanonical($chordedNote) {	
-	return sprintf("%s V%s",
+	return sprintf("%s V%s A%s",
 		PlacedTone\placedTonesToCanonical($chordedNote->placedTones()),
-		Value\valueToCanonical($chordedNote->value()));
+		Value\valueToCanonical($chordedNote->value()),$chordedNote->attack());
 }
 
 function chordedNotesToCanonical($chordedNotes) {

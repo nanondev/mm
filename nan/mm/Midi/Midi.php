@@ -35,6 +35,12 @@ class ArrangementToMidi {
 	var $maxTime=0;
 	var $midiFileName="midi/testMidi.mid";
 	var $midiQueue=array();
+	var $activeTimeSignature;
+	var $activeBeat;
+
+	function applyBeatAccent($note) {
+		
+	}
 
 	function __construct() {
 		$this->arrangement=Arrangement::nw();
@@ -83,7 +89,7 @@ class ArrangementToMidi {
 	function closeMidi() {
 		$globalMaxTime=$this->maxTime;
 		$msgTrkEnd=sprintf("%s Meta TrkEnd",$globalMaxTime+500);
-		print "msgTrkEnd:$msgTrkEnd\n";
+		//print "msgTrkEnd:$msgTrkEnd\n";
 		$this->midi->addMsg(0, $msgTrkEnd);
 		$xml=$this->midi->getXml();		
 		$this->midi->saveMidFile($this->midiFileName);
@@ -115,21 +121,22 @@ class ArrangementToMidi {
 		return $minVoiceIndex;
 	}
 
-	function queueMidiMessage($track,$time,$message) {
-		$this->midiQueue[]=array($time,$message);	
+	function queueMidiMessage($track,$clazz,$time,$message) {
+		$this->midiQueue[]=array($time,$clazz,$message);	
 	}
 	
 	function flushMidiQueue() {
 		foreach ($this->midiQueue as $timedMessage) {
 			$time=$timedMessage[0];
-			$message=$timedMessage[1];
+			$clazz=$timedMessage[1];
+			$message=$timedMessage[2];
 			$this->midi->addMsg(0, $message);
-			//print "dg-message:$message\n";
+			print "dg-message:$message\n";
 		}			
 	}
 
 	function sortMidiQueue() {
-		usort($this->midiQueue, create_function('$a,$b','return $a[0]>=$b[0];'));	
+		usort($this->midiQueue,array('\\nan\\mm\\Midi\\MidiCompare','midiMessageCompare'));	
 	}
 	
 
@@ -143,6 +150,7 @@ class ArrangementToMidi {
 		$chordedNote=$voice->chordedNotes()[$noteIndex];
 		$time=$this->voiceTime[$voiceIndex];
 		$timeDelta=$this->midiWholeDuration*Value\valueToDuration($chordedNote->value());
+		print "chordedNote:".$chordedNote."\n";
 		foreach($chordedNote->placedTones() as $placedTone) {
 			$globalTime=$this->arrangementStartTime+$time;
 			$globalTimeOff=$this->arrangementStartTime+$time+$timeDelta;
@@ -152,10 +160,11 @@ class ArrangementToMidi {
 				$midiChannel=$voiceIndex+1;
 				$volume=80;
 				$volume=$this->chordedNoteGain($chordedNote,$volume);
+				print "apply gain: $volume\n";
 				$midiMsgOn="$globalTime On ch=$midiChannel n=$midiNote v=$volume";
 				$midiMsgOff="$globalTimeOff Off ch=$midiChannel n=$midiNote v=$volume";			
-				$this->queueMidiMessage(0,$globalTime,$midiMsgOn);				
-				$this->queueMidiMessage(0,$globalTimeOff,$midiMsgOff);
+				$this->queueMidiMessage(0,"On",$globalTime,$midiMsgOn);				
+				$this->queueMidiMessage(0,"Off",$globalTimeOff,$midiMsgOff);
 			}			
 		}		
 		if ($time>$this->maxTime) $this->maxTime=$time+$timeDelta;
@@ -175,10 +184,16 @@ class ArrangementToMidi {
 	}
 
 	function writeVoiceInstrumentMidi($arrangement) {
+		$voiceIndex=0;
 		foreach($arrangement->voices() as $voice) {
 			$globalTime=$this->arrangementStartTime;
-			$InstrumentMsg = sprintf("$globalTime Meta InstrName \"$%s\"",$voice->instrument());
-			//$this->queueMidiMessage(0,$globalTime,$instrumentMsg);
+			$channel=$voiceIndex+1;
+			$instrumentMsg = sprintf("$globalTime Meta InstrName \"%s\"",$voice->instrument());
+			$programNumber=$this->midi->findGm1InstrumentPatchNumber($voice->instrument());
+			$programChangeMsg=sprintf("$globalTime PrCh ch=$channel p=$programNumber");
+			$this->queueMidiMessage(0,"Meta",$globalTime,$instrumentMsg);
+			$this->queueMidiMessage(0,"PrCh",$globalTime,$programChangeMsg);
+			++$voiceIndex;
 		}	
 	}
 
@@ -206,6 +221,7 @@ class ArrangementToMidi {
 	function totalTime() {
 		return $this->maxTime;
 	}
+
 }
 
 /*
@@ -219,7 +235,6 @@ function arrangementToMidi($arrangement,$midiFileName) {
 	$toMidi=ArrangementToMidi::nw()
 		->withMidiFileName($midiFileName)
 		->withArrangement($arrangement);
-	print "dg-arr:$arrangement\n";
 	$toMidi->toMidi();
 	return $toMidi;
 }

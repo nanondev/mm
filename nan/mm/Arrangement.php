@@ -5,7 +5,8 @@ use nan\mm\Tempo;
 class Arrangement {
 	var $voices=[];
 	var $tempo;
-	
+	var $timeSignature;
+
 	static function nw() {
 		$arrangement= new Arrangement();
 		$tempo=Tempo\Tempo::nw();
@@ -30,6 +31,16 @@ class Arrangement {
 	function withTempo($tempo) {
 		$arr=clone $this;
 		$arr->tempo=$tempo;
+		return $arr;
+	}
+
+	function timeSignature() {
+		return $this->timeSignature;
+	}
+
+	function withTimeSignature($timeSignature) {
+		$arr=clone $this;
+		$arr->timeSignature=$timeSignature;
 		return $arr;
 	}
 

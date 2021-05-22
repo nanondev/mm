@@ -3,7 +3,7 @@ spl_autoload_register(function($class) {
 	$file=str_replace('\\','/',$class);
 	$file.=".php";
 	$ns_file=dirname($file);
-	$frags=explode("/",$ns_file);
+	$frags=explode("/",$ns_file);	
 	if (count($frags)>0) {
 		$ns_file.="/".$frags[count($frags)-1].".php";
 	}

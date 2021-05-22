@@ -13,7 +13,7 @@ PlacedTone\Functions::Load;
 
 class Voice {
 	var $chordedNotes=[];
-	var $instrument="Piano";
+	var $instrument="Acoustic Grand Piano";
 
 	static function nw() {
 		return new Voice();

@@ -57,7 +57,7 @@ const TwelveToAmerican=array(
 	GNatural=>"G",
 	GSharp=>"G#",
 	GFlat=>"Gb",
-	Rest=>"-",
+	Rest=>"r",
 );
 
 const TwelveTonePitch=array(

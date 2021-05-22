@@ -17,7 +17,7 @@ function isRest($tone) {
 
 function toneToAmerican($tone) {
 	if (TwelveTone\isTwelveTone($tone)) return TwelveTone\twelveToAmerican($tone);
-	if (SevenTone\isSevenTone($tone)) return SevenTone\tonalToAmerican($tone);
+	if (SevenTone\isSevenTone($tone)) return SevenTone\sevenToneToAmerican($tone);
 	throw new \Exception("toneToAmerican: FAIL tone:$tone msg:unknown tone");
 }
 

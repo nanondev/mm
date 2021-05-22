@@ -11,6 +11,8 @@ use nan\mm\Octave;
 use nan\mm\ChordProgression;
 use nan\mm\Melody;
 use nan\mm\Tempo;
+use nan\mm\Note;
+use nan\mm\Dynamic\Attack;
 
 require("autoloader.php");
 include_once("midi_class_v178/classes/midi.class.php");
@@ -113,16 +115,29 @@ function testChordToWaltz() {
 		->withChordProgression(chordProgression3())
 		->withChordToVoice(Chord\ChordToWaltz::nw())
 		->toVoice();
-	print "voice:$voice\n";
-	$arrangement=Arrangement::nw()
+	
+	$arrangement=Arrangement::nw()		
 		->withVoice($voice);
 		//->withVoice(Melody\melodyToVoice(melody3() ));
 	//Midi\voiceToMidi($voice);
 	Midi\arrangementToMidi($arrangement,"midi/testChordToWaltz.mid");
 }
 
+function testDoubleMelody() {
+	$doubleMelody=DoubleMelody::nw()
+		->withMelody(Melody\americanToMelody("A0 A0 A0 A0 A0 A0 A0 A0"))
+		->withOctave(Octave\O2)
+		->toArrangement();
+	
+	$doubleMelody=Arrangement::nw()	
+		->withVoice($doubleMelody->voices()[0]->withInstrument("Violin"))
+		->withVoice($doubleMelody->voices()[1]->withInstrument("Acoustic Guitar (steel)"));
+	
+	Midi\arrangementToMidi($doubleMelody,"midi/testDoubleMelody.mid");
+}
+
 function testMelodyToMidi() {
-	Midi\melodyToMidi(Melody\americanToMelody("A0 B0 C0 A0 B0 C0 A0 B0 C0 A0 B0 C0 A0 B0 C0"),"midi/testMelodyToMidi.mid");
+	Midi\melodyToMidi(Melody\americanToMelody("A0 B0 C0 A0 B0 C0 A0 B0 C0 A0 B0 C0 A0 B0 C0"),"midi/testMelody.mid");
 }
 
 function testTempo() {
@@ -140,11 +155,44 @@ function testTimeSignature() {
 	print sprintf("timeSignature:%s",TimeSignature\timeSignatureToCanonical($timeSignature));
 }
 
+function testRest() {
+	Midi\melodyToMidi(Melody\americanToMelody("A3 r1 D3 r1 A3 r1 D3 r1 A3 r1 D3 r1 A3"),"midi/testRest.mid");
+}
+
+function testAccent() {
+	$melody=Melody\Melody::nw()
+		->withNote(Note\Note::nw()
+			->withPlacedTone(PlacedTone\PlacedTone::nw()
+				->withTone(SevenTone\C)				
+			)
+		)
+		->withNote(Note\Note::nw()
+			->withPlacedTone(PlacedTone\PlacedTone::nw()
+				->withTone(SevenTone\C)				
+			)
+		)
+		->withNote(Note\Note::nw()
+			->withPlacedTone(PlacedTone\PlacedTone::nw()
+				->withTone(SevenTone\C)		
+			)
+			->withAttack(Attack\Accented)		
+		);
+
+	/*$melody=Repeat::nw()
+		->withTimes(10)
+		->withMelody($melody)
+		->toMelody();*/
+	Midi\melodyToMidi($melody,"midi/testAccent.mid");
+}
+
 function test() {	
+//	testRest();
+	testAccent();
+	//testDoubleMelody();
 	//testTempo();
 	//testTimeSignature();
-	testChordToWaltz();
-	testMelodyToMidi();
+//	testChordToWaltz();
+	//testMelodyToMidi();
 	//testAmerican();
 	//testVoiceMidi();
 	//Melody::nw();
