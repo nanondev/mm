@@ -76,7 +76,8 @@ function chordedNotesToCanonical($chordedNotes) {
 function noteToChordedNote($note) {
 	return ChordedNote::nw()
 		->withPlacedTone($note->placedTone())
-		->withValue($note->value());	
+		->withValue($note->value())
+		->withAttack($note->attack());	
 }
 
 

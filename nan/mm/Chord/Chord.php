@@ -117,4 +117,13 @@ function americanToChord($american) {
 	return $americanToChord[$american];
 }
 
+function selectChordTones($chord,$tones) {
+	$sel=[];
+	foreach($tones as $tone) {
+		$toneCount=count($tone);
+		$selTone=chordTones($chord)[$tone%$toneCount];
+		$sel[]=$selTone;
+	}
+	return $sel;
+}
 ?>

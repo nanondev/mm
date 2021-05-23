@@ -83,19 +83,53 @@ function testVoiceMidi() {
 	Midi\voiceToMidi(voice1());
 }
 
-function testAmerican() {
+function testTwelveToAmerican() {
 	Test\assertEquals("twelveToAmerican",TwelveTone\twelveToAmerican(TwelveTone\ASharp),"A#");
+}
+
+function testTwelveToAmericanRest() {
 	Test\assertEquals("twelveToAmerican.rest",TwelveTone\twelveToAmerican(TwelveTone\Rest),"-");	
+}
+
+function testAmericanToTwelve() {
 	Test\assertEquals("americanToTwelve",TwelveTone\americanToTwelve("A#"),TwelveTone\ASharp);
-	Test\assertTrue("isSharp",TwelveTone\isSharp(TwelveTone\ASharp));	
+}
+
+function testIsSharp() {
+	Test\assertTrue("isSharp",TwelveTone\isSharp(TwelveTone\ASharp));		
+}
+
+function testIsFlat() {
 	Test\assertFalse("isFlat",TwelveTone\isFlat(TwelveTone\ASharp));
+}
+
+function testIsNatural() {
 	Test\assertFalse("isNatural",TwelveTone\isNatural(TwelveTone\ASharp));
+}
+
+function testSevenToAmerican() {
 	Test\assertEquals("sevenToneToAmerican",SevenTone\sevenToneToAmerican(TwelveTone\twelveToSeven(TwelveTone\ASharp)),"A");
+}
+
+function testSevenToneToAmericanRest() {
 	Test\assertEquals("sevenToneToAmerican.rest",SevenTone\sevenToneToAmerican(SevenTone\Rest),"-");
+}
+
+function testValueToDuration() {
 	Test\assertTrue("valueToDuration",Value\valueToDuration(Value\Half),1/2);
-	Test\assertTrue("durationToValue",Value\durationToValue(1,Value\Whole));
-	//Test\assertEquals("mixNote",MixNote::nw()->withTone(TwelveTone\DSharp)->modify(melody1()),"Cb D# C D#");
+}
+
+function testDurationToValue() {
+	Test\assertTrue("durationToValue",Value\durationToValue(1,Value\Whole));	
+}
+
+function testSevenTonePitch() {
 	Test\assertTrue("sevenTonePitch",SevenTone\sevenTonePitch(SevenTone\B),11);
+}
+
+function testAmerican() {
+	//Test\assertEquals("mixNote",MixNote::nw()->withTone(TwelveTone\DSharp)->modify(melody1()),"Cb D# C D#");
+	
 	print "\namericanToChord:".Chord\americanToChord("D#maj7");
 	print "\namericanToChordProgression:".chordProgression1();
 
@@ -123,6 +157,22 @@ function testChordToWaltz() {
 	Midi\arrangementToMidi($arrangement,"midi/testChordToWaltz.mid");
 }
 
+function testChordToArpeggio() {
+	$voice=ChordProgression\ChordProgressionToVoice::nw()
+		->withChordProgression(chordProgression3())
+		->withChordToVoice(Chord\ChordToArpeggio::nw()
+			->withArpeggioTones([0,2])
+			->withArpeggioTones([1])
+			->withArpeggioTones([1,3])
+			)
+		->toVoice();
+	
+	$arrangement=Arrangement::nw()		
+		->withVoice($voice);
+		//->withVoice(Melody\melodyToVoice(melody3() ));
+	//Midi\voiceToMidi($voice);
+	Midi\arrangementToMidi($arrangement,"midi/testChordToArpeggio.mid");
+}
 function testDoubleMelody() {
 	$doubleMelody=DoubleMelody::nw()
 		->withMelody(Melody\americanToMelody("A0 A0 A0 A0 A0 A0 A0 A0"))
@@ -178,26 +228,36 @@ function testAccent() {
 			->withAttack(Attack\Accented)		
 		);
 
-	/*$melody=Repeat::nw()
+	$melody=Repeat::nw()
 		->withTimes(10)
 		->withMelody($melody)
-		->toMelody();*/
+		->toMelody();
 	Midi\melodyToMidi($melody,"midi/testAccent.mid");
 }
 
 function test() {	
-//	testRest();
+	testTwelveToAmerican();
+	testTwelveToAmericanRest();
+	testAmericanToTwelve();
+	testIsSharp();
+	testIsFlat();
+	testIsNatural();
+	testSevenToAmerican();	
+	testSevenToneToAmericanRest();
+	testValueToDuration();
+	testDurationToValue();
+	testSevenTonePitch();
+	testRest();
 	testAccent();
-	//testDoubleMelody();
-	//testTempo();
-	//testTimeSignature();
-//	testChordToWaltz();
-	//testMelodyToMidi();
-	//testAmerican();
-	//testVoiceMidi();
-	//Melody::nw();
-	//print "americanToMelody:".americanToMelody("O3 C#w Cb1 O4 C1");
-	//testMelodyMidi();
+	testDoubleMelody();
+	testTempo();
+	testTimeSignature();
+	testChordToWaltz();
+	testChordToArpeggio();
+	testMelodyToMidi();
+	testAmerican();
+	testVoiceMidi();
+	print "americanToMelody:".americanToMelody("O3 C#w Cb1 O4 C1");	
 }
 
 test();

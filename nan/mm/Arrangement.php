@@ -1,6 +1,7 @@
 <?php
 namespace nan\mm;
 use nan\mm\Tempo;
+use nan\mm\TimeSignature;
 
 class Arrangement {
 	var $voices=[];
@@ -11,6 +12,8 @@ class Arrangement {
 		$arrangement= new Arrangement();
 		$tempo=Tempo\Tempo::nw();
 		$arrangement->tempo=$tempo;
+		$arrangement->timeSignature=TimeSignature\TimeSignature::nw();
+
 		return $arrangement;
 	}
 

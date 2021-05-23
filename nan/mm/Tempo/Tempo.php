@@ -29,14 +29,14 @@ class Tempo {
 		return $this->beatsPerMinute;
 	}
 
-	function withBeatsPerMinute($withBeatsPerMinute) {
+	function withBeatsPerMinute($beatsPerMinute) {
 		$tempo=clone $this;
-		$tempo->withBeatsPerMinute=$withBeatsPerMinute;
+		$tempo->beatsPerMinute=$beatsPerMinute;
 		return $tempo;
 	}
 
 	function __toString() {
-		tempoToCanonical(this);
+		return tempoToCanonical($this);
 	}
 }
 
