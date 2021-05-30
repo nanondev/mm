@@ -5,7 +5,7 @@ use nan\mm\Arrangement;
 
 Functions::Load;
 
-abstract class  MelodyToArrangement {
+abstract class  MelodyToPart {
 	var $melody;
 
 	function __construct() {
@@ -13,7 +13,7 @@ abstract class  MelodyToArrangement {
 	}
 
 	static function nw() {
-		return new MelodyToArrangement();
+		return new MelodyToPart();
 	}
 
 	function melody() {
@@ -21,12 +21,12 @@ abstract class  MelodyToArrangement {
 	}	
 
 	function withMelody($melody) {
-		$toArr=clone $this;
-		$toArr->melody=$melody;
-		return $toArr;
+		$toPart=clone $this;
+		$toPart->melody=$melody;
+		return $toPart;
 	}
 
-	abstract function toArrangement();
+	abstract function toPart();
 }
 
 ?>

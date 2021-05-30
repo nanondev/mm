@@ -5,11 +5,14 @@ use nan\mm\TwelveTone;
 use nan\mm\SevenTone;
 use nan\mm\PlacedTone;
 use nan\mm\ChordedNote;
+use nan\mm\Arrangement;
+use nan\mm\Part;
 
 class Functions {const Load=1; }
 
 ChordedNote\Functions::Load;
 PlacedTone\Functions::Load;
+Part\Functions::Load;
 
 class Voice {
 	var $chordedNotes=[];
@@ -55,6 +58,14 @@ class Voice {
 
 function voiceToCanonical($voice) {
 	return sprintf("Voice %s",ChordedNote\chordedNotesToCanonical($voice->chordedNotes() ));
+}
+
+function voiceToPart($voice) {
+	return Part\Part::nw()->withVoice($voice);
+}
+
+function voiceToArrangement($voice) {
+	return Arrangement::nw()->withPart(voiceToPart($voice));
 }
 
 function sequenceVoices($voices) {

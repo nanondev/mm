@@ -2,10 +2,11 @@
 namespace nan\mm;
 use nan\mm\TwelveTone;
 use nan\mm\Melody;
+use nan\mm\Part;
 
 require_once("autoloader.php");
 
-class DoubleMelody extends Melody\MelodyToArrangement {
+class DoubleMelody extends Melody\MelodyToPart {
 	var $octave;
 
 	static function nw() {
@@ -22,8 +23,8 @@ class DoubleMelody extends Melody\MelodyToArrangement {
 		return $double;
 	}
 
-	function toArrangement() {
-		$arrangement=Arrangement::nw();
+	function toPart() {
+		$part=Part\Part::nw();
 
 		$originalVoice=Voice\Voice::nw();
 		$doubleVoice=Voice\Voice::nw();
@@ -33,11 +34,11 @@ class DoubleMelody extends Melody\MelodyToArrangement {
 			$doubleVoice=$doubleVoice->withNote($doubleNote);
 		}
 				
-		$arrangement=$arrangement
+		$part=$part
 			->withVoice($originalVoice)
 			->withVoice($doubleVoice);
 
-		return $arrangement;
+		return $part;
 	}
 }
 

@@ -4,49 +4,23 @@ use nan\mm\Tempo;
 use nan\mm\TimeSignature;
 
 class Arrangement {
-	var $voices=[];
-	var $tempo;
-	var $timeSignature;
+	var $parts=[];
 
 	static function nw() {
 		$arrangement= new Arrangement();
-		$tempo=Tempo\Tempo::nw();
-		$arrangement->tempo=$tempo;
-		$arrangement->timeSignature=TimeSignature\TimeSignature::nw();
-
 		return $arrangement;
 	}
 
-	function voices() {
-		return $this->voices;
+	function parts() {
+		return $this->parts;
 	}
 
-	function withVoice($voice) {
+	function withPart($part) {
 		$arrangement=clone $this;
-		$arrangement->voices[]=$voice;
+		$arrangement->parts[]=$part;
 		return $arrangement;
 	}
 	
-	function tempo() {
-		return $this->tempo;
-	}
-
-	function withTempo($tempo) {
-		$arr=clone $this;
-		$arr->tempo=$tempo;
-		return $arr;
-	}
-
-	function timeSignature() {
-		return $this->timeSignature;
-	}
-
-	function withTimeSignature($timeSignature) {
-		$arr=clone $this;
-		$arr->timeSignature=$timeSignature;
-		return $arr;
-	}
-
 	function __toString() {
 		return arrangementToCanonical($this);
 	}	
@@ -54,8 +28,8 @@ class Arrangement {
 
 function arrangementToCanonical($arrangement) {	
 	$s="Arrangement";
-	foreach($arrangement->voices() as $voice) {
-		$s.=" voice:$voice";
+	foreach($arrangement->parts() as $part) {
+		$s.=" part:$part";
 	}
 	return $s;
 }

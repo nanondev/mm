@@ -60,7 +60,7 @@ class Note {
 		return $note;
 	}
 	function __toString() {
-		return "".PlacedTone\placedToneToAmerican($this->placedTone);
+		return "".PlacedTone\placedToneToCanonical($this->placedTone);
 	}
 }
 

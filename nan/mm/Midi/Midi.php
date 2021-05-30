@@ -7,6 +7,7 @@ use nan\mm\Value;
 use nan\mm\Arrangement;
 use nan\mm\Melody;
 use nan\mm\Tone;
+use nan\mm\Voice;
 use nan\mm\TimeSignature;
 use nan\mm\Dynamic\Attack;
 
@@ -14,6 +15,7 @@ Melody\Functions::Load;
 Pitch\Functions::Load;
 Tone\Functions::Load;
 Attack\Functions::Load;
+Voice\Functions::Load;
 TimeSignature\Functions::Load;
 
 class Functions { const Load=1; }
@@ -33,18 +35,13 @@ class ArrangementToMidi {
 	var $arrangementStartTime=0;
 	var $voiceTime=array();
 	var $voiceNoteIndex=array();
+	var $voiceNotePulse=array();
 	var $midi;
 	var $maxTime=0;
 	var $midiFileName="midi/testMidi.mid";
 	var $midiQueue=array();
 	var $activeTimeSignature;
-	var $activePulse;
 	var $ticksPerBeat=100;
-	var $pulse=0;
-
-	function applyBeatAccent($note) {
-		
-	}
 
 	function __construct() {
 		$this->arrangement=Arrangement::nw();
@@ -84,14 +81,15 @@ class ArrangementToMidi {
 		return $this->midiFileName;
 	}
 	
-	function setupStructs($arrangement) {
+	function setupStructs($part) {
 		$voiceIndex=0;
-		foreach($arrangement->voices() as $voice) {
+		foreach($part->voices() as $voice) {
 			$this->voiceTime[$voiceIndex]=0;
-			$this->voiceNoteIndex[$voiceIndex]=0;		
+			$this->voiceNoteIndex[$voiceIndex]=0;
+			$this->voiceNotePulse[$voiceIndex]=0;
 			++$voiceIndex;		
 		}
-		$this->activeTimeSignature=$arrangement->timeSignature();
+		$this->activeTimeSignature=$part->timeSignature();
 	}
 
 	function setupMidi() {
@@ -110,12 +108,12 @@ class ArrangementToMidi {
 		//print "midi_xml:$xml\n";
 	}
 
-	function pickVoice($arrangement) {
+	function pickVoice($part) {
 		$voiceIndex=0;
 		$minVoiceTime=PHP_INT_MAX;
 		$minVoiceIndex=-1;		
 
-		foreach($arrangement->voices() as $voice) {
+		foreach($part->voices() as $voice) {
 			$notesCount=count($voice->chordedNotes());
 			$noteIndex=$this->voiceNoteIndex[$voiceIndex];
 			$inRange=$noteIndex<$notesCount;
@@ -158,8 +156,8 @@ class ArrangementToMidi {
 		return Attack\attackGain($chordedNote->attack(),$volume);	
 	}
 	
-	function midiWholeDuration($arrangement) {
-		$bpm=$arrangement->tempo()->beatsPerMinute();
+	function midiWholeDuration($part) {
+		$bpm=$part->tempo()->beatsPerMinute();
 		 $midiBaseBpm=120;
 		 $bpmRelation=$midiBaseBpm/$bpm;
 		$beatDurationSecs=60/$bpm;
@@ -175,12 +173,12 @@ class ArrangementToMidi {
 		return $pulseDelta;
 	}
 
-	function generateVoiceNote($arrangement,$voiceIndex) {
+	function generateVoiceNote($part,$voiceIndex) {
 		$noteIndex=$this->voiceNoteIndex[$voiceIndex];
-		$voice=$arrangement->voices()[$voiceIndex];
+		$voice=$part->voices()[$voiceIndex];
 		$chordedNote=$voice->chordedNotes()[$noteIndex];
 		$time=$this->voiceTime[$voiceIndex];
-		$timeDelta=$this->midiWholeDuration($arrangement)*Value\valueToDuration($chordedNote->value());	
+		$timeDelta=$this->midiWholeDuration($part)*Value\valueToDuration($chordedNote->value());	
 		$pulseDelta=$this->pulseDelta($chordedNote);
 		//print "pulseDelta:$pulseDelta\n";
 
@@ -192,7 +190,8 @@ class ArrangementToMidi {
 				//print "*** dg-generateVoiceIndex: voiceIndex:$voiceIndex noteIndex:$noteIndex time:$time globalTime:$globalTime $globalTimeOff\n";
 				$midiChannel=$voiceIndex+1;
 				$volume=80;				
-				$chordedNote=TimeSignature\timeSignChordedNote($this->activeTimeSignature,$chordedNote,$this->pulse);
+				$pulse=$this->voiceNotePulse[$voiceIndex];
+				$chordedNote=TimeSignature\timeSignChordedNote($this->activeTimeSignature,$chordedNote,$pulse);
 				$volume=$this->chordedNoteGain($chordedNote,$volume);
 				
 				$midiMsgOn="$globalTime On ch=$midiChannel n=$midiNote v=$volume";
@@ -204,22 +203,23 @@ class ArrangementToMidi {
 		if ($time>$this->maxTime) $this->maxTime=$time+$timeDelta;
 		$this->voiceTime[$voiceIndex]=$time+$timeDelta;		
 		$this->voiceNoteIndex[$voiceIndex]=$this->voiceNoteIndex[$voiceIndex]+1;
+		$this->voiceNotePulse[$voiceIndex]=$this->voiceNotePulse[$voiceIndex]+$pulseDelta;
 	}
 
-	function writeArrangementNotes($arrangement) {
-		$voiceCount=count($arrangement->voices());
+	function writePartNotes($part) {
+		$voiceCount=count($part->voices());
 		$this->maxTime=0;			
 		do {
-			$voiceIndex=$this->pickVoice($arrangement);
+			$voiceIndex=$this->pickVoice($part);
 			$hasNext=$voiceIndex!=-1;
-			if ($hasNext) $this->generateVoiceNote($arrangement,$voiceIndex);						
+			if ($hasNext) $this->generateVoiceNote($part,$voiceIndex);						
 		} while($hasNext);
 		$this->arrangementStartTime=$this->maxTime;
 	}
 
-	function writeVoiceInstrumentMidi($arrangement) {
+	function writeVoiceInstrumentMidi($part) {
 		$voiceIndex=0;
-		foreach($arrangement->voices() as $voice) {
+		foreach($part->voices() as $voice) {
 			$globalTime=$this->arrangementStartTime;
 			$channel=$voiceIndex+1;
 			$instrumentMsg = sprintf("$globalTime Meta InstrName \"%s\"",$voice->instrument());
@@ -232,10 +232,12 @@ class ArrangementToMidi {
 	}
 
 	function writeArrangementMidi($arrangement) {
-		$this->setupStructs($arrangement);
-		//$this->midi->setBpm($arrangement->tempo()->beatsPerMinute()); // DO NOT USE. We calculate delta dinamically.
-		$this->writeVoiceInstrumentMidi($arrangement);
-		$this->writeArrangementNotes($arrangement);		
+		foreach($arrangement->parts() as $part) {
+			$this->setupStructs($part);
+			//$this->midi->setBpm($arrangement->tempo()->beatsPerMinute()); // DO NOT USE. We calculate delta dinamically.
+			$this->writeVoiceInstrumentMidi($part);
+			$this->writePartNotes($part);					
+		}
 	}
 	
 	function writeArrangementsMidi() {		
@@ -285,16 +287,21 @@ function arrangementsToMidi($arrangements,$midiFileName) {
 	return $toMidi;
 }
 
-function voiceToMidi($voice,$midiFileName) {
+function partToMidi($part,$midiFileName) {
 	return
 		ArrangementToMidi::nw()
 		->withMidiFileName($midiFileName)
 		->withArrangement(
 			Arrangement::nw()
-				->withVoice($voice)
+				->withPart($part)
 			)
 		->toMidi();
 }
+
+function voiceToMidi($voice,$midiFileName) {
+	return partToMidi(Voice\voiceToPart($voice),$midiFileName);
+}
+
 
 function melodyToMidi($melody,$midiFileName) {
 	return voiceToMidi(Melody\melodyToVoice($melody),$midiFileName);

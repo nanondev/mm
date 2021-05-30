@@ -68,7 +68,7 @@ function timeSignatureToCanonical($timeSignature) {
 }
 
 function timeSignChordedNote($timeSignature,$chordedNote,$pulse) {
-	$attack=$timeSignature->pulseAttack($pulse);
+	$attack=$timeSignature->pulseAttack($pulse);	
 	$timeSigned=$chordedNote;
 	if ($attack!=Attack\NotAccented) {
 		$timeSigned=$chordedNote->withAttack($attack);

@@ -47,40 +47,40 @@ function melody2() {
 }
 
 function voice1() {
-	return Voice::nw()
+	return Voice\Voice::nw()
 		->withChordedNote(
-			ChordedNote::nw()
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\ENatural)->withOctave(Octave\O4))
+			ChordedNote\ChordedNote::nw()
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\ENatural)->withOctave(Octave\O4))
 				->withValue(Value\Whole)
 		)
 		->withChordedNote(
-			ChordedNote::nw()
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O4))
+			ChordedNote\ChordedNote::nw()
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O4))
 				->withValue(Value\Quarter)
 		)
 		->withChordedNote(
-			ChordedNote::nw()
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O2))
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\CNatural)->withOctave(Octave\O2))
+			ChordedNote\ChordedNote::nw()
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O2))
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\CNatural)->withOctave(Octave\O2))
 				->withValue(Value\Quarter)
 		)
 		->withChordedNote(
-			ChordedNote::nw()
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
-				->withPlacedTone(PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O4))
+			ChordedNote\ChordedNote::nw()
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\FNatural)->withOctave(Octave\O3))
+				->withPlacedTone(PlacedTone\PlacedTone::nw()->withTone(TwelveTone\ANatural)->withOctave(Octave\O4))
 				->withValue(Value\Whole)
 		);
 }
 
 function testMelodyMidi() {	
-	Midi\melodyToMidi(melody2());
+	Midi\melodyToMidi(melody2(),"midi/testMelodyToMidi.mid");
 }
 
 function testVoiceMidi() {
-	Midi\voiceToMidi(voice1());
+	Midi\voiceToMidi(voice1(),"midi/testVoiceToMidi.mid");
 }
 
 function testTwelveToAmerican() {
@@ -150,11 +150,11 @@ function testChordToWaltz() {
 		->withChordToVoice(Chord\ChordToWaltz::nw())
 		->toVoice();
 	
-	$arrangement=Arrangement::nw()		
+	$part=Part\Part::nw()		
 		->withVoice($voice);
 		//->withVoice(Melody\melodyToVoice(melody3() ));
 	//Midi\voiceToMidi($voice);
-	Midi\arrangementToMidi($arrangement,"midi/testChordToWaltz.mid");
+	Midi\partToMidi($part,"midi/testChordToWaltz.mid");
 }
 
 function testChordToArpeggio() {
@@ -167,23 +167,23 @@ function testChordToArpeggio() {
 			)
 		->toVoice();
 	
-	$arrangement=Arrangement::nw()		
+	$part=Part\Part::nw()		
 		->withVoice($voice);
 		//->withVoice(Melody\melodyToVoice(melody3() ));
 	//Midi\voiceToMidi($voice);
-	Midi\arrangementToMidi($arrangement,"midi/testChordToArpeggio.mid");
+	Midi\partToMidi($part,"midi/testChordToArpeggio.mid");
 }
 function testDoubleMelody() {
 	$doubleMelody=DoubleMelody::nw()
 		->withMelody(Melody\americanToMelody("A0 A0 A0 A0 A0 A0 A0 A0"))
 		->withOctave(Octave\O2)
-		->toArrangement();
+		->toPart();
 	
-	$doubleMelody=Arrangement::nw()	
+	$doubleMelody=Part\Part::nw()	
 		->withVoice($doubleMelody->voices()[0]->withInstrument("Violin"))
 		->withVoice($doubleMelody->voices()[1]->withInstrument("Acoustic Guitar (steel)"));
 	
-	Midi\arrangementToMidi($doubleMelody,"midi/testDoubleMelody.mid");
+	Midi\partToMidi($doubleMelody,"midi/testDoubleMelody.mid");
 }
 
 function testMelodyToMidi() {
@@ -199,10 +199,15 @@ function testTempo() {
 
 function testTimeSignature() {
 	$timeSignature=TimeSignature\TimeSignature::nw()
-		->withPulseValue(3)
-		->withPulseValue(Value\Quarter);
+		->withPulses(3)
+		->withPulseValue(Value\Quarter)
+		->withPulseAttack(Attack\Accented)
+		->withPulseAttack(Attack\NotAccented)
+		->withPulseAttack(Attack\NotAccented);
 
-	print sprintf("timeSignature:%s",TimeSignature\timeSignatureToCanonical($timeSignature));
+	$part=Voice\voiceToPart(Melody\melodyToVoice(Melody\americanToMelody("A0 A0 A0 A0 A0 A0")));
+	$part=$part->withTimeSignature($timeSignature);
+	Midi\partToMidi($part,"midi/testTimeSignature.mid");	
 }
 
 function testRest() {
@@ -235,7 +240,19 @@ function testAccent() {
 	Midi\melodyToMidi($melody,"midi/testAccent.mid");
 }
 
+function testAmericanToMelody() {
+	print "americanToMelody:".Melody\americanToMelody("O3 C#w Cb1 O4 C1");	
+}
+
+function testChordNotes() {
+	$chord=Chord\americanToChord("C");
+	print sprintf("\nchord:%s tones:%s\n",$chord,Tone\tonesToCanonical(Chord\chordTones($chord),false));
+	$chord=Chord\americanToChord("Cm");
+	print sprintf("\nchord:%s tones:%s\n",$chord,Tone\tonesToCanonical(Chord\chordTones($chord),false));
+}
+
 function test() {	
+	testTimeSignature();
 	testTwelveToAmerican();
 	testTwelveToAmericanRest();
 	testAmericanToTwelve();
@@ -251,13 +268,13 @@ function test() {
 	testAccent();
 	testDoubleMelody();
 	testTempo();
-	testTimeSignature();
 	testChordToWaltz();
 	testChordToArpeggio();
 	testMelodyToMidi();
 	testAmerican();
 	testVoiceMidi();
-	print "americanToMelody:".americanToMelody("O3 C#w Cb1 O4 C1");	
+	testAmericanToMelody();
+	testChordNotes();
 }
 
 test();

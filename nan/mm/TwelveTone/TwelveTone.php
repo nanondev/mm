@@ -2,8 +2,9 @@
 namespace nan\mm\TwelveTone;
 use nan\mm;
 use nan\mm\SevenTone;
-
+use nan\mm\Interval;
 SevenTone\Functions::Load;
+Interval\Functions::Load;
 
 class Functions { const Load=1; }
 
@@ -173,13 +174,23 @@ function twelveToAmerican($tone) {
 	return TwelveToAmerican[$tone];
 }
 
-function americanToTwelve($american) {
+function americanToTwelve($american) {	
 	$americanToTwelve=array_flip(TwelveToAmerican);
+	if (!array_key_exists($american,$americanToTwelve)) throw new \Exception("americanToTwelve: american:'$american' msg: unknown tone");
 	return $americanToTwelve[$american];	
 }
 
 function twelveTonePitch($tone) {
 	checkTwelveTone($tone);
-	return TwelveTonePitch[$tone];
 }
+
+function twelveAddInterval($twelveTone,$interval) {
+	$sevenTone=twelveToSeven($twelveTone);
+	$toneDistance=Interval\IntervalToneDistance[$interval];
+	$sevenToneIndex=SevenTone\ToneToIndex[$sevenTone];
+	$newSevenTone=SevenTone\IndexToTone[($sevenToneIndex+$toneDistance)%7];	
+	return sevenToTwelve($newSevenTone);
+}
+
+
 ?>

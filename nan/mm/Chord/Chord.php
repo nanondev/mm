@@ -30,18 +30,22 @@ class Chord {
 	}
 
 	function bassTone() {
-		return Interval\twelveAddInterval($this->root,$this->intervals[0]);
+		return TwelveTone\twelveAddInterval($this->root,$this->intervals[0]);
 	}
 
 	function nonBassTones() {
 		$tones=[];
 		for($i=1;$i<count($this->intervals);$i++) {
 			$interval=$this->intervals[$i];
-			$tone=Interval\twelveAddInterval($this->root,$interval);
+			$tone=TwelveTone\twelveAddInterval($this->root,$interval);
 			$tones[]=$tone;
 		}
 		return $tones;
 	}	
+
+	function root() {
+		return $this->root;
+	}
 
 	function withRoot($root) {
 		$chord=clone $this;
@@ -56,8 +60,15 @@ class Chord {
 
 
 function chordTones($chord) {
-	Tone\toneAddInterval($chord->root(),$interval);
+	$tones=[];
+	for($i=0;$i<count($chord->intervals());$i++) {
+		$interval=$chord->intervals()[$i];
+		$tone=TwelveTone\twelveAddInterval($chord->root(),$interval);
+		$tones[]=$tone;
+	}
+	return $tones;
 }
+
 function chordMajor($root) {
 	return Chord::nw()
 		->withRoot($root)
@@ -75,7 +86,7 @@ function chordMinor($root) {
 	return Chord::nw()
 		->withRoot($root)
 		->withInterval(Interval\Unison)
-		->withInterval(Interval\MajorThird)
+		->withInterval(Interval\MinorThird)
 		->withInterval(Interval\PerfectFifth);
 }
 

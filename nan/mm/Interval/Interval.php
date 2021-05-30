@@ -9,7 +9,6 @@ SevenTone\Functions::Load;
 
 class Functions { const Load=1; }
 
-
 const Unison=50000;
 const MinorSecond=50001;
 const MajorSecond=50002;
@@ -58,14 +57,6 @@ const IntervalToneDistance=array(
 
 function intervalSemitones($interval) {
 	return IntervalSemitones[$interval];
-}
-
-function twelveAddInterval($twelveTone,$interval) {
-	$sevenTone=TwelveTone\twelveToSeven($twelveTone);
-	$toneDistance=IntervalToneDistance[$interval];
-	$sevenToneIndex=SevenTone\ToneToIndex[$sevenTone];
-	$newSevenTone=SevenTone\IndexToTone[($sevenToneIndex+$toneDistance)%7];
-	return TwelveTone\sevenToTwelve($newSevenTone);
 }
 
 ?>
