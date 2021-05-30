@@ -167,6 +167,7 @@ function testChordToArpeggio() {
 			)
 		->toVoice();
 	
+	print "dg-arp: voice: $voice\n";
 	$part=Part\Part::nw()		
 		->withVoice($voice);
 		//->withVoice(Melody\melodyToVoice(melody3() ));

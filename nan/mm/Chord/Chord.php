@@ -130,8 +130,8 @@ function americanToChord($american) {
 
 function selectChordTones($chord,$tones) {
 	$sel=[];
+	$toneCount=count(chordTones($chord));
 	foreach($tones as $tone) {
-		$toneCount=count($tone);
 		$selTone=chordTones($chord)[$tone%$toneCount];
 		$sel[]=$selTone;
 	}

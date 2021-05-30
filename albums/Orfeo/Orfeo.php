@@ -60,27 +60,47 @@ function voice41() {
 		->toVoice();
 }
 
-function arrangement1() {
-	return Arrangement::nw()
+function part1() {
+	return Part\Part::nw()
 		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(160))
 		->withVoice(voice11());
 }
 
-function arrangement2() {
-	return Arrangement::nw()
+function part2() {
+	return Part\Part::nw()
 		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(120))
 		->withVoice(voice21());
 }
 
-function arrangement3() {
-	return Arrangement::nw()
+function part3() {
+	return Part\Part::nw()
 		->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(60))
 		->withVoice(voice31());
 }
 
+function part4() {
+	return Part\Part::nw()
+		->withVoice(voice41());
+}
+
+function arrangement1() {
+	return Arrangement::nw()
+		->withPart(part1());
+}
+
+function arrangement2() {
+	return Arrangement::nw()
+		->withPart(part2());
+}
+
+function arrangement3() {
+	return Arrangement::nw()
+		->withPart(part3());
+}
+
 function arrangement4() {
 	return Arrangement::nw()
-		->withVoice(voice41());
+		->withPart(part4());
 }
 
 function track1() {

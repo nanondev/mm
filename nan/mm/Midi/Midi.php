@@ -44,7 +44,6 @@ class ArrangementToMidi {
 	var $ticksPerBeat=100;
 
 	function __construct() {
-		$this->arrangement=Arrangement::nw();
 	}
 
 	static function nw() {
