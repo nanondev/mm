@@ -245,6 +245,36 @@ function testAmericanToMelody() {
 	print "americanToMelody:".Melody\americanToMelody("O3 C#w Cb1 O4 C1");	
 }
 
+function testMultiPart() {
+	
+	$ts1=TimeSignature\TimeSignature::nw()
+		->withPulses(3)
+		->withPulseValue(Value\Quarter)
+		->withPulseAttack(Attack\Accented)
+		->withPulseAttack(Attack\NotAccented)
+		->withPulseAttack(Attack\NotAccented);
+
+	$ts2=TimeSignature\TimeSignature::nw()
+		->withPulses(3)
+		->withPulseValue(Value\Quarter)
+		->withPulseAttack(Attack\NotAccented)
+		->withPulseAttack(Attack\NotAccented)
+		->withPulseAttack(Attack\Accented);
+
+	$voice1=Melody\melodyToVoice(Melody\americanToMelody("O3 C#0 C0 C#0 E0 C#0 C0 C#0 E0 C#0 C0 C#0 E0 C#0 C0 C#0 E0"));
+	$voice2=$voice1->withInstrument("Violin");
+	$voice3=$voice2->withInstrument("Acoustic Guitar (steel)");
+	$part1=Part\Part::nw()->withVoice($voice1)->withTimeSignature($ts1);
+	$part2=Part\Part::nw()->withVoice($voice2)->withTimeSignature($ts2);
+	$part3=Part\Part::nw()->withVoice($voice3);
+
+	$arrangement=Arrangement::nw()
+		->withPart($part1->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(120)))
+		->withPart($part2->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(160)))
+		->withPart($part3->withTempo(Tempo\Tempo::nw()->withBeatsPerMinute(80)));
+	Midi\arrangementToMidi($arrangement,"midi/testMultiPart.mid");
+}
+
 function testChordNotes() {
 	$chord=Chord\americanToChord("C");
 	print sprintf("\nchord:%s tones:%s\n",$chord,Tone\tonesToCanonical(Chord\chordTones($chord),false));
@@ -252,7 +282,10 @@ function testChordNotes() {
 	print sprintf("\nchord:%s tones:%s\n",$chord,Tone\tonesToCanonical(Chord\chordTones($chord),false));
 }
 
-function test() {	
+function test() {
+	testMultiPart();
+	exit();
+	testMelodyToMidi();	
 	testTimeSignature();
 	testTwelveToAmerican();
 	testTwelveToAmericanRest();
@@ -271,11 +304,10 @@ function test() {
 	testTempo();
 	testChordToWaltz();
 	testChordToArpeggio();
-	testMelodyToMidi();
 	testAmerican();
 	testVoiceMidi();
 	testAmericanToMelody();
-	testChordNotes();
+	testChordNotes();	
 }
 
 test();

@@ -182,6 +182,7 @@ function americanToTwelve($american) {
 
 function twelveTonePitch($tone) {
 	checkTwelveTone($tone);
+	return TwelveTonePitch[$tone];
 }
 
 function twelveAddInterval($twelveTone,$interval) {

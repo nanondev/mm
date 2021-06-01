@@ -40,7 +40,7 @@ class PlacedTone {
 	}
 
 	function __toString() {
-		return "".placedToneToAmerican($this->tone);
+		return "".placedToneToCanonical($this);
 	}
 }
 

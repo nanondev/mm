@@ -25,6 +25,7 @@ const MidiC4=60;
 function placedToneToMidiNote($placedTone) {
 	$octaveMidiNote=MidiC4+(Octave\octaveIndex($placedTone->octave())-4)*12;
 	$midiNote=$octaveMidiNote+Pitch\tonePitch($placedTone->tone());
+	//print sprintf("dg-octaveMidiNote:$octaveMidiNote pitchFor:%s\n",$placedTone->tone());
 	return $midiNote;
 }
 
@@ -32,7 +33,7 @@ class ArrangementToMidi {
 	var $arrangements=array();
 	var $track;
 
-	var $arrangementStartTime=0;
+	var $partStartTime=0;
 	var $voiceTime=array();
 	var $voiceNoteIndex=array();
 	var $voiceNotePulse=array();
@@ -82,6 +83,10 @@ class ArrangementToMidi {
 	
 	function setupStructs($part) {
 		$voiceIndex=0;
+		$this->voiceTime=array(); // local to part (starts at 0 when part begins)
+		$this->voiceNoteIndex=array();
+		$this->voiceNotePulse=array();
+
 		foreach($part->voices() as $voice) {
 			$this->voiceTime[$voiceIndex]=0;
 			$this->voiceNoteIndex[$voiceIndex]=0;
@@ -98,7 +103,7 @@ class ArrangementToMidi {
 	}
 
 	function closeMidi() {
-		$globalMaxTime=$this->maxTime;
+		$globalMaxTime=$this->partStartTime+$this->maxTime;
 		$msgTrkEnd=sprintf("%s Meta TrkEnd",$globalMaxTime+500);
 		//print "msgTrkEnd:$msgTrkEnd\n";
 		$this->midi->addMsg(0, $msgTrkEnd);
@@ -142,7 +147,7 @@ class ArrangementToMidi {
 			$clazz=$timedMessage[1];
 			$message=$timedMessage[2];
 			$this->midi->addMsg(0, $message);
-			//print "dg-message:$message\n";
+			print "dg-message:$message\n";
 		}			
 	}
 
@@ -182,25 +187,29 @@ class ArrangementToMidi {
 		//print "pulseDelta:$pulseDelta\n";
 
 		foreach($chordedNote->placedTones() as $placedTone) {
-			$globalTime=$this->arrangementStartTime+$time;
-			$globalTimeOff=$this->arrangementStartTime+$time+$timeDelta;
+			$globalTime=$this->partStartTime+$time;
+			$globalTimeOff=$this->partStartTime+$time+$timeDelta;
+			$globalTimeInt=floor($globalTime);
+			$globalTimeOffInt=floor($globalTimeOff);
+
 			if (!Tone\isRest($placedTone->tone())) {
 				$midiNote=placedToneToMidiNote($placedTone);			
-				//print "*** dg-generateVoiceIndex: voiceIndex:$voiceIndex noteIndex:$noteIndex time:$time globalTime:$globalTime $globalTimeOff\n";
+				//print "*** dg-generateVoiceIndex: voiceIndex:$voiceIndex noteIndex:$noteIndex time:$time globalTime:$globalTime $globalTimeOff placedTone:$placedTone midiNote:$midiNote\n";
 				$midiChannel=$voiceIndex+1;
 				$volume=80;				
 				$pulse=$this->voiceNotePulse[$voiceIndex];
 				$chordedNote=TimeSignature\timeSignChordedNote($this->activeTimeSignature,$chordedNote,$pulse);
 				$volume=$this->chordedNoteGain($chordedNote,$volume);
 				
-				$midiMsgOn="$globalTime On ch=$midiChannel n=$midiNote v=$volume";
-				$midiMsgOff="$globalTimeOff Off ch=$midiChannel n=$midiNote v=$volume";			
-				$this->queueMidiMessage(0,"On",$globalTime,$midiMsgOn);				
-				$this->queueMidiMessage(0,"Off",$globalTimeOff,$midiMsgOff);
+				$midiMsgOn="$globalTimeInt On ch=$midiChannel n=$midiNote v=$volume";
+				$midiMsgOff="$globalTimeOffInt Off ch=$midiChannel n=$midiNote v=$volume";			
+				$this->queueMidiMessage(0,"On",$globalTimeInt,$midiMsgOn);			
+				$this->queueMidiMessage(0,"Off",$globalTimeOffInt,$midiMsgOff);
 			}			
 		}		
-		if ($time>$this->maxTime) $this->maxTime=$time+$timeDelta;
-		$this->voiceTime[$voiceIndex]=$time+$timeDelta;		
+		$newTime=$time+$timeDelta;
+		if ($newTime>$this->maxTime) $this->maxTime=$newTime;
+		$this->voiceTime[$voiceIndex]=$newTime;		
 		$this->voiceNoteIndex[$voiceIndex]=$this->voiceNoteIndex[$voiceIndex]+1;
 		$this->voiceNotePulse[$voiceIndex]=$this->voiceNotePulse[$voiceIndex]+$pulseDelta;
 	}
@@ -213,13 +222,13 @@ class ArrangementToMidi {
 			$hasNext=$voiceIndex!=-1;
 			if ($hasNext) $this->generateVoiceNote($part,$voiceIndex);						
 		} while($hasNext);
-		$this->arrangementStartTime=$this->maxTime;
+		$this->partStartTime=$this->partStartTime+$this->maxTime; 
 	}
 
 	function writeVoiceInstrumentMidi($part) {
 		$voiceIndex=0;
 		foreach($part->voices() as $voice) {
-			$globalTime=$this->arrangementStartTime;
+			$globalTime=$this->partStartTime;
 			$channel=$voiceIndex+1;
 			$instrumentMsg = sprintf("$globalTime Meta InstrName \"%s\"",$voice->instrument());
 			$programNumber=$this->midi->findGm1InstrumentPatchNumber($voice->instrument());
@@ -232,6 +241,7 @@ class ArrangementToMidi {
 
 	function writeArrangementMidi($arrangement) {
 		foreach($arrangement->parts() as $part) {
+			print sprintf("dg-part-startTime:%s\n",$this->maxTime);
 			$this->setupStructs($part);
 			//$this->midi->setBpm($arrangement->tempo()->beatsPerMinute()); // DO NOT USE. We calculate delta dinamically.
 			$this->writeVoiceInstrumentMidi($part);
@@ -254,7 +264,7 @@ class ArrangementToMidi {
 	}
 
 	function totalTime() {
-		return $this->maxTime;
+		return $this->partStartTime+$this->maxTime;
 	}
 
 }
