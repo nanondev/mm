@@ -147,7 +147,7 @@ class ArrangementToMidi {
 			$clazz=$timedMessage[1];
 			$message=$timedMessage[2];
 			$this->midi->addMsg(0, $message);
-			print "dg-message:$message\n";
+			//print "dg-message:$message\n";
 		}			
 	}
 
@@ -240,8 +240,7 @@ class ArrangementToMidi {
 	}
 
 	function writeArrangementMidi($arrangement) {
-		foreach($arrangement->parts() as $part) {
-			print sprintf("dg-part-startTime:%s\n",$this->maxTime);
+		foreach($arrangement->parts() as $part) {		
 			$this->setupStructs($part);
 			//$this->midi->setBpm($arrangement->tempo()->beatsPerMinute()); // DO NOT USE. We calculate delta dinamically.
 			$this->writeVoiceInstrumentMidi($part);

@@ -55,8 +55,37 @@ const IntervalToneDistance=array(
 	PerfectOctave=>7
 );
 
+const IntervalToCanonical=array(
+	Unison=>"Unison",
+	MinorSecond=>"MinorSecond",
+	MajorSecond=>"MajorSecond",
+	MinorThird=>"MinorThird",
+	MajorThird=>"MajorThird",
+	PerfectFourth=>"PerfectFourth",
+	PerfectFifth=>"PerfectFifth",
+	AugmentedFourth=>"AugmentedFourth",
+	MinorSixth=>"MinorSixth",
+	MajorSixth=>"MajorSixth",
+	MinorSeventh=>"MinorSeventh",
+	MajorSeventh=>"MajorSeventh",
+	PerfectOctave=>"PerfectOctave"
+);
+
+function intervalToCanonical($interval) {
+	return IntervalToCanonical[$interval];
+}
+
 function intervalSemitones($interval) {
 	return IntervalSemitones[$interval];
+}
+
+function semitonesBetweenTwelve($twelveTone1,$twelveTone2) {
+	$pitch1=TwelveTone\TwelveTonePitch[$twelveTone2];
+	$pitch2=TwelveTone\TwelveTonePitch[$twelveTone1];
+	//print "dg-pitch1: $pitch1 pitch2:$pitch2\n";
+	$interval=($pitch2-$pitch1)%12;
+	if ($interval<0) $interval=$interval+12;
+	return $interval;
 }
 
 ?>

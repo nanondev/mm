@@ -3,6 +3,7 @@ namespace nan\mm\TwelveTone;
 use nan\mm;
 use nan\mm\SevenTone;
 use nan\mm\Interval;
+
 SevenTone\Functions::Load;
 Interval\Functions::Load;
 
@@ -10,26 +11,40 @@ class Functions { const Load=1; }
 
 const ANatural=20001;
 const ASharp=20002;
-const AFlat=20003;
-const BNatural=20004;
-const BSharp=20005;
-const BFlat=20006;
-const CNatural=20007;
-const CSharp=20008;
-const CFlat=20009;
-const DNatural=20010;
-const DSharp=20011;
-const DFlat=20012;
-const ENatural=20013;
-const ESharp=20014;
-const EFlat=20015;
-const FNatural=20016;
-const FSharp=20017;
-const FFlat=20018;
-const GNatural=20019;
-const GSharp=20020;
-const GFlat=20021;	
-const Rest=20022;
+const ASharpSharp=20003;
+const AFlat=20004;
+const AFlatFlat=20005;
+const BNatural=20006;
+const BSharp=20007;
+const BSharpSharp=20008;
+const BFlat=20009;
+const BFlatFlat=20010;
+const CNatural=20011;
+const CSharp=20012;
+const CSharpSharp=20013;
+const CFlat=20014;
+const CFlatFlat=20015;
+const DNatural=20016;
+const DSharp=20017;
+const DSharpSharp=20018;
+const DFlat=20019;
+const DFlatFlat=20020;
+const ENatural=20021;
+const ESharp=20022;
+const ESharpSharp=20023;
+const EFlat=20024;
+const EFlatFlat=20025;
+const FNatural=20026;
+const FSharp=20027;
+const FSharpSharp=20027;
+const FFlat=20028;
+const FFlatFlat=20029;
+const GNatural=20030;
+const GSharp=20031;
+const GSharpSharp=20032;
+const GFlat=20033;	
+const GFlatFlat=20034;	
+const Rest=20035;
 
 const TwelveSharps=array(ASharp,BSharp,CSharp,DSharp,ESharp,FSharp,GSharp);
 const TwelveFlats=array(AFlat,BFlat,CFlat,DFlat,EFlat,FFlat,GFlat,AFlat);
@@ -61,6 +76,55 @@ const TwelveToAmerican=array(
 	Rest=>"r",
 );
 
+const TwelveToFlat=array(
+	ANatural=>AFlat,
+	ASharp=>ANatural,
+	AFlat=>AFlatFlat,
+	BNatural=>BFlat,
+	BSharp=>BNatural,
+	BFlat=>BFlatFlat,
+	CNatural=>CFlat,
+	CSharp=>CSharpSharp,
+	CFlat=>CNatural,
+	DNatural=>DFlat,
+	DSharp=>DNatural,
+	DFlat=>DFlatFlat,
+	ENatural=>EFlat,
+	ESharp=>ENatural,
+	EFlat=>EFlatFlat,
+	FNatural=>FFlat,
+	FSharp=>FNatural,
+	FFlat=>FFlatFlat,
+	GNatural=>GFlat,
+	GSharp=>GNatural,
+	GFlat=>GFlatFlat,
+	Rest=>Rest,
+);
+
+const TwelveToSharp=array(
+	ANatural=>ASharp,
+	ASharp=>ASharpSharp,
+	AFlat=>ANatural,
+	BNatural=>BSharp,
+	BSharp=>BSharpSharp,
+	BFlat=>BNatural,
+	CNatural=>CSharp,
+	CSharp=>CSharpSharp,
+	CFlat=>CNatural,
+	DNatural=>DSharp,
+	DSharp=>DSharpSharp,
+	DFlat=>DNatural,
+	ENatural=>ESharp,
+	ESharp=>ESharpSharp,
+	EFlat=>ENatural,
+	FNatural=>FSharp,
+	FSharp=>FSharpSharp,
+	FFlat=>FNatural,
+	GNatural=>GSharp,
+	GSharp=>GSharpSharp,
+	GFlat=>GNatural,
+	Rest=>Rest,
+);
 const TwelveTonePitch=array(
 	BSharp=>0,
 	CNatural=>0,
@@ -186,12 +250,33 @@ function twelveTonePitch($tone) {
 }
 
 function twelveAddInterval($twelveTone,$interval) {
+	$intervalSemitones=Interval\intervalSemitones($interval);
 	$sevenTone=twelveToSeven($twelveTone);
 	$toneDistance=Interval\IntervalToneDistance[$interval];
 	$sevenToneIndex=SevenTone\ToneToIndex[$sevenTone];
 	$newSevenTone=SevenTone\IndexToTone[($sevenToneIndex+$toneDistance)%7];	
-	return sevenToTwelve($newSevenTone);
+	$newTwelveTone=sevenToTwelve($newSevenTone);
+	$newDistance=Interval\semitonesBetweenTwelve($newTwelveTone,$twelveTone);
+	
+	while ($intervalSemitones>$newDistance) {
+		$newTwelveTone=sharpTwelve($newTwelveTone);
+		++$newDistance;
+	}
+	while ($intervalSemitones<$newDistance) {
+		$newTwelveTone=flatTwelve($newTwelveTone);
+		--$newDistance;
+	}
+	
+	// print sprintf("dg-addInterval twelveTone:%s newSevenTone:%s newTwelveTone:%s toneDistance:$toneDistance  interval:%s intervalSemitones:$intervalSemitones currentSemitones:$newDistance\n",twelveToAmerican($twelveTone),SevenTone\sevenToneToAmerican($newSevenTone),twelveToAmerican($newTwelveTone),Interval\intervalToCanonical($interval));
+	return $newTwelveTone;
 }
 
+function flatTwelve($twelveTone) {
+	return TwelveToFlat[$twelveTone];
+}
+
+function sharpTwelve($twelveTone) {
+	return TwelveToSharp[$twelveTone];	
+}
 
 ?>

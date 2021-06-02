@@ -283,8 +283,6 @@ function testChordNotes() {
 }
 
 function test() {
-	testMultiPart();
-	exit();
 	testMelodyToMidi();	
 	testTimeSignature();
 	testTwelveToAmerican();
@@ -308,6 +306,7 @@ function test() {
 	testVoiceMidi();
 	testAmericanToMelody();
 	testChordNotes();	
+	testMultiPart();
 }
 
 test();
